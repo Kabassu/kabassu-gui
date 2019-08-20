@@ -1,6 +1,7 @@
 import "../../styles/styles.scss"
 import Button from "react-bootstrap/Button";
 import DefinitionDetailsModal from "./DefinitionDetailsModal";
+import Link from "next/link";
 
 class RequestsTable extends React.Component {
 
@@ -40,7 +41,9 @@ class RequestsTable extends React.Component {
           </td>
           <td>{item.configurationId}</td>
           <td>{item.jvm}</td>
-          <td>LINK</td>
+          <td>
+            <Link href="/request"><a className="nav-link">Show Details</a></Link>
+          </td>
         </tr>
     );
     return <>

@@ -6,18 +6,52 @@ import DefinitionsTable from "../components/kabassu/DefinitionsTable";
 export default class Index extends React.Component {
 
   render() {
-    return <AdminLayoutHoc contentTitle={'Home'} contentTitleButton={<i className="fa fa-2x fa-home"/>} url={this.props.url}>
+    return <AdminLayoutHoc contentTitle={'Request Details'} contentTitleButton={<i className="fa fa-2x fa-home"/>} url={this.props.url}>
       <div className="row">
-        <div className="col-sm-12">
-          <DataList table={<DefinitionsTable/>} collection="kabassu-definitions" title="List of test definitions"/>
+        <div className="col-md-6">
+          <div className="card">
+            <div className="card-header">
+              <h3 className="card-title">
+                <i className="fa fa-text-width"/>&nbsp;Description
+              </h3>
+            </div>
+            <div className="card-body">
+              <dl>
+                <dt>Description lists</dt>
+                <dd>A description list is perfect for defining terms.</dd>
+                <dt>Euismod</dt>
+                <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                <dt>Malesuada porta</dt>
+                <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+              </dl>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="col-sm-12">
-          <DataList table={<RequestsTable/>} collection="kabassu-requests" title="List of test requests"/>
-        </div>
-      </div>
 
+        <div className="col-md-6">
+          <div className="card">
+            <div className="card-header">
+              <h3 className="card-title">
+                <i className="fa fa-text-width"/>&nbsp;Description Horizontal
+              </h3>
+            </div>
+            <div className="card-body">
+              <dl className="dl-horizontal">
+                <dt>Description lists</dt>
+                <dd>A description list is perfect for defining terms.</dd>
+                <dt>Euismod</dt>
+                <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                <dt>Felis euismod semper eget lacinia</dt>
+                <dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo
+                  sit amet risus.
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div className="row">
         <div className="col-sm-12">

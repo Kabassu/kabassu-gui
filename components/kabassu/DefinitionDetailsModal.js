@@ -4,11 +4,15 @@ import Button from 'react-bootstrap/Button';
 class DefinitionDetailsModal extends React.Component {
 
   render() {
-    return ( <Modal show = {this.props.show} onHide={this.props.onHide}>
+    return (<Modal show={this.props.show}
+                   onHide={this.props.onHide}
+                   size="lg"
+                   aria-labelledby="contained-modal-title-vcenter"
+                   centered>
       <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
+        <Modal.Title>Definition details {this.props.definitionId}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Woohoo, you're reading this text in a modal! {this.props.definitionId}</Modal.Body>
+      <Modal.Body>TO DO: DETAILS</Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={this.props.onHide}>
           Close
