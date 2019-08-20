@@ -13,8 +13,8 @@ class DefinitionsTable extends React.Component {
           <td>LINK</td>
         </tr>
     );
-    return <table className="table">
-      <thead>
+    return   <table className="table table-hover table-bordered">
+      <thead className="thead-dark">
       <tr>
         <th>id</th>
         <th>name</th>

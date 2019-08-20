@@ -31,7 +31,7 @@ class RequestsTable extends React.Component {
         <tr key={item._id}>
           <td>{item._id}</td>
           <td>
-            <Button key={item.definitionId}
+            <Button variant="link" key={item.definitionId}
                     onClick={e => this.clickHandler(item.definitionId,
                         index)}>{item.definitionId}</Button>
             <DefinitionDetailsModal show={this.state.activeModal === index}
@@ -44,8 +44,8 @@ class RequestsTable extends React.Component {
         </tr>
     );
     return <>
-      <table className="table">
-        <thead>
+      <table className="table table-hover table-bordered">
+        <thead className="thead-dark">
         <tr>
           <th>id</th>
           <th>definition</th>
