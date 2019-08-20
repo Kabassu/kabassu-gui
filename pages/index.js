@@ -9,11 +9,11 @@ export default class Index extends React.Component {
     return <AdminLayoutHoc contentTitle={'Home'} contentTitleButton={<i className="fa fa-2x fa-home"/>} url={this.props.url}>
       <div className="row">
         <div className="col-md-6">
-          <DataList table={<DefinitionsTable/>} collection="kabassu-definitions"/>
+          <DataList table={<DefinitionsTable/>} collection="kabassu-definitions" title="List of test definitions"/>
         </div>
 
         <div className="col-md-6">
-          <DataList table={<RequestsTable/>} collection="kabassu-requests"/>
+          <DataList table={<RequestsTable/>} collection="kabassu-requests" title="List of test requests"/>
         </div>
       </div>
 
