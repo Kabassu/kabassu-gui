@@ -1,31 +1,19 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
-import Definitions from "../components/kabassu/Definitions";
+import DataList from "../components/kabassu/DataList";
+import RequestsTable from "../components/kabassu/RequestsTable";
+import DefinitionsTable from "../components/kabassu/DefinitionsTable";
 
 export default class Index extends React.Component {
+
   render() {
     return <AdminLayoutHoc contentTitle={'Home'} contentTitleButton={<i className="fa fa-2x fa-home"/>} url={this.props.url}>
       <div className="row">
         <div className="col-md-6">
-          <Definitions/>
+          <DataList table={<DefinitionsTable/>} collection="kabassu-definitions"/>
         </div>
 
         <div className="col-md-6">
-          <div className="card">
-            <div className="card-header">
-              <h3 className="card-title">
-                <i className="fa fa-text-width"/>&nbsp;Text Emphasis
-              </h3>
-            </div>
-            <div className="card-body">
-              <p className="lead">Lead to emphasize importance</p>
-              <p className="text-success">Text green to emphasize success</p>
-              <p className="text-info">Text aqua to emphasize info</p>
-              <p className="text-primary">Text light blue to emphasize info (2)</p>
-              <p className="text-danger">Text red to emphasize danger</p>
-              <p className="text-warning">Text yellow to emphasize warning</p>
-              <p className="text-muted">Text muted to emphasize general</p>
-            </div>
-          </div>
+          <DataList table={<RequestsTable/>} collection="kabassu-requests"/>
         </div>
       </div>
 

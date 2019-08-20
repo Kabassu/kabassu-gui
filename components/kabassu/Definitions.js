@@ -1,4 +1,5 @@
 import "../../styles/styles.scss"
+import PaginationBasic from "./PaginationBasic";
 
 class Definitions extends React.Component {
 
@@ -41,13 +42,7 @@ class Definitions extends React.Component {
     } else if (!isLoaded) {
       cardEntry = <div>Loading...</div>;
     } else {
-      cardEntry =         <ul>
-        {items.map(item => (
-            <li>{item._id}
-            {item.name} {item.runner}
-            </li>
-        ))}
-      </ul>;
+      cardEntry =  <PaginationBasic active = {1} size = {300} />;
     }
 
     return <div className="card">
