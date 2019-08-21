@@ -8,11 +8,9 @@ class AdminSidebar extends React.Component {
     return <aside className="main-sidebar sidebar-dark-primary elevation-4" style={{minHeight: '846px'}}>
       <Link href="/">
         <a className="brand-link text-center">
-          <i className="fa fa-home fa-2x brand-image ml-2"/>
-          <span className="brand-text font-weight-light">{this.props.projectName && this.props.projectName}</span>
+          <img src="/static/images/kabassu.png" className="logo"/>
         </a>
       </Link>
-
       <div className="sidebar">
         <nav className="mt-2">
           <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

@@ -7,7 +7,7 @@ const AdminHeader = (props) => {
         <a className="nav-link" data-widget="pushmenu" href="#"><i className="fa fa-bars"/></a>
       </li>
       <li className="nav-item d-none d-sm-inline-block">
-        <Link href="/"><a className="nav-link">Home</a></Link>
+        <Link href="/"><a className="nav-link">Kabassu</a></Link>
       </li>
     </ul>
 
