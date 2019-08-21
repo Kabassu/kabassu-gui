@@ -22,6 +22,14 @@ class AdminSidebar extends React.Component {
                 </a>
               </Link>
             </li>
+            <li className="nav-item">
+              <Link href="/addtestrequest">
+                <a className={['nav-link', pathname === '/addtestrequest' ? 'active' : ''].join(' ')}>
+                  <i className="nav-icon fa  fa-plus-square"/>
+                  <p>Create Test Request</p>
+                </a>
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
