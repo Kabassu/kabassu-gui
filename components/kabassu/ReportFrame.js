@@ -3,8 +3,8 @@ class ReportFrame extends React.Component {
 
   render() {
     return (
-        <div>
-          <iframe src={this.props.src}/>
+        <div className="row  d-flex h-100">
+          <iframe src={this.props.src} className="reportFrame" />
         </div>
     );
   }
