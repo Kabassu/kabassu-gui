@@ -102,7 +102,7 @@ class DataList extends React.Component {
     return <div className="card">
       <div className="card-header">
         <h3 className="card-title">
-          <i className="fa fa-text-width"/>&nbsp;{this.props.title}
+          <i className="fa fa-television"/>&nbsp;{this.props.title}
         </h3>
         <div className="card-tools">
           <button type="button" className="btn btn-tool" data-widget="collapse"
