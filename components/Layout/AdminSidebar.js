@@ -22,21 +22,33 @@ class AdminSidebar extends React.Component {
                 </a>
               </Link>
             </li>
-            <li className="nav-item">
-              <Link href="/addtestrequest">
-                <a className={['nav-link', pathname === '/addtestrequest' ? 'active' : ''].join(' ')}>
-                  <i className="nav-icon fa  fa-plus-square"/>
-                  <p>Create Test Request</p>
-                </a>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/addtestdefinition">
-                <a className={['nav-link', pathname === '/addtestdefinition' ? 'active' : ''].join(' ')}>
-                  <i className="nav-icon fa  fa-plus-square"/>
-                  <p>Create Test Definition</p>
-                </a>
-              </Link>
+
+            <li className="nav-item has-treeview menu-closed">
+              <a href="#" className="nav-link">
+                <i className="nav-icon fa fas fa-edit"/>
+                <p>
+                  Create
+                  <i className="right fa fa-angle-left"/>
+                </p>
+              </a>
+              <ul className="nav nav-treeview">
+                <li className="nav-item">
+                  <Link href="/addtestrequest">
+                    <a className={['nav-link', pathname === '/addtestrequest' ? 'active' : ''].join(' ')}>
+                      <i className="nav-icon fa  fa-plus-square"/>
+                      <p>Create Test Request</p>
+                    </a>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link href="/addtestdefinition">
+                    <a className={['nav-link', pathname === '/addtestdefinition' ? 'active' : ''].join(' ')}>
+                      <i className="nav-icon fa  fa-plus-square"/>
+                      <p>Create Test Definition</p>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
             </li>
           </ul>
         </nav>

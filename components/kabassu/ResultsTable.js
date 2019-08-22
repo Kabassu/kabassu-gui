@@ -8,7 +8,7 @@ class ResultsTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeDefinitionModal: null,
+      activeDefinitionModal: false,
       definitionId: null,
 
     }
@@ -18,13 +18,16 @@ class ResultsTable extends React.Component {
 
   clickDefinitionHandler(definitionId, index, e) {
     this.setState({
-      activeDefinitionModal: index,
+      activeDefinitionModal: true,
       definitionId: definitionId
     })
   }
 
   hideDefinitionModal() {
-    this.setState({activeDefinitionModal: null})
+    this.setState({
+      activeDefinitionModal: false,
+      definitionId: null
+    })
   }
 
   calculateResult(result) {
@@ -38,8 +41,8 @@ class ResultsTable extends React.Component {
   }
 
   prepareReports(reports) {
-    return reports.map(item =>
-        <li>
+    return reports.map((item,key) =>
+        <li key={key}>
           <Link href={"/report?data=" + item.downloadPath}><a
               className="nav-link">Show {item.downloadPath}</a></Link>
         </li>
@@ -55,10 +58,6 @@ class ResultsTable extends React.Component {
                     onClick={e => this.clickDefinitionHandler(
                         item.definition._id,
                         index)}>{item.definition._id}</Button>
-            <DefinitionDetailsModal
-                show={this.state.activeDefinitionModal === index}
-                onHide={this.hideDefinitionModal}
-                definitionId={this.state.definitionId}/>
           </td>
           <td>{item.result}</td>
           <td>
@@ -82,6 +81,10 @@ class ResultsTable extends React.Component {
         {list}
         </tbody>
       </table>
+      <DefinitionDetailsModal
+          show={this.state.activeDefinitionModal}
+          onHide={this.hideDefinitionModal}
+          definitionId={this.state.definitionId}/>
     </>
   }
 }

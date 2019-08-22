@@ -8,7 +8,7 @@ class RequestsTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeModal: null,
+      activeModal: false,
       definitionId: null,
 
     }
@@ -16,15 +16,18 @@ class RequestsTable extends React.Component {
     this.hideModal = this.hideModal.bind(this);
   }
 
-  clickHandler(definitionId, index, e) {
+  clickHandler(definitionId, e) {
     this.setState({
-      activeModal: index,
+      activeModal: true,
       definitionId: definitionId
     })
   }
 
   hideModal() {
-    this.setState({activeModal: null})
+    this.setState({
+      activeModal: false,
+      definitionId: null
+    })
   }
 
   render() {
@@ -33,16 +36,15 @@ class RequestsTable extends React.Component {
           <td>{item._id}</td>
           <td>
             <Button variant="link" key={item.definitionId}
-                    onClick={e => this.clickHandler(item.definitionId,
-                        index)}>{item.definitionId}</Button>
-            <DefinitionDetailsModal show={this.state.activeModal === index}
-                                    onHide={this.hideModal}
-                                    definitionId={this.state.definitionId}/>
+                    onClick={e => this.clickHandler(
+                        item.definitionId)}>{item.definitionId}</Button>
           </td>
           <td>{item.configurationId}</td>
           <td>{item.jvm}</td>
           <td>
-            <Link href={'/request?id='+item.definitionId} as={'/request/'+item.definitionId}><a className="nav-link">Show Details</a></Link>
+            <Link href={'/request?id=' + item.definitionId}
+                  as={'/request/' + item.definitionId}><a className="nav-link">Show
+              Details</a></Link>
           </td>
         </tr>
     );
@@ -61,6 +63,9 @@ class RequestsTable extends React.Component {
         {list}
         </tbody>
       </table>
+      <DefinitionDetailsModal show={this.state.activeModal}
+                              onHide={this.hideModal}
+                              definitionId={this.state.definitionId}/>
     </>
   }
 }
