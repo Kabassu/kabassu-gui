@@ -42,8 +42,7 @@ class RequestsTable extends React.Component {
           <td>{item.configurationId}</td>
           <td>{item.jvm}</td>
           <td>
-            <Link href={'/request?id=' + item.definitionId}
-                  as={'/request/' + item.definitionId}><a className="nav-link">Show
+            <Link href={'/request?id=' + item._id}><a className="nav-link">Show
               Details</a></Link>
           </td>
         </tr>
