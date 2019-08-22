@@ -58,6 +58,12 @@ class DefinitionDetailsModal extends React.Component {
           <table className="table table-hover table-bordered">
             <tbody>
             <tr>
+              <td>Id</td>
+              <td>
+                {this.state.result._id}
+              </td>
+            </tr>
+            <tr>
               <td>Runner</td>
               <td>
                 {this.state.result.runner}
