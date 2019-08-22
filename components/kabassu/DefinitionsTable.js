@@ -10,6 +10,7 @@ class DefinitionsTable extends React.Component {
           <td>{item.runner}</td>
           <td>{item.locationType}</td>
           <td>{item.location}</td>
+          <td>{item.reports}</td>
           <td>LINK</td>
         </tr>
     );
@@ -21,6 +22,7 @@ class DefinitionsTable extends React.Component {
         <th>runner</th>
         <th>location type</th>
         <th>locations</th>
+        <th>reports</th>
         <th></th>
       </tr>
       </thead>

@@ -115,7 +115,6 @@ class DataList extends React.Component {
         {cardEntry}
       </div>
       <div className="card-footer text-right text-muted">
-        <small>Card Footer</small>
       </div>
     </div>
 

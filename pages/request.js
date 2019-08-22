@@ -1,9 +1,8 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
-import DataList from "../components/kabassu/DataList";
-import RequestsTable from "../components/kabassu/RequestsTable";
-import DefinitionsTable from "../components/kabassu/DefinitionsTable";
 import ResultsTable from "../components/kabassu/ResultsTable";
 import DataListParametrized from "../components/kabassu/DataListParametrized";
+import RequestDetails from "../components/kabassu/RequestDetails";
+import DefinitionDetails from "../components/kabassu/DefinitionDetails";
 
 export default class Request extends React.Component {
 
@@ -13,15 +12,53 @@ export default class Request extends React.Component {
     }
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      result: {}
+    };
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData() {
+    fetch(process.env.kabassuServer + '/kabassu/getrequest/'+this.props.id, {
+      crossDomain: true,
+      method: 'GET',
+    })
+    .then(res => res.json())
+    .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            result: result
+          });
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+    )
+  }
+
   render() {
     return <AdminLayoutHoc contentTitle={'Request Details'} contentTitleButton={<i className="fa fa-2x fa-home"/>} url={this.props.url}>
 
       <div className="row">
-        <div className="col-sm-12">
-          
-        </div>
+          <RequestDetails result={this.state.result}/>
       </div>
 
+      <div className="row">
+        <div className="col-sm-12">
+          <DefinitionDetails id={this.state.result.definitionId}/>
+        </div>
+      </div>
 
       <div className="row">
         <div className="col-sm-12">
