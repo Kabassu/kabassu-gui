@@ -6,7 +6,7 @@ import DefinitionDetails from "../components/kabassu/DefinitionDetails";
 
 export default class Request extends React.Component {
 
-  static async getInitialProps({req, query: { id }}) {
+  static async getInitialProps({req, query: {id}}) {
     return {
       id: id
     }
@@ -18,47 +18,56 @@ export default class Request extends React.Component {
       error: null,
       isLoaded: false,
       result: {},
-      message: null
+      message: null,
+      status: 'finished'
     };
     this.rerunTest = this.rerunTest.bind(this);
   }
 
   rerunTest() {
-    fetch(process.env.kabassuServer + "/kabassu/test/rerun", {
-      method: 'POST',
-      crossDomain: true,
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        requestId: this.props.id
-      })
-    }).then(res => res.json())
-    .then(
-        (result) => {
-          if(result._id!==null){
-            this.setState({
-              message: <div className="alert alert-success" role="alert">
-                Rerun request send
-              </div>
-            });
-          } else {
+
+    if (this.state.result.status == 'finished') {
+      this.setState({
+        result: {
+          status: ''
+        }
+      });
+      fetch(process.env.kabassuServer + "/kabassu/test/rerun", {
+        method: 'POST',
+        crossDomain: true,
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          requestId: this.props.id
+        })
+      }).then(res => res.json())
+      .then(
+          (result) => {
+            if (result._id !== null) {
+              this.setState({
+                message: <div className="alert alert-success" role="alert">
+                  Rerun request send
+                </div>
+              });
+            } else {
+              this.setState({
+                message: <div className="alert alert-danger" role="alert">
+                  Test Request not found
+                </div>
+              });
+            }
+          },
+          (error) => {
             this.setState({
               message: <div className="alert alert-danger" role="alert">
-                Test Request not found
+                Problem with server
               </div>
             });
           }
-        },
-        (error) => {
-          this.setState({
-            message: <div className="alert alert-danger" role="alert">
-              Problem with server
-            </div>
-          });
-        }
-    )
+      )
+    }
   }
 
   componentDidMount() {
@@ -66,7 +75,7 @@ export default class Request extends React.Component {
   }
 
   fetchData() {
-    fetch(process.env.kabassuServer + '/kabassu/getrequest/'+this.props.id, {
+    fetch(process.env.kabassuServer + '/kabassu/getrequest/' + this.props.id, {
       crossDomain: true,
       method: 'GET',
     })
@@ -88,13 +97,16 @@ export default class Request extends React.Component {
   }
 
   render() {
+    console.log(this.state.result.status);
+    var disabled = this.state.result.status == 'finished' ? null : 'disabled';
     return <AdminLayoutHoc contentTitle={'Request Details'} contentTitleButton={
-      <button type="button" className="btn btn-lg bg-gradient-green" onClick={this.rerunTest}>
-        <i className="fa fa-repeat" ></i> Run Again
+      <button type="button" className={"btn btn-lg bg-gradient-green "+disabled}
+              onClick={this.rerunTest}>
+        <i className="fa fa-repeat"></i> Run Again
       </button>} url={this.props.url}>
       {this.state.message}
       <div className="row">
-          <RequestDetails result={this.state.result}/>
+        <RequestDetails result={this.state.result}/>
       </div>
       <div className="row">
         <div className="col-sm-12">
@@ -118,7 +130,10 @@ export default class Request extends React.Component {
 
       <div className="row">
         <div className="col-sm-12">
-          <DataListParametrized table={<ResultsTable/>} collection="kabassu-results" field="testRequest.id" value={this.props.id} title="List of test results"/>
+          <DataListParametrized table={<ResultsTable/>}
+                                collection="kabassu-results"
+                                field="testRequest._id" value={this.props.id}
+                                title="List of test results"/>
         </div>
       </div>
 
