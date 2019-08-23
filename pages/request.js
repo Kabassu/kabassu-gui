@@ -17,8 +17,48 @@ export default class Request extends React.Component {
     this.state = {
       error: null,
       isLoaded: false,
-      result: {}
+      result: {},
+      message: null
     };
+    this.rerunTest = this.rerunTest.bind(this);
+  }
+
+  rerunTest() {
+    fetch(process.env.kabassuServer + "/kabassu/test/rerun", {
+      method: 'POST',
+      crossDomain: true,
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        requestId: this.props.id
+      })
+    }).then(res => res.json())
+    .then(
+        (result) => {
+          if(result._id!==null){
+            this.setState({
+              message: <div className="alert alert-success" role="alert">
+                Rerun request send
+              </div>
+            });
+          } else {
+            this.setState({
+              message: <div className="alert alert-danger" role="alert">
+                Test Request not found
+              </div>
+            });
+          }
+        },
+        (error) => {
+          this.setState({
+            message: <div className="alert alert-danger" role="alert">
+              Problem with server
+            </div>
+          });
+        }
+    )
   }
 
   componentDidMount() {
@@ -48,8 +88,11 @@ export default class Request extends React.Component {
   }
 
   render() {
-    return <AdminLayoutHoc contentTitle={'Request Details'} contentTitleButton={<i className="fa fa-2x fa-home"/>} url={this.props.url}>
-
+    return <AdminLayoutHoc contentTitle={'Request Details'} contentTitleButton={
+      <button type="button" className="btn btn-lg bg-gradient-green" onClick={this.rerunTest}>
+        <i className="fa fa-repeat" ></i> Run Again
+      </button>} url={this.props.url}>
+      {this.state.message}
       <div className="row">
           <RequestDetails result={this.state.result}/>
       </div>
