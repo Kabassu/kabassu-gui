@@ -1,7 +1,8 @@
 const initialstate = {
   definitionId: '',
   jvm: '',
-  message: null
+  message: null,
+  description: ''
 }
 
 class AddTestRequest extends React.Component {
@@ -18,6 +19,8 @@ class AddTestRequest extends React.Component {
       this.setState({definitionId: e.target.value});
     } else if (e.target.id === 'jvmInput') {
       this.setState({jvm: e.target.value});
+    }else if (e.target.id === 'descriptionInput') {
+      this.setState({description: e.target.value});
     }
   }
 
@@ -39,6 +42,7 @@ class AddTestRequest extends React.Component {
         body: JSON.stringify({
           definitionId: this.state.definitionId,
           jvm: this.state.jvm,
+          description: this.state.description,
           configurationId: "string",
           additionalData: {},
         })
@@ -82,6 +86,11 @@ class AddTestRequest extends React.Component {
               <small id="jvmHelp" className="form-text text-muted">
                 Enter existing jvm
               </small>
+            </div>
+            <div className="form-group">
+              <label htmlFor="descriptionInput">Description</label>
+              <textarea id="descriptionInput" className="form-control"
+                        rows="4"></textarea>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
           </form>

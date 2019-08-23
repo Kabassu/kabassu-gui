@@ -96,7 +96,20 @@ export default class Request extends React.Component {
       <div className="row">
           <RequestDetails result={this.state.result}/>
       </div>
-
+      <div className="row">
+        <div className="col-sm-12">
+          <div className="info-box">
+            <span className="info-box-icon bg-warning"><i
+                className="fa fa-copy"></i></span>
+            <div className="info-box-content">
+              <span className="info-box-number">Description</span>
+              <div>
+                {this.state.result.description}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="row">
         <div className="col-sm-12">
           <DefinitionDetails id={this.state.result.definitionId}/>
