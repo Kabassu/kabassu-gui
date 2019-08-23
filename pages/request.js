@@ -3,6 +3,7 @@ import ResultsTable from "../components/kabassu/ResultsTable";
 import DataListParametrized from "../components/kabassu/DataListParametrized";
 import RequestDetails from "../components/kabassu/RequestDetails";
 import DefinitionDetails from "../components/kabassu/DefinitionDetails";
+import HistoryTable from "../components/kabassu/HistoryTable";
 
 export default class Request extends React.Component {
 
@@ -25,49 +26,42 @@ export default class Request extends React.Component {
   }
 
   rerunTest() {
-
-    if (this.state.result.status == 'finished') {
-      this.setState({
-        result: {
-          status: ''
-        }
-      });
-      fetch(process.env.kabassuServer + "/kabassu/test/rerun", {
-        method: 'POST',
-        crossDomain: true,
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          requestId: this.props.id
-        })
-      }).then(res => res.json())
-      .then(
-          (result) => {
-            if (result._id !== null) {
-              this.setState({
-                message: <div className="alert alert-success" role="alert">
-                  Rerun request send
-                </div>
-              });
-            } else {
-              this.setState({
-                message: <div className="alert alert-danger" role="alert">
-                  Test Request not found
-                </div>
-              });
-            }
-          },
-          (error) => {
+    fetch(process.env.kabassuServer + "/kabassu/test/rerun", {
+      method: 'POST',
+      crossDomain: true,
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        requestId: this.props.id
+      })
+    }).then(res => res.json())
+    .then(
+        (result) => {
+          if (result._id !== null) {
+            this.setState({
+              message: <div className="alert alert-success" role="alert">
+                Rerun request send
+              </div>,
+              result: result
+            });
+          } else {
             this.setState({
               message: <div className="alert alert-danger" role="alert">
-                Problem with server
+                Test Request not found
               </div>
             });
           }
-      )
-    }
+        },
+        (error) => {
+          this.setState({
+            message: <div className="alert alert-danger" role="alert">
+              Problem with server
+            </div>
+          });
+        }
+    )
   }
 
   componentDidMount() {
@@ -100,7 +94,8 @@ export default class Request extends React.Component {
     console.log(this.state.result.status);
     var disabled = this.state.result.status == 'finished' ? null : 'disabled';
     return <AdminLayoutHoc contentTitle={'Request Details'} contentTitleButton={
-      <button type="button" className={"btn btn-lg bg-gradient-green "+disabled}
+      <button type="button"
+              className={"btn btn-lg bg-gradient-green " + disabled}
               onClick={this.rerunTest}>
         <i className="fa fa-repeat"></i> Run Again
       </button>} url={this.props.url}>
@@ -125,6 +120,12 @@ export default class Request extends React.Component {
       <div className="row">
         <div className="col-sm-12">
           <DefinitionDetails id={this.state.result.definitionId}/>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-sm-12">
+          <HistoryTable items={this.state.result.history}/>
         </div>
       </div>
 
