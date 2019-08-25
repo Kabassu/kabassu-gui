@@ -81,6 +81,12 @@ class DefinitionDetailsModal extends React.Component {
                 {this.state.result.location}
               </td>
             </tr>
+            <tr>
+              <td>Reports</td>
+              <td>
+                {this.state.result.reports}
+              </td>
+            </tr>
             </tbody>
           </table>
         </Modal.Body>

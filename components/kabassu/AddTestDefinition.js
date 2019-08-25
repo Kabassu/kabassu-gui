@@ -3,7 +3,8 @@ const initialstate = {
   runner: 'gradle',
   locationType: 'filesystem',
   location: '',
-  message: null
+  message: null,
+  reports: ''
 }
 
 class AddTestDefinition extends React.Component {
@@ -24,6 +25,8 @@ class AddTestDefinition extends React.Component {
       this.setState({locationType: e.target.value});
     }else if (e.target.id === 'locationInput') {
       this.setState({location: e.target.value});
+    }else if (e.target.id === 'reportsInput') {
+      this.setState({reports: e.target.value});
     }
   }
 
@@ -46,7 +49,8 @@ class AddTestDefinition extends React.Component {
           name: this.state.name,
           runner: this.state.runner,
           locationType: this.state.locationType,
-          location: this.state.location
+          location: this.state.location,
+          reports: this.state.reports.split(",")
         })
       });
 
@@ -107,6 +111,15 @@ class AddTestDefinition extends React.Component {
                      placeholder="Enter Location" value={this.state.location}/>
               <small id="locationHelp" className="form-text text-muted">
                 Enter existing location
+              </small>
+            </div>
+            <div className="form-group">
+              <label htmlFor="reportsInput">Reports</label>
+              <input type="text" className="form-control"
+                     id="reportsInput" aria-describedby="reportsHelp"
+                     placeholder="Enter Reports" value={this.state.reports}/>
+              <small id="reportsHelp" className="form-text text-muted">
+                Enter reports to use with this definition
               </small>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>

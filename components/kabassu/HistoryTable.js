@@ -20,40 +20,62 @@ class HistoryTable extends React.Component {
   }
 
   updateState(page) {
-    this.state.page = (page.target.text - 1) < 0 ? 0 : (page.target.text - 1);
+    this.setState({
+      page: (page.target.text - 1) < 0 ? 0 : (page.target.text - 1)
+    });
   }
 
   previousPage() {
-    this.state.page = (this.state.page - 1) < 0 ? 0 : (this.state.page - 1);
+    this.setState({
+      page: (this.state.page - 1) < 0 ? 0 : (this.state.page - 1)
+    })
   }
 
   nextPage() {
-    this.state.page = (this.state.page + 1) >= Math.ceil(
-        this.state.size / this.state.pageSize) ? Math.ceil(
-        this.state.size / this.state.pageSize) - 1 : (this.state.page + 1);
+    this.setState({
+      page: (this.state.page + 1) >= Math.ceil(
+          this.state.size / this.state.pageSize) ? Math.ceil(
+          this.state.size / this.state.pageSize) - 1 : (this.state.page + 1)
+    })
   }
 
   firstPage() {
-    this.state.page = 0;
+    this.setState({
+      page: 0
+    })
   }
 
   lastPage() {
-    this.state.page = Math.ceil(this.state.size / this.state.pageSize) - 1;
+    this.setState({
+      page: Math.ceil(this.state.size / this.state.pageSize) - 1
+    })
+  }
+
+  generatePage(items) {
+    var pages = [];
+    var start = this.state.page * this.state.pageSize;
+    var limit = start + this.state.pageSize;
+    limit = limit <= items.length ? limit : items.length;
+    for (var i = start; i < limit; i++) {
+      console.log(items[i]);
+      pages[i] = items[i]
+    }
+    return pages;
   }
 
   render() {
-    var list;
-    if (typeof this.props.items !=='undefined') {
-      this.state.items = this.props.items;
-      this.state.size = this.props.items.length;
-      list = this.state.items.map(item =>
-          <tr key={item.date}>
-            <td>{(new Date(item.date)).toString()}</td>
-            <td>{item.event}</td>
-          </tr>
-      );
-    } else {
-      list = []
+    var list = [];
+    if (typeof this.props.items !== 'undefined') {
+      this.state.items = this.generatePage(this.props.items);
+      if (this.state.items.length > 0) {
+        this.state.size = this.props.items.length;
+        list = this.state.items.map(item =>
+            <tr key={item.date}>
+              <td>{(new Date(item.date)).toString()}</td>
+              <td>{item.event}</td>
+            </tr>
+        );
+      }
     }
     return <>
       <div className="card collapsed-card">
@@ -81,7 +103,8 @@ class HistoryTable extends React.Component {
             {list}
             </tbody>
           </table>
-          <PaginationBasic active={this.state.page} size={this.state.size} pageSize={this.state.pageSize}
+          <PaginationBasic active={this.state.page} size={this.state.size}
+                           pageSize={this.state.pageSize}
                            updateState={this.updateState}
                            previousPage={this.previousPage}
                            nextPage={this.nextPage}

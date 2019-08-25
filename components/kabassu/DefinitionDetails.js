@@ -80,6 +80,10 @@ class DefinitionDetails extends React.Component {
               <td>Location</td>
               <td>{this.state.result.location}</td>
             </tr>
+            <tr>
+              <td>Reports</td>
+              <td>{this.state.result.reports}</td>
+            </tr>
             </tbody>
           </table>
         </div>
