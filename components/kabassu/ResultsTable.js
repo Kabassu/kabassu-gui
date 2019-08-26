@@ -1,6 +1,4 @@
 import "../../styles/styles.scss"
-import Button from "react-bootstrap/Button";
-import DefinitionDetailsModal from "./DefinitionDetailsModal";
 import Link from "next/link";
 
 class ResultsTable extends React.Component {

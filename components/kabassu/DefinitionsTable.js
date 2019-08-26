@@ -1,4 +1,5 @@
 import "../../styles/styles.scss"
+import Link from "next/link";
 
 class DefinitionsTable extends React.Component {
 
@@ -11,7 +12,8 @@ class DefinitionsTable extends React.Component {
           <td>{item.locationType}</td>
           <td>{item.location}</td>
           <td>{typeof item.reports!=='undefined' ? item.reports.map(item => <div>{item}</div>) : ''}</td>
-          <td>LINK</td>
+          <td><Link href={'/definition?id=' + item._id}><a className="nav-link">Show
+            Details</a></Link></td>
         </tr>
     );
     return   <table className="table table-hover table-bordered">

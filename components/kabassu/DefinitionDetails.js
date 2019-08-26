@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 class DefinitionDetails extends React.Component {
 
   constructor(props) {
@@ -82,7 +84,12 @@ class DefinitionDetails extends React.Component {
             </tr>
             <tr>
               <td>Reports</td>
-              <td>{this.state.result.reports}</td>
+              <td>{ typeof this.state.result.reports!=='undefined' ? this.state.result.reports.map(item => <div>{item}</div>) : ''}</td>
+            </tr>
+            <tr>
+              <td>Details</td>
+              <td><Link href={'/definition?id=' + this.state.result._id}><a className="nav-link">Show
+                Details</a></Link></td>
             </tr>
             </tbody>
           </table>
