@@ -18,13 +18,6 @@ export default class Index extends React.Component {
           <DataList table={<RequestsTable/>} collection="kabassu-requests" title="List of test requests"/>
         </div>
       </div>
-
-
-      <div className="row">
-        <div className="col-sm-12">
-          <DataList table={<ResultsTable/>} collection="kabassu-results" title="List of test results"/>
-        </div>
-      </div>
     </AdminLayoutHoc>
   }
 }

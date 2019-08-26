@@ -43,13 +43,13 @@ class SingleTestReports extends React.Component {
     )
   }
 
-  mapReports(downloadedReports){
+  mapReports(downloadedReports,id){
     return downloadedReports.map(
         (download,key)  =>
           <tr key={key}>
             <td>{download.reportType}</td>
-            <td><Link href={"/report?data=" + download.downloadPath}><a
-                className="nav-link">Show {download.downloadPath}</a></Link></td>
+            <td><Link href={"/report?data=" + download.downloadPath+"&id="+id}><a
+                className="nav-link">Show Report</a></Link></td>
           </tr>
         );
   }
@@ -66,7 +66,7 @@ class SingleTestReports extends React.Component {
     } else if (this.state.items.length > 0
         && typeof this.state.items[0].downloadedReports !== 'undefined') {
       cardEntry = this.mapReports(this.state.items[0].downloadedReports.filter(
-          item => item.type === 'single'));
+          item => item.type === 'single'),this.state.items[0].testRequest._id);
     }
 
     console.log(cardEntry)

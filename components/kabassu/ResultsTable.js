@@ -7,28 +7,11 @@ class ResultsTable extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      activeDefinitionModal: false,
-      definitionId: null,
-
-    }
-    this.clickDefinitionHandler = this.clickDefinitionHandler.bind(this);
-    this.hideDefinitionModal = this.hideDefinitionModal.bind(this);
   }
 
-  clickDefinitionHandler(definitionId, index, e) {
-    this.setState({
-      activeDefinitionModal: true,
-      definitionId: definitionId
-    })
-  }
 
-  hideDefinitionModal() {
-    this.setState({
-      activeDefinitionModal: false,
-      definitionId: null
-    })
-  }
+
+
 
   calculateResult(result) {
     if (result === "Success") {
@@ -40,11 +23,11 @@ class ResultsTable extends React.Component {
     return "";
   }
 
-  prepareReports(reports) {
+  prepareReports(reports,id) {
     return reports.filter(item => item.type!=='single').map((item,key) =>
         <li key={key}>
-          <Link href={"/report?data=" + item.downloadPath}><a
-              className="nav-link">Show {item.downloadPath}</a></Link>
+          <Link href={"/report?data=" + item.downloadPath + "&id="+id}><a
+              className="nav-link">Show Report: {item.reportType}</a></Link>
         </li>
     );
   }
@@ -52,17 +35,10 @@ class ResultsTable extends React.Component {
   render() {
     let list = this.props.items.map((item, index) =>
         <tr className={this.calculateResult(item.result)} key={item._id}>
-          <td>{item._id}</td>
-          <td>
-            <Button variant="link" key={item.definition._id}
-                    onClick={e => this.clickDefinitionHandler(
-                        item.definition._id,
-                        index)}>{item.definition._id}</Button>
-          </td>
           <td>{item.result}</td>
           <td>
             <ul className="list-unstyled">
-            {this.prepareReports(item.downloadedReports)}
+            {this.prepareReports(item.downloadedReports,item.testRequest._id)}
             </ul>
           </td>
         </tr>
@@ -71,8 +47,6 @@ class ResultsTable extends React.Component {
       <table className="table table-hover table-bordered">
         <thead className="thead-dark">
         <tr>
-          <th>id</th>
-          <th>definition</th>
           <th>Result</th>
           <th>Report</th>
         </tr>
@@ -81,10 +55,6 @@ class ResultsTable extends React.Component {
         {list}
         </tbody>
       </table>
-      <DefinitionDetailsModal
-          show={this.state.activeDefinitionModal}
-          onHide={this.hideDefinitionModal}
-          definitionId={this.state.definitionId}/>
     </>
   }
 }

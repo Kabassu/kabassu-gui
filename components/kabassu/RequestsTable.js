@@ -33,7 +33,7 @@ class RequestsTable extends React.Component {
   render() {
     let list = this.props.items.map((item, index) =>
         <tr key={item._id}>
-          <td>{item._id}</td>
+          <td>{item.description}</td>
           <td>
             <Button variant="link" key={item.definitionId}
                     onClick={e => this.clickHandler(
@@ -41,6 +41,7 @@ class RequestsTable extends React.Component {
           </td>
           <td>{item.configurationId}</td>
           <td>{item.jvm}</td>
+          <td>{item.status}</td>
           <td>
             <Link href={'/request?id=' + item._id}><a className="nav-link">Show
               Details</a></Link>
@@ -51,10 +52,11 @@ class RequestsTable extends React.Component {
       <table className="table table-hover table-bordered">
         <thead className="thead-dark">
         <tr>
-          <th>id</th>
+          <th>Description</th>
           <th>definition</th>
           <th>configuration</th>
           <th>jvm</th>
+          <th>status</th>
           <th></th>
         </tr>
         </thead>

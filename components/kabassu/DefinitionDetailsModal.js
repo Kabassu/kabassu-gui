@@ -84,7 +84,7 @@ class DefinitionDetailsModal extends React.Component {
             <tr>
               <td>Reports</td>
               <td>
-                {this.state.result.reports.map(item => <div>{item}</div>)}
+                { typeof this.state.result.reports!=='undefined' ? this.state.result.reports.map(item => <div>{item}</div>) : ''}
               </td>
             </tr>
             </tbody>

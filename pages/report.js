@@ -3,16 +3,22 @@ import ReportFrame from "../components/kabassu/ReportFrame";
 
 export default class Report extends React.Component {
 
-  static async getInitialProps({req, query: { data }}) {
+  static async getInitialProps({req, query: {data,id}}) {
     return {
-      data: data
+      data: data,
+      id: id
     }
   }
 
   render() {
-    return <AdminLayoutHoc contentTitle={'Report Details'} contentTitleButton={<i className="fa fa-2x fa-home"/>} url={this.props.url}>
+    return <AdminLayoutHoc contentTitle={'Report Details'}
+                           contentTitleButton={<a href={'/request?id='+this.props.id}
+                               className={"btn btn-app"}>
+                             <i className="fa  fa-step-backward"></i> Return to request
+                           </a>} url={this.props.url}>
 
-      <ReportFrame src={process.env.kabassuResultsServer+"/kabassu/results"+this.props.data}/>
+      <ReportFrame src={process.env.kabassuResultsServer + "/kabassu/results"
+      + this.props.data}/>
 
     </AdminLayoutHoc>
   }
