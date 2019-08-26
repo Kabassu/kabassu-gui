@@ -84,7 +84,7 @@ class DefinitionDetailsModal extends React.Component {
             <tr>
               <td>Reports</td>
               <td>
-                {this.state.result.reports}
+                {this.state.result.reports.map(item => <div>{item}</div>)}
               </td>
             </tr>
             </tbody>

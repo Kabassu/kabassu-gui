@@ -10,7 +10,7 @@ class DefinitionsTable extends React.Component {
           <td>{item.runner}</td>
           <td>{item.locationType}</td>
           <td>{item.location}</td>
-          <td>{item.reports}</td>
+          <td>{typeof item.reports!=='undefined' ? item.reports.map(item => <div>{item}</div>) : ''}</td>
           <td>LINK</td>
         </tr>
     );
