@@ -4,6 +4,7 @@ import DataListParametrized from "../components/kabassu/DataListParametrized";
 import RequestDetails from "../components/kabassu/RequestDetails";
 import DefinitionDetails from "../components/kabassu/DefinitionDetails";
 import HistoryTable from "../components/kabassu/HistoryTable";
+import SingleTestReports from "../components/kabassu/SingleTestReports";
 
 export default class Request extends React.Component {
 
@@ -138,6 +139,12 @@ export default class Request extends React.Component {
                                 collection="kabassu-results"
                                 field="testRequest._id" value={this.props.id}
                                 title="List of test results"/>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-sm-12">
+          <SingleTestReports testId={this.props.id}/>
         </div>
       </div>
 

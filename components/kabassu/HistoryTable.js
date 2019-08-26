@@ -57,7 +57,6 @@ class HistoryTable extends React.Component {
     var limit = start + this.state.pageSize;
     limit = limit <= items.length ? limit : items.length;
     for (var i = start; i < limit; i++) {
-      console.log(items[i]);
       pages[i] = items[i]
     }
     return pages;

@@ -41,7 +41,7 @@ class ResultsTable extends React.Component {
   }
 
   prepareReports(reports) {
-    return reports.map((item,key) =>
+    return reports.filter(item => item.type!=='single').map((item,key) =>
         <li key={key}>
           <Link href={"/report?data=" + item.downloadPath}><a
               className="nav-link">Show {item.downloadPath}</a></Link>
