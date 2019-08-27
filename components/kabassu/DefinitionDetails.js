@@ -10,7 +10,6 @@ class DefinitionDetails extends React.Component {
   }
 
   fetchData() {
-    console.log(this.props.id)
     fetch(process.env.kabassuServer + '/kabassu/getdefinition/'
         + this.props.id, {
       crossDomain: true,

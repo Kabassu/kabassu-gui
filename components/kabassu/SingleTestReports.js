@@ -69,7 +69,6 @@ class SingleTestReports extends React.Component {
           item => item.type === 'single'),this.state.items[0].testRequest._id);
     }
 
-    console.log(cardEntry)
     return <div className="card">
       <div className="card-header">
         <h3 className="card-title">
