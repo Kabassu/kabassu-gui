@@ -2,7 +2,7 @@ import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
 import RequestsTable from "../components/kabassu/RequestsTable";
 import DataListParametrized from "../components/kabassu/DataListParametrized";
 
-export default class Request extends React.Component {
+export default class Definition extends React.Component {
 
   static async getInitialProps({req, query: {id}}) {
     return {
