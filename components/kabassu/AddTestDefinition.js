@@ -4,7 +4,8 @@ const initialstate = {
   locationType: 'filesystem',
   location: '',
   message: null,
-  reports: ''
+  reports: '',
+  runnerParams: "clean test"
 }
 
 class AddTestDefinition extends React.Component {
@@ -27,6 +28,8 @@ class AddTestDefinition extends React.Component {
       this.setState({location: e.target.value});
     }else if (e.target.id === 'reportsInput') {
       this.setState({reports: e.target.value});
+    }else if (e.target.id === 'runnerParamsInput') {
+      this.setState({runnerParams: e.target.value});
     }
   }
 
@@ -48,6 +51,7 @@ class AddTestDefinition extends React.Component {
         body: JSON.stringify({
           name: this.state.name,
           runner: this.state.runner,
+          runnerOptions: this.state.runnerParams !== null && this.state.runnerParams !== '' ?  this.state.runnerParams.split(" ") : [],
           locationType: this.state.locationType,
           location: this.state.location,
           reports: this.state.reports.split(",")
@@ -93,6 +97,15 @@ class AddTestDefinition extends React.Component {
                      placeholder="Enter Runner" value={this.state.runner}/>
               <small id="runnerHelp" className="form-text text-muted">
                 Enter existing runner
+              </small>
+            </div>
+            <div className="form-group">
+              <label htmlFor="runnerParamsInput">Runner parameters</label>
+              <input type="text" className="form-control"
+                     id="runnerParamsInput" aria-describedby="runnerParamsHelp"
+                     placeholder="Enter runner params" value={this.state.runnerParams}/>
+              <small id="runnerParamsHelp" className="form-text text-muted">
+                Enter runner parameters (space as separator) optional
               </small>
             </div>
             <div className="form-group">

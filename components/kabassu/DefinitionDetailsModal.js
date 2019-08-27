@@ -70,6 +70,10 @@ class DefinitionDetailsModal extends React.Component {
               </td>
             </tr>
             <tr>
+              <td>Runner Options</td>
+              <td>{typeof this.state.result.runnerOptions!=='undefined' ? this.state.result.runnerOptions.map((item,key) => <div key={key}>{item}</div>) : ''}</td>
+            </tr>
+            <tr>
               <td>Location Type</td>
               <td>
                 {this.state.result.locationType}
@@ -84,7 +88,7 @@ class DefinitionDetailsModal extends React.Component {
             <tr>
               <td>Reports</td>
               <td>
-                { typeof this.state.result.reports!=='undefined' ? this.state.result.reports.map(item => <div>{item}</div>) : ''}
+                { typeof this.state.result.reports!=='undefined' ? this.state.result.reports.map((item,key) => <div key={key}>{item}</div>) : ''}
               </td>
             </tr>
             </tbody>

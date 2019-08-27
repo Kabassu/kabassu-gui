@@ -32,7 +32,7 @@ class RequestsTable extends React.Component {
 
   render() {
     let list = this.props.items.map((item, index) =>
-        <tr key={item._id}>
+        <tr key={index}>
           <td>{item.description}</td>
           <td>
             <Button variant="link" key={item.definitionId}

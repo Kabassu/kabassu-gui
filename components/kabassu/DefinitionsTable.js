@@ -9,9 +9,10 @@ class DefinitionsTable extends React.Component {
           <td>{item._id}</td>
           <td>{item.name}</td>
           <td>{item.runner}</td>
+          <td>{typeof item.runnerOptions!=='undefined' ? item.runnerOptions.map((item,key) => <div key={key}>{item}</div>) : ''}</td>
           <td>{item.locationType}</td>
           <td>{item.location}</td>
-          <td>{typeof item.reports!=='undefined' ? item.reports.map(item => <div>{item}</div>) : ''}</td>
+          <td>{typeof item.reports!=='undefined' ? item.reports.map((item,key) => <div key={key}>{item}</div>) : ''}</td>
           <td><Link href={'/definition?id=' + item._id}><a className="nav-link">Show
             Details</a></Link></td>
         </tr>
@@ -22,6 +23,7 @@ class DefinitionsTable extends React.Component {
         <th>id</th>
         <th>name</th>
         <th>runner</th>
+        <th>runner options</th>
         <th>location type</th>
         <th>locations</th>
         <th>reports</th>

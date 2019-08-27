@@ -75,6 +75,10 @@ class DefinitionDetails extends React.Component {
               <td>{this.state.result.runner}</td>
             </tr>
             <tr>
+              <td>Runner Options</td>
+              <td>{typeof this.state.result.runnerOptions!=='undefined' ? this.state.result.runnerOptions.map((item,key) => <div key={key}>{item}</div>) : ''}</td>
+            </tr>
+            <tr>
               <td>Location Type</td>
               <td>{this.state.result.locationType}</td>
             </tr>
@@ -84,7 +88,7 @@ class DefinitionDetails extends React.Component {
             </tr>
             <tr>
               <td>Reports</td>
-              <td>{ typeof this.state.result.reports!=='undefined' ? this.state.result.reports.map(item => <div>{item}</div>) : ''}</td>
+              <td>{ typeof this.state.result.reports!=='undefined' ? this.state.result.reports.map((item,key) => <div key={key}>{item}</div>) : ''}</td>
             </tr>
             <tr>
               <td>Details</td>

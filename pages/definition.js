@@ -49,7 +49,7 @@ export default class Request extends React.Component {
   render() {
 
     return <AdminLayoutHoc contentTitle={'Definition Details'}
-                           contentTitleButton={''} url={this.props.url}>
+                           contentTitleButton={<i className="fa fa-2x fa-home"/>} url={this.props.url}>
       <div className="row">
         <div className="col-sm-6">
           <div className="info-box">
@@ -87,6 +87,19 @@ export default class Request extends React.Component {
           <span className="info-box-icon bg-red"><i
               className="fa  fa-terminal"></i></span>
             <div className="info-box-content">
+              <span className="info-box-text">Runner Options</span>
+              <span
+                  className="info-box-number">{typeof this.state.result.runnerOptions
+              !== 'undefined' ? this.state.result.runnerOptions.map(
+                  (item,key) => <div key={key}>{item}</div>) : ''}</span>
+            </div>
+          </div>
+        </div>
+        <div className="col-sm-6">
+          <div className="info-box">
+          <span className="info-box-icon bg-red"><i
+              className="fa  fa-terminal"></i></span>
+            <div className="info-box-content">
               <span className="info-box-text">Location Type</span>
               <span
                   className="info-box-number">{this.state.result.locationType}</span>
@@ -113,7 +126,7 @@ export default class Request extends React.Component {
               <span
                   className="info-box-number">{typeof this.state.result.reports
               !== 'undefined' ? this.state.result.reports.map(
-                  item => <div>{item}</div>) : ''}</span>
+                  (item,key) => <div key={key}>{item}</div>) : ''}</span>
             </div>
           </div>
         </div>
