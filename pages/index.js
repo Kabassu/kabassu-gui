@@ -3,6 +3,7 @@ import DataList from "../components/kabassu/DataList";
 import RequestsTable from "../components/kabassu/RequestsTable";
 import DefinitionsTable from "../components/kabassu/DefinitionsTable";
 import ResultsTable from "../components/kabassu/ResultsTable";
+import TestSuitesTable from "../components/kabassu/TestSuitesTable";
 
 export default class Index extends React.Component {
 
@@ -11,6 +12,11 @@ export default class Index extends React.Component {
       <div className="row">
         <div className="col-sm-12">
           <DataList table={<DefinitionsTable/>} collection="kabassu-definitions" title="List of test definitions"/>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-sm-12">
+          <DataList table={<TestSuitesTable/>} collection="kabassu-suites" title="List of test suites"/>
         </div>
       </div>
       <div className="row">
