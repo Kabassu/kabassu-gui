@@ -55,7 +55,7 @@ class TestSuitesTable extends React.Component {
     );
     return <>
       <table className="table table-hover table-bordered">
-        <thead className="thead-dark">
+        <thead className="thead-light">
         <tr>
           <th>Name</th>
           <th>Description</th>

@@ -99,7 +99,7 @@ class DataList extends React.Component {
       </div>;
     }
 
-    return <div className="card">
+    return <div className="card card-primary">
       <div className="card-header">
         <h3 className="card-title">
           <i className="fa fa-television"/>&nbsp;{this.props.title}

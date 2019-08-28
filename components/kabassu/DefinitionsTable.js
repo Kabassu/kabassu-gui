@@ -18,7 +18,7 @@ class DefinitionsTable extends React.Component {
         </tr>
     );
     return   <table className="table table-hover table-bordered">
-      <thead className="thead-dark">
+      <thead className="thead-light">
       <tr>
         <th>id</th>
         <th>name</th>
