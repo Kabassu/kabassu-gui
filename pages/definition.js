@@ -1,6 +1,7 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
 import RequestsTable from "../components/kabassu/RequestsTable";
 import DataListParametrized from "../components/kabassu/DataListParametrized";
+import Link from "next/link";
 
 export default class Definition extends React.Component {
 
@@ -49,7 +50,9 @@ export default class Definition extends React.Component {
   render() {
 
     return <AdminLayoutHoc contentTitle={'Definition Details'}
-                           contentTitleButton={<i className="fa fa-2x fa-home"/>} url={this.props.url}>
+                           contentTitleButton={
+                             <Link href={'/addtestrequest?id=' + this.props.id}><a className={"btn btn-lg bg-gradient-green "} >Create Execution</a></Link>
+                           } url={this.props.url}>
       <div className="row">
         <div className="col-sm-6">
           <div className="info-box">
