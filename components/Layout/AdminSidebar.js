@@ -48,6 +48,14 @@ class AdminSidebar extends React.Component {
                     </a>
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link href="/addtestsuite">
+                    <a className={['nav-link', pathname === '/addtestsuite' ? 'active' : ''].join(' ')}>
+                      <i className="nav-icon fa  fa-plus-square"/>
+                      <p>Create Test Suite</p>
+                    </a>
+                  </Link>
+                </li>
               </ul>
             </li>
           </ul>
