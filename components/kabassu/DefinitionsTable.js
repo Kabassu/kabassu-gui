@@ -13,8 +13,11 @@ class DefinitionsTable extends React.Component {
           <td>{item.locationType}</td>
           <td>{item.location}</td>
           <td>{typeof item.reports!=='undefined' ? item.reports.map((item,key) => <div key={key}>{item}</div>) : ''}</td>
-          <td><Link href={'/definition?id=' + item._id}><a className="nav-link">Show
-            Details</a></Link></td>
+          <td>
+            <div><Link href={'/definition?id=' + item._id}><a className="nav-link">Show
+            Details</a></Link></div>
+            <div><Link href={'/addtestrequest?id=' + item._id}><a className="nav-link">Create Execution</a></Link></div>
+          </td>
         </tr>
     );
     return   <table className="table table-hover table-bordered">

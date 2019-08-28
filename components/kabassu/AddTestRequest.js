@@ -10,6 +10,7 @@ class AddTestRequest extends React.Component {
   constructor(props) {
     super(props)
     this.state = initialstate;
+    this.state.definitionId=this.props.id;
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   };
@@ -73,7 +74,7 @@ class AddTestRequest extends React.Component {
               <label htmlFor="definitionIdInput">Definition Id</label>
               <input type="text" className="form-control"
                      id="definitionIdInput" aria-describedby="definitionIdHelp"
-                     placeholder="Enter definition id" value={this.state.definitionId}/>
+                     placeholder="Enter definition id"  value={this.state.definitionId}/>
                 <small id="definitionIdHelp" className="form-text text-muted">
                   Enter existing definition Id
                 </small>
