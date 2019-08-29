@@ -9,7 +9,8 @@ class SuiteRunTable extends React.Component {
           <td>{item._id}</td>
           <td>{item.suiteId}</td>
           <td>{typeof item.requests!=='undefined' ? item.requests.map((item,key) => <div key={key}>{item}</div>) : ''}</td>
-          <td>Show Details</td>
+          <td><Link href={"/suiterun?id="+ item._id}><a className="nav-link">Show
+            Details</a></Link></td>
         </tr>
     );
     return   <table className="table table-hover table-bordered">

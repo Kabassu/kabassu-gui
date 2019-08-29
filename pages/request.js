@@ -97,7 +97,7 @@ export default class Request extends React.Component {
   render() {
     var disabled = this.state.result.status == 'finished' ? '' : 'disabled';
     this.state.enableRerun = this.state.result.status == 'finished';
-    return <AdminLayoutHoc contentTitle={'Request Details'} contentTitleButton={
+    return <AdminLayoutHoc contentTitle={'Test Execution Details'} contentTitleButton={
       <button type="button"
               className={"btn btn-lg bg-gradient-green " + disabled}
               onClick={this.rerunTest}>
