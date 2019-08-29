@@ -141,6 +141,18 @@ export default class SuiteRun extends React.Component {
             </div>
           </div>
         </div>
+        <div className="col-sm-6">
+          <div className="info-box">
+            <span className="info-box-icon bg-warning"><i
+                className="fa fa-copy"></i></span>
+            <div className="info-box-content">
+              <span className="info-box-number">Status</span>
+              <div>
+                {this.state.enableRerun ? 'Finished' : 'In progress'}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="row">
         <div className="col-sm-12">
