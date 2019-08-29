@@ -48,7 +48,7 @@ class TestSuitesTable extends React.Component {
             {this.prepareDefinitions(item.definitions)}
           </td>
           <td>
-            <Link href="/index"><a className="nav-link">Show
+            <Link href={"/suite?id="+ item._id}><a className="nav-link">Show
               Details</a></Link>
           </td>
         </tr>
