@@ -67,7 +67,7 @@ export default class Suite extends React.Component {
 
     return <AdminLayoutHoc contentTitle={'Suite Definition Details'}
                            contentTitleButton={
-                             <Link href={'#'}><a
+                             <Link href={'/addsuiterun?id='+this.state.result._id}><a
                                  className={"btn btn-lg bg-gradient-green "}>Create
                                Execution</a></Link>
                            } url={this.props.url}>
