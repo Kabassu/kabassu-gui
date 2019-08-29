@@ -18,7 +18,7 @@ class DataListFiltered extends React.Component {
     this.nextPage = this.nextPage.bind(this)
     this.firstPage = this.firstPage.bind(this)
     this.lastPage = this.lastPage.bind(this)
-
+    this.parentUpdate = this.parentUpdate.bind(this)
   }
 
   updateState(page) {
@@ -53,6 +53,12 @@ class DataListFiltered extends React.Component {
     this.fetchData();
   }
 
+  parentUpdate(){
+    if(typeof this.props.parentUpdate !== 'undefined' && typeof this.state.items !== 'undefined'){
+       this.props.parentUpdate(this.state.items.filter(item => item.status !=='finished').length===0)
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.filters !== prevProps.filters) {
       this.fetchData();
@@ -83,6 +89,7 @@ class DataListFiltered extends React.Component {
             items: result.results,
             size: result.allItems
           });
+          this.parentUpdate()
         },
         (error) => {
           this.setState({

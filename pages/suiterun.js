@@ -23,10 +23,14 @@ export default class SuiteRun extends React.Component {
       error: null,
       isLoaded: false,
       result: {},
+      message: null,
       enableRerun: false,
       filters: []
     };
     this.prepareRequests = this.prepareRequests.bind(this);
+    this.updateRerun = this.updateRerun.bind(this);
+    this.rerunTest = this.rerunTest.bind(this);
+
   }
 
   prepareRequests() {
@@ -36,12 +40,18 @@ export default class SuiteRun extends React.Component {
           filterName: "_id",
           filterValues: typeof this.state.result.requests !== 'undefined' ? this.state.result.requests.map(item => item) : []
         }
-      ]
+      ],
     })
   }
 
   componentDidMount() {
     this.fetchData();
+  }
+
+  updateRerun(finished){
+    this.setState({
+      enableRerun: finished
+    })
   }
 
   fetchData() {
@@ -67,10 +77,54 @@ export default class SuiteRun extends React.Component {
     )
   }
 
+  rerunTest() {
+    if (this.state.enableRerun) {
+      this.state.enableRerun = false;
+      fetch(process.env.kabassuServer + "/kabassu/suite/rerun", {
+        method: 'POST',
+        crossDomain: true,
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          suiterunId: this.props.id
+        })
+      }).then(res => res.json())
+      .then(
+          (result) => {
+            if (result._id !== null) {
+              this.setState({
+                message: <div className="alert alert-success" role="alert">
+                  Rerun suit send
+                </div>,
+                result: result
+              });
+            } else {
+              this.setState({
+                message: <div className="alert alert-danger" role="alert">
+                  Test Suite not found
+                </div>
+              });
+            }
+          },
+          (error) => {
+            this.setState({
+              message: <div className="alert alert-danger" role="alert">
+                Problem with server
+              </div>
+            });
+          }
+      )
+    }
+  }
+
   render() {
+    var disabled = this.state.enableRerun ? '' : 'disabled';
     return <AdminLayoutHoc contentTitle={'Suit Execution Details'} contentTitleButton={
       <button type="button"
-              className={"btn btn-lg bg-gradient-green disabled"}       >
+              className={"btn btn-lg bg-gradient-green "+disabled}
+              onClick={this.rerunTest}>
         <i className="fa fa-repeat"></i> Run Again
       </button>} url={this.props.url}>
       {this.state.message}
@@ -96,10 +150,17 @@ export default class SuiteRun extends React.Component {
 
       <div className="row">
         <div className="col-sm-12">
+          <HistoryTable items={this.state.result.history}/>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-sm-12">
           <DataListFiltered table={<RequestsTable/>}
                                 collection="kabassu-requests"
                                 filters={this.state.filters}
-                                title="List of test executions"/>
+                                title="List of test executions"
+                                parentUpdate={this.updateRerun}/>
         </div>
       </div>
 
