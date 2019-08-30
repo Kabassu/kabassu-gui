@@ -114,6 +114,17 @@ export default class Definition extends React.Component {
           <span className="info-box-icon bg-red"><i
               className="fa  fa-terminal"></i></span>
             <div className="info-box-content">
+              <span className="info-box-text">Additional Parameters</span>
+              <span
+                  className="info-box-number"><pre>{JSON.stringify(this.state.result.additionalParameters,undefined,1)}</pre></span>
+            </div>
+          </div>
+        </div>
+        <div className="col-sm-6">
+          <div className="info-box">
+          <span className="info-box-icon bg-red"><i
+              className="fa  fa-terminal"></i></span>
+            <div className="info-box-content">
               <span className="info-box-text">Location</span>
               <span
                   className="info-box-number">{this.state.result.location}</span>
