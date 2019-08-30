@@ -11,6 +11,7 @@ export default class MyDocument extends Document {
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"/>
           {/* This provides all admin-lte functionality - we copied the files to our static directory above */}
           <script src="/static/adminlte.js"/>
+
         </Head>
         <body className="sidebar-mini layout-fixed ">
         <Main/>

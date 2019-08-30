@@ -80,6 +80,12 @@ class DefinitionDetailsModal extends React.Component {
               </td>
             </tr>
             <tr>
+              <td>Additional Parameters</td>
+              <td>
+                <pre>{JSON.stringify(this.state.result.additionalParameters,undefined,1)}</pre>
+              </td>
+            </tr>
+            <tr>
               <td>Location</td>
               <td>
                 {this.state.result.location}
@@ -88,7 +94,7 @@ class DefinitionDetailsModal extends React.Component {
             <tr>
               <td>Reports</td>
               <td>
-                { typeof this.state.result.reports!=='undefined' ? this.state.result.reports.map((item,key) => <div key={key}>{item}</div>) : ''}
+                 <pre>{JSON.stringify(this.state.result.reports,undefined,1)}</pre>
               </td>
             </tr>
             </tbody>
