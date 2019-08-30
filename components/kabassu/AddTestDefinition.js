@@ -118,7 +118,7 @@ class AddTestDefinition extends React.Component {
       && this.state.runnerParams !== '' ? this.state.runnerParams.split(" ")
           : [],
       locationType: this.state.locationType,
-      additionalParamers: {},
+      additionalParameters: {},
       location: this.state.location,
       reports: this.state.reports.split(",")
     }
