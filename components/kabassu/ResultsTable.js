@@ -7,10 +7,6 @@ class ResultsTable extends React.Component {
     super(props);
   }
 
-
-
-
-
   calculateResult(result) {
     if (result === "Success") {
       return "table-success"

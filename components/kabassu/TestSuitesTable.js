@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import DefinitionDetailsModal from "./DefinitionDetailsModal";
 import Link from "next/link";
 
-class RequestsTable extends React.Component {
+class TestSuitesTable extends React.Component {
 
   constructor(props) {
     super(props);
@@ -30,21 +30,28 @@ class RequestsTable extends React.Component {
     })
   }
 
+  prepareDefinitions(definitions) {
+    return definitions.map((item, index) =>
+        <div key={index}>
+          <Button variant="link" key={item}
+                  onClick={e => this.clickHandler(item)}>{item}
+          </Button>
+        </div>)
+  }
+
   render() {
     let list = this.props.items.map((item, index) =>
         <tr key={index}>
+          <td>{item.name}</td>
           <td>{item.description}</td>
           <td>
-            <Button variant="link" key={item.definitionId}
-                    onClick={e => this.clickHandler(
-                        item.definitionId)}>{item.definitionId}</Button>
+            {this.prepareDefinitions(item.definitions)}
           </td>
-          <td>{item.configurationId}</td>
-          <td>{item.jvm}</td>
-          <td>{item.status}</td>
           <td>
-            <Link href={'/request?id=' + item._id}><a className="nav-link">Show
-              Details</a></Link>
+            <div><Link href={"/suite?id="+ item._id}><a className="nav-link">Show
+              Details</a></Link></div>
+            <div><Link href={'/addsuiterun?id=' + item._id}><a
+                className="nav-link">Create Execution</a></Link></div>
           </td>
         </tr>
     );
@@ -52,11 +59,9 @@ class RequestsTable extends React.Component {
       <table className="table table-hover table-bordered">
         <thead className="thead-light">
         <tr>
+          <th>Name</th>
           <th>Description</th>
-          <th>definition</th>
-          <th>configuration</th>
-          <th>jvm</th>
-          <th>status</th>
+          <th>Definitions</th>
           <th></th>
         </tr>
         </thead>
@@ -71,4 +76,4 @@ class RequestsTable extends React.Component {
   }
 }
 
-export default RequestsTable
+export default TestSuitesTable

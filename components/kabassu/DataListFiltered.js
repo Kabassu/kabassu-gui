@@ -1,7 +1,7 @@
 import "../../styles/styles.scss"
 import PaginationBasic from "./PaginationBasic";
 
-class DataList extends React.Component {
+class DataListFiltered extends React.Component {
 
   constructor(props) {
     super(props);
@@ -11,14 +11,14 @@ class DataList extends React.Component {
       items: [],
       size: 0,
       page: 0,
-      pageSize: 5
+      pageSize: 5,
     };
     this.updateState = this.updateState.bind(this)
     this.previousPage = this.previousPage.bind(this)
     this.nextPage = this.nextPage.bind(this)
     this.firstPage = this.firstPage.bind(this)
     this.lastPage = this.lastPage.bind(this)
-
+    this.parentUpdate = this.parentUpdate.bind(this)
   }
 
   updateState(page) {
@@ -53,11 +53,33 @@ class DataList extends React.Component {
     this.fetchData();
   }
 
+  parentUpdate(){
+    if(typeof this.props.parentUpdate !== 'undefined' && typeof this.state.items !== 'undefined'){
+       this.props.parentUpdate(this.state.items.filter(item => item.status !=='finished').length===0)
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.filters !== prevProps.filters) {
+      this.fetchData();
+    }
+  }
+
   fetchData() {
-    fetch(process.env.kabassuServer + '/kabassu/getall/'+this.props.collection+'/'
-        + this.state.page + '/' + this.state.pageSize, {
+    var request = {
+      collection : this.props.collection,
+      page: this.state.page,
+      pageSize: this.state.pageSize,
+      filters: this.props.filters
+    }
+    fetch(process.env.kabassuServer + '/kabassu/getbyfilters', {
+      method: 'POST',
       crossDomain: true,
-      method: 'GET',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(request)
     })
     .then(res => res.json())
     .then(
@@ -67,6 +89,7 @@ class DataList extends React.Component {
             items: result.results,
             size: result.allItems
           });
+          this.parentUpdate()
         },
         (error) => {
           this.setState({
@@ -99,7 +122,7 @@ class DataList extends React.Component {
       </div>;
     }
 
-    return <div className="card card-primary">
+    return <div className="card">
       <div className="card-header">
         <h3 className="card-title">
           <i className="fa fa-television"/>&nbsp;{this.props.title}
@@ -121,4 +144,4 @@ class DataList extends React.Component {
   }
 }
 
-export default DataList
+export default DataListFiltered

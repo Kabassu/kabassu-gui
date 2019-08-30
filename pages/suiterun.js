@@ -5,8 +5,11 @@ import RequestDetails from "../components/kabassu/RequestDetails";
 import DefinitionDetails from "../components/kabassu/DefinitionDetails";
 import HistoryTable from "../components/kabassu/HistoryTable";
 import SingleTestReports from "../components/kabassu/SingleTestReports";
+import RequestsTable from "../components/kabassu/RequestsTable";
+import DataListFiltered from "../components/kabassu/DataListFiltered";
+import SuiteDetails from "../components/kabassu/SuiteDetails";
 
-export default class Request extends React.Component {
+export default class SuiteRun extends React.Component {
 
   static async getInitialProps({req, query: {id}}) {
     return {
@@ -21,15 +24,63 @@ export default class Request extends React.Component {
       isLoaded: false,
       result: {},
       message: null,
-      enableRerun: false
+      enableRerun: false,
+      filters: []
     };
+    this.prepareRequests = this.prepareRequests.bind(this);
+    this.updateRerun = this.updateRerun.bind(this);
     this.rerunTest = this.rerunTest.bind(this);
+
+  }
+
+  prepareRequests() {
+    this.setState({
+      filters:  [
+        {
+          filterName: "_id",
+          filterValues: typeof this.state.result.requests !== 'undefined' ? this.state.result.requests.map(item => item) : []
+        }
+      ],
+    })
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  updateRerun(finished){
+    this.setState({
+      enableRerun: finished
+    })
+  }
+
+  fetchData() {
+    fetch(process.env.kabassuServer + '/kabassu/getsuiterun/' + this.props.id, {
+      crossDomain: true,
+      method: 'GET',
+    })
+    .then(res => res.json())
+    .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            result: result
+          });
+          this.prepareRequests()
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+    )
   }
 
   rerunTest() {
     if (this.state.enableRerun) {
       this.state.enableRerun = false;
-      fetch(process.env.kabassuServer + "/kabassu/test/rerun", {
+      fetch(process.env.kabassuServer + "/kabassu/suite/rerun", {
         method: 'POST',
         crossDomain: true,
         mode: 'cors',
@@ -37,7 +88,7 @@ export default class Request extends React.Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          requestId: this.props.id
+          suiterunId: this.props.id
         })
       }).then(res => res.json())
       .then(
@@ -45,14 +96,14 @@ export default class Request extends React.Component {
             if (result._id !== null) {
               this.setState({
                 message: <div className="alert alert-success" role="alert">
-                  Rerun request send
+                  Rerun suit send
                 </div>,
                 result: result
               });
             } else {
               this.setState({
                 message: <div className="alert alert-danger" role="alert">
-                  Test Request not found
+                  Test Suite not found
                 </div>
               });
             }
@@ -68,54 +119,36 @@ export default class Request extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.fetchData();
-  }
-
-  fetchData() {
-    fetch(process.env.kabassuServer + '/kabassu/getrequest/' + this.props.id, {
-      crossDomain: true,
-      method: 'GET',
-    })
-    .then(res => res.json())
-    .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            result: result
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-    )
-  }
-
   render() {
-    var disabled = this.state.result.status == 'finished' ? '' : 'disabled';
-    this.state.enableRerun = this.state.result.status == 'finished';
-    return <AdminLayoutHoc contentTitle={'Test Execution Details'} contentTitleButton={
+    var disabled = this.state.enableRerun ? '' : 'disabled';
+    return <AdminLayoutHoc contentTitle={'Suit Execution Details'} contentTitleButton={
       <button type="button"
-              className={"btn btn-lg bg-gradient-green " + disabled}
+              className={"btn btn-lg bg-gradient-green "+disabled}
               onClick={this.rerunTest}>
         <i className="fa fa-repeat"></i> Run Again
       </button>} url={this.props.url}>
       {this.state.message}
       <div className="row">
-        <RequestDetails result={this.state.result}/>
-      </div>
-      <div className="row">
-        <div className="col-sm-12">
+        <div className="col-sm-6">
           <div className="info-box">
             <span className="info-box-icon bg-warning"><i
                 className="fa fa-copy"></i></span>
             <div className="info-box-content">
-              <span className="info-box-number">Description</span>
+              <span className="info-box-number">Id</span>
               <div>
-                {this.state.result.description}
+                {this.state.result._id}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-sm-6">
+          <div className="info-box">
+            <span className="info-box-icon bg-warning"><i
+                className="fa fa-copy"></i></span>
+            <div className="info-box-content">
+              <span className="info-box-number">Status</span>
+              <div>
+                {this.state.enableRerun ? 'Finished' : 'In progress'}
               </div>
             </div>
           </div>
@@ -123,7 +156,7 @@ export default class Request extends React.Component {
       </div>
       <div className="row">
         <div className="col-sm-12">
-          <DefinitionDetails id={this.state.result.definitionId}/>
+          <SuiteDetails id={this.state.result.suiteId}/>
         </div>
       </div>
 
@@ -135,18 +168,14 @@ export default class Request extends React.Component {
 
       <div className="row">
         <div className="col-sm-12">
-          <DataListParametrized table={<ResultsTable/>}
-                                collection="kabassu-results"
-                                field="testRequest._id" value={this.props.id}
-                                title="List of test results"/>
+          <DataListFiltered table={<RequestsTable/>}
+                                collection="kabassu-requests"
+                                filters={this.state.filters}
+                                title="List of test executions"
+                                parentUpdate={this.updateRerun}/>
         </div>
       </div>
 
-      <div className="row">
-        <div className="col-sm-12">
-          <SingleTestReports testId={this.props.id}/>
-        </div>
-      </div>
 
     </AdminLayoutHoc>
   }
