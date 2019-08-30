@@ -123,7 +123,7 @@ class AddTestDefinition extends React.Component {
       reports: this.state.reports.split(",")
     }
     this.state.parameters.forEach(function(value, key){
-      request.additionalParamers[key] = value
+      request.additionalParameters[key] = value
     })
     console.log(request)
     return request
