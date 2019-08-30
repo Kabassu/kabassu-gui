@@ -36,6 +36,16 @@ class RequestDetails extends React.Component {
           </div>
         </div>
       </div>
+      <div className="col-sm-6">
+        <div className="info-box">
+          <span className="info-box-icon bg-red"><i
+              className="fa  fa-terminal"></i></span>
+          <div className="info-box-content">
+            <span className="info-box-text">Configuration</span>
+            <span className="info-box-number"><pre>{JSON.stringify(this.props.result.additionalData,undefined,1)}</pre></span>
+          </div>
+        </div>
+      </div>
     </>
   }
 }

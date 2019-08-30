@@ -79,7 +79,8 @@ class AddTestSuite extends React.Component {
   removeDefinitions(e) {
       this.state.definitions.delete(e.target.value);
       this.setState({
-        definitions: this.state.definitions
+        definitions: this.state.definitions,
+        possibleDefinition: ''
       })
 
   }

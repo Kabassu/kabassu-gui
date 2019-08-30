@@ -105,7 +105,9 @@ class AddTestDefinition extends React.Component {
   removeParameters(e) {
     this.state.parameters.delete(e.target.value);
     this.setState({
-      parameters: this.state.parameters
+      parameters: this.state.parameters,
+      possibleParameterName: '',
+      possibleParameterValue: ''
     })
 
   }
@@ -125,7 +127,6 @@ class AddTestDefinition extends React.Component {
     this.state.parameters.forEach(function(value, key){
       request.additionalParameters[key] = value
     })
-    console.log(request)
     return request
   }
 

@@ -82,6 +82,12 @@ class DefinitionDetails extends React.Component {
               <td>{this.state.result.locationType}</td>
             </tr>
             <tr>
+              <td>Additional Parameters</td>
+              <td>
+                <pre>{JSON.stringify(this.state.result.additionalParameters,undefined,1)}</pre>
+              </td>
+            </tr>
+            <tr>
               <td>Location</td>
               <td>{this.state.result.location}</td>
             </tr>
