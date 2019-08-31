@@ -11,8 +11,7 @@ Build with Next.js and AdminLTE user interface for Kabassu
 
 # How to run it
 
-1. Create database in Mongo.
-2. Clone this repository
-3. Set servers of kabassu in next.config.js
-4. Run npm install
-5. Run npm run dev
+1. Clone this repository
+2. Set servers of kabassu in next.config.js
+3. Run npm install
+4. Run npm run dev
