@@ -4,6 +4,7 @@ import DefinitionsTable from "./DefinitionsTable";
 const initialstate = {
   suiteId: '',
   definitionsData: new Map(),
+  additionalParameters: new Map(),
   suiteData: {},
   filters: []
 }
@@ -17,7 +18,11 @@ class AddSuiteRun extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.prepareDefinitions = this.prepareDefinitions.bind(this);
+    this.prepareAdditionalParameters = this.prepareAdditionalParameters.bind(
+        this);
     this.prepareTestsConfiguration = this.prepareTestsConfiguration.bind(this);
+    this.addParameters = this.addParameters.bind(this);
+    this.removeParameters = this.removeParameters.bind(this);
 
   };
 
@@ -33,7 +38,8 @@ class AddSuiteRun extends React.Component {
           this.setState({
             isLoaded: true,
             suiteData: result,
-            definitionsData: this.prepareDefinitionsData(result)
+            definitionsData: this.prepareDefinitionsData(result),
+            additionalParameters: this.prepareAdditionalParameters(result)
           });
           this.prepareDefinitions();
         },
@@ -65,46 +71,98 @@ class AddSuiteRun extends React.Component {
   prepareDefinitionsData(suiteData) {
     var definitionsMap = new Map();
     suiteData.definitions.forEach(
-        item => definitionsMap.set(item, {configurationId: '', jvm: ''}))
+        item => definitionsMap.set(item,
+            {configurationId: '', jvm: '', additionalData: new Map()}))
     return definitionsMap;
+  }
+
+  prepareAdditionalParameters(suiteData) {
+    var parametersMap = new Map();
+    suiteData.definitions.forEach(
+        item => parametersMap.set(item, {field: '', value: ''}))
+    return parametersMap;
   }
 
   onChange(e) {
     if (e.target.id.startsWith('configurationInput@')) {
       var setJvm = this.state.definitionsData.get(e.target.id.split('@')[1]).jvm
-      this.state.definitionsData.set(e.target.id.split('@')[1],{
+      var additional = this.state.definitionsData.get(
+          e.target.id.split('@')[1]).additionalData
+      this.state.definitionsData.set(e.target.id.split('@')[1], {
         jvm: setJvm,
-        configurationId: e.target.value
+        configurationId: e.target.value,
+        additionalData: additional
       })
-      this.setState({definitionsData:  this.state.definitionsData});
+      this.setState({definitionsData: this.state.definitionsData});
     } else if (e.target.id.startsWith('jvmInput@')) {
-      var setConfigurationId = this.state.definitionsData.get(e.target.id.split('@')[1]).configurationId
-      this.state.definitionsData.set(e.target.id.split('@')[1],{
+      var additional = this.state.definitionsData.get(
+          e.target.id.split('@')[1]).additionalData
+      var setConfigurationId = this.state.definitionsData.get(
+          e.target.id.split('@')[1]).configurationId
+      this.state.definitionsData.set(e.target.id.split('@')[1], {
         jvm: e.target.value,
-        configurationId: setConfigurationId
+        configurationId: setConfigurationId,
+        additionalData: additional
       })
-      this.setState({definitionsData:  this.state.definitionsData});
+      this.setState({definitionsData: this.state.definitionsData});
+
+    } else if (e.target.id.startsWith('parameterValueInput@')) {
+      var changedData = this.state.additionalParameters.get(
+          e.target.id.split('@')[1]).field
+      this.state.additionalParameters.set(e.target.id.split('@')[1], {
+        value: e.target.value,
+        field: changedData
+      })
+      this.setState({additionalParameters: this.state.additionalParameters});
+    } else if (e.target.id.startsWith('parameterFieldInput@')) {
+      var changedData = this.state.additionalParameters.get(
+          e.target.id.split('@')[1]).value
+      this.state.additionalParameters.set(e.target.id.split('@')[1], {
+        field: e.target.value,
+        value: changedData
+      })
+      this.setState({additionalParameters: this.state.additionalParameters});
     }
   }
 
   validate(state) {
     var valid = true;
-    state.definitionsData.forEach(function(value,key){
-      if(value.configurationId === null || value.jvm === null || value.configurationId === '' || value.jvm === '') valid = false;
+    state.definitionsData.forEach(function (value, key) {
+      if ( value.jvm === null || value.jvm === '') {
+        valid = false;
+      }
     })
     return valid
   }
 
-  transformDefinitionsData(definitionsData){
+  transformDefinitionsData(definitionsData) {
     var data = [];
-    Array.from( definitionsData.keys() ).map(item =>{
-    data.push(
-      {
-        definitionId: item,
-        configurationId: definitionsData.get(item).configurationId,
-        jvm: definitionsData.get(item).jvm,
-      })});
+    Array.from(definitionsData.keys()).map(item => {
+      data.push(
+          {
+            definitionId: item,
+            configurationId: definitionsData.get(item).configurationId,
+            jvm: definitionsData.get(item).jvm,
+            additionalData: {}
+          })
+      definitionsData.get(item).additionalData.forEach(function(value, key){
+        data[data.length-1].additionalData[key] = value
+      })
+    });
+
     return data;
+  }
+
+  addParameters(e) {
+    var definition = e.target.value;
+    this.state.definitionsData.get(definition).additionalData.set(
+        this.state.additionalParameters.get(definition).field,
+        this.state.additionalParameters.get(definition).value)
+    this.state.additionalParameters.set(definition, {field: '', value: ''})
+    this.setState({
+      definitionsData: this.state.definitionsData
+    })
+    console.log(this.state.definitionsData)
   }
 
   onSubmit(e) {
@@ -120,12 +178,14 @@ class AddSuiteRun extends React.Component {
         },
         body: JSON.stringify({
           suiteId: this.state.suiteId,
-         definitionsData: this.transformDefinitionsData(this.state.definitionsData)
+          definitionsData: this.transformDefinitionsData(
+              this.state.definitionsData)
         })
       });
 
       this.setState({
         definitionsData: this.prepareDefinitionsData(this.state.suiteData),
+        additionalParameters: this.prepareAdditionalParameters(this.state.suiteData),
         message: <div className="alert alert-success" role="alert">
           Suite send
         </div>
@@ -144,18 +204,81 @@ class AddSuiteRun extends React.Component {
     var tablecontents;
     if (typeof this.state.suiteData.definitions !== 'undefined') {
       tablecontents = this.state.suiteData.definitions.map((item, key) =>
-        <tr key={key}>
-          <td>{item}</td>
-          <td><input type="text" className="form-control"
-                     id={"configurationInput@"+item}
-                     placeholder="Enter configurationId" value={this.state.definitionsData.get(item).configurationId}/></td>
-          <td><input type="text" className="form-control"
-                     id={"jvmInput@"+item}
-                     placeholder="Enter Jvm" value={this.state.definitionsData.get(item).jvm}/></td>
-        </tr>
+          <tr key={key}>
+            <td>{item}</td>
+            <td><input type="text" className="form-control"
+                       id={"configurationInput@" + item}
+                       placeholder="Enter configurationId"
+                       value={this.state.definitionsData.get(
+                           item).configurationId}/>
+              {this.generateAdditionalData(item)}
+            </td>
+            <td><input type="text" className="form-control"
+                       id={"jvmInput@" + item}
+                       placeholder="Enter Jvm"
+                       value={this.state.definitionsData.get(item).jvm}/></td>
+          </tr>
       );
     }
     return tablecontents
+  }
+
+  removeParameters(e) {
+    if (typeof e.target.value !== 'undefined') {
+      var items = e.target.value.split('@');
+      this.state.definitionsData.get(items[0]).additionalData.delete(items[1]);
+      this.setState({
+        definitionsData: this.state.definitionsData
+      })
+    }
+  }
+
+  generateAdditionalData(item) {
+    let addedParameters = Array.from(
+        this.state.definitionsData.get(item).additionalData, ([key, value]) =>
+            <tr key={key}>
+              <td>{key}</td>
+              <td>{value}</td>
+              <td>
+                <button type="button" className="btn-danger"
+                        onClick={this.removeParameters}
+                        value={item + "@" + key}><i
+                    className="fa fa-remove"/></button>
+              </td>
+            </tr>
+    );
+    return <>
+      <label htmlFor="definitionsInput">Additional Parameters</label>
+      <table className="table table-hover table-bordered">
+        <thead className="thead-dark">
+        <tr>
+          <th>Parameter name</th>
+          <th>Parameter value</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>{addedParameters}</tbody>
+      </table>
+      <div className="form-row">
+        <div className="col">
+          <input type="text" className="form-control"
+                 id={"parameterFieldInput@" + item} aria-describedby="nameHelp"
+                 placeholder="Enter parameter name"
+                 value={this.state.additionalParameters.get(item).field}/>
+        </div>
+        <div className="col">
+          <input type="text" className="form-control"
+                 id={"parameterValueInput@" + item} aria-describedby="nameHelp"
+                 placeholder="Enter parameter value"
+                 value={this.state.additionalParameters.get(item).value}/>
+        </div>
+        <div className="col">
+          <button type="button" className="btn btn-info btn-flat"
+                  value={item} onClick={this.addParameters}>Add parameter
+          </button>
+        </div>
+      </div>
+    </>
   }
 
   render() {
