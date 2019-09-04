@@ -21,16 +21,6 @@ class RequestDetails extends React.Component {
           <span className="info-box-icon bg-red"><i
               className="fa  fa-terminal"></i></span>
           <div className="info-box-content">
-            <span className="info-box-text">Enviroment</span>
-            <span className="info-box-number">{this.props.result.jvm}</span>
-          </div>
-        </div>
-      </div>
-      <div className="col-sm-6">
-        <div className="info-box">
-          <span className="info-box-icon bg-red"><i
-              className="fa  fa-terminal"></i></span>
-          <div className="info-box-content">
             <span className="info-box-text">Status</span>
             <span className="info-box-number">{this.props.result.status}</span>
           </div>
@@ -42,7 +32,7 @@ class RequestDetails extends React.Component {
               className="fa  fa-terminal"></i></span>
           <div className="info-box-content">
             <span className="info-box-text">Configuration</span>
-            <span className="info-box-number"><pre>{JSON.stringify(this.props.result.additionalData,undefined,1)}</pre></span>
+            <span className="info-box-number"><pre>{JSON.stringify(this.props.result.additionalParameters,undefined,1)}</pre></span>
           </div>
         </div>
       </div>

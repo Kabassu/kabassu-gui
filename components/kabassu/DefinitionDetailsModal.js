@@ -70,10 +70,6 @@ class DefinitionDetailsModal extends React.Component {
               </td>
             </tr>
             <tr>
-              <td>Runner Options</td>
-              <td>{typeof this.state.result.runnerOptions!=='undefined' ? this.state.result.runnerOptions.map((item,key) => <div key={key}>{item}</div>) : ''}</td>
-            </tr>
-            <tr>
               <td>Location Type</td>
               <td>
                 {this.state.result.locationType}
@@ -83,12 +79,6 @@ class DefinitionDetailsModal extends React.Component {
               <td>Additional Parameters</td>
               <td>
                 <pre>{JSON.stringify(this.state.result.additionalParameters,undefined,1)}</pre>
-              </td>
-            </tr>
-            <tr>
-              <td>Location</td>
-              <td>
-                {this.state.result.location}
               </td>
             </tr>
             <tr>

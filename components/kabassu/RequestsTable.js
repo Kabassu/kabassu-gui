@@ -39,8 +39,7 @@ class RequestsTable extends React.Component {
                     onClick={e => this.clickHandler(
                         item.definitionId)}>{item.definitionId}</Button>
           </td>
-          <td><pre>{JSON.stringify(item.additionalData,undefined,1)}</pre></td>
-          <td>{item.jvm}</td>
+          <td><pre>{JSON.stringify(item.additionalParameters,undefined,1)}</pre></td>
           <td>{item.status}</td>
           <td>
             <Link href={'/request?id=' + item._id}><a className="nav-link">Show
@@ -55,7 +54,6 @@ class RequestsTable extends React.Component {
           <th>Description</th>
           <th>definition</th>
           <th>configuration</th>
-          <th>jvm</th>
           <th>status</th>
           <th></th>
         </tr>
