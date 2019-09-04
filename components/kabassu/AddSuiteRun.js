@@ -72,7 +72,7 @@ class AddSuiteRun extends React.Component {
     var definitionsMap = new Map();
     suiteData.definitions.forEach(
         item => definitionsMap.set(item,
-            {configurationId: '', jvm: '', additionalData: new Map()}))
+            {configurationId: '', additionalData: new Map()}))
     return definitionsMap;
   }
 
@@ -85,27 +85,13 @@ class AddSuiteRun extends React.Component {
 
   onChange(e) {
     if (e.target.id.startsWith('configurationInput@')) {
-      var setJvm = this.state.definitionsData.get(e.target.id.split('@')[1]).jvm
       var additional = this.state.definitionsData.get(
           e.target.id.split('@')[1]).additionalData
       this.state.definitionsData.set(e.target.id.split('@')[1], {
-        jvm: setJvm,
         configurationId: e.target.value,
         additionalData: additional
       })
       this.setState({definitionsData: this.state.definitionsData});
-    } else if (e.target.id.startsWith('jvmInput@')) {
-      var additional = this.state.definitionsData.get(
-          e.target.id.split('@')[1]).additionalData
-      var setConfigurationId = this.state.definitionsData.get(
-          e.target.id.split('@')[1]).configurationId
-      this.state.definitionsData.set(e.target.id.split('@')[1], {
-        jvm: e.target.value,
-        configurationId: setConfigurationId,
-        additionalData: additional
-      })
-      this.setState({definitionsData: this.state.definitionsData});
-
     } else if (e.target.id.startsWith('parameterValueInput@')) {
       var changedData = this.state.additionalParameters.get(
           e.target.id.split('@')[1]).field
@@ -128,9 +114,6 @@ class AddSuiteRun extends React.Component {
   validate(state) {
     var valid = true;
     state.definitionsData.forEach(function (value, key) {
-      if ( value.jvm === null || value.jvm === '') {
-        valid = false;
-      }
     })
     return valid
   }
@@ -142,11 +125,10 @@ class AddSuiteRun extends React.Component {
           {
             definitionId: item,
             configurationId: definitionsData.get(item).configurationId,
-            jvm: definitionsData.get(item).jvm,
-            additionalData: {}
+            additionalParameters: {}
           })
       definitionsData.get(item).additionalData.forEach(function(value, key){
-        data[data.length-1].additionalData[key] = value
+        data[data.length-1].additionalParameters[key] = value
       })
     });
 
@@ -213,10 +195,6 @@ class AddSuiteRun extends React.Component {
                            item).configurationId}/>
               {this.generateAdditionalData(item)}
             </td>
-            <td><input type="text" className="form-control"
-                       id={"jvmInput@" + item}
-                       placeholder="Enter Jvm"
-                       value={this.state.definitionsData.get(item).jvm}/></td>
           </tr>
       );
     }
@@ -313,7 +291,6 @@ class AddSuiteRun extends React.Component {
             <tr>
               <th>Definition Id</th>
               <th>Configuration Id</th>
-              <th>JVM</th>
             </tr>
             </thead>
             <tbody>{this.prepareTestsConfiguration()}</tbody>

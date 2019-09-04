@@ -18,11 +18,7 @@ class DefinitionsTable extends React.Component {
             <td>{item._id}</td>
             <td>{item.name}</td>
             <td>{item.runner}</td>
-            <td>{typeof item.runnerOptions !== 'undefined'
-                ? item.runnerOptions.map(
-                    (item, key) => <div key={key}>{item}</div>) : ''}</td>
             <td>{item.locationType}</td>
-            <td>{item.location}</td>
             <td><pre>{JSON.stringify(item.additionalParameters,undefined,1)}</pre></td>
             <td><pre>{JSON.stringify(item.reports,undefined,1)}</pre></td>
           </tr>
@@ -36,9 +32,7 @@ class DefinitionsTable extends React.Component {
         <th>id</th>
         <th>name</th>
         <th>runner</th>
-        <th>runner options</th>
         <th>location type</th>
-        <th>location</th>
         <th>additional parameters</th>
         <th>reports</th>
       </tr>

@@ -1,6 +1,5 @@
 const initialstate = {
   definitionId: '',
-  jvm: '',
   message: null,
   description: '',
   parameters: new Map(),
@@ -24,8 +23,6 @@ class AddTestRequest extends React.Component {
   onChange(e) {
     if (e.target.id === 'definitionIdInput') {
       this.setState({definitionId: e.target.value});
-    } else if (e.target.id === 'jvmInput') {
-      this.setState({jvm: e.target.value});
     } else if (e.target.id === 'descriptionInput') {
       this.setState({description: e.target.value});
     } else if (e.target.id === 'parameterNameInput') {
@@ -36,7 +33,7 @@ class AddTestRequest extends React.Component {
   }
 
   validate(state) {
-    return state.definitionId !== '' && state.jvm !== '';
+    return state.definitionId !== '';
   }
 
   onSubmit(e) {
@@ -54,8 +51,8 @@ class AddTestRequest extends React.Component {
       });
 
       this.setState({
-        jvm: '',
         definitionId: '',
+        parameters: new Map(),
         message: <div className="alert alert-success" role="alert">
           Request send
         </div>
@@ -98,10 +95,10 @@ class AddTestRequest extends React.Component {
       jvm: this.state.jvm,
       description: this.state.description,
       configurationId: "string",
-      additionalData: {},
+      additionalParameters: {},
     }
     this.state.parameters.forEach(function(value, key){
-      request.additionalData[key] = value
+      request.additionalParameters[key] = value
     })
     return request
   }
@@ -131,15 +128,6 @@ class AddTestRequest extends React.Component {
                      value={this.state.definitionId}/>
               <small id="definitionIdHelp" className="form-text text-muted">
                 Enter existing definition Id
-              </small>
-            </div>
-            <div className="form-group">
-              <label htmlFor="jvmInput">JVM</label>
-              <input type="text" className="form-control"
-                     id="jvmInput" aria-describedby="jvmHelp"
-                     placeholder="Enter jvm" value={this.state.jvm}/>
-              <small id="jvmHelp" className="form-text text-muted">
-                Enter existing jvm
               </small>
             </div>
             <div className="form-group">

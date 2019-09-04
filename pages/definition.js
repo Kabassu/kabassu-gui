@@ -90,19 +90,6 @@ export default class Definition extends React.Component {
           <span className="info-box-icon bg-red"><i
               className="fa  fa-terminal"></i></span>
             <div className="info-box-content">
-              <span className="info-box-text">Runner Options</span>
-              <span
-                  className="info-box-number">{typeof this.state.result.runnerOptions
-              !== 'undefined' ? this.state.result.runnerOptions.map(
-                  (item,key) => <div key={key}>{item}</div>) : ''}</span>
-            </div>
-          </div>
-        </div>
-        <div className="col-sm-6">
-          <div className="info-box">
-          <span className="info-box-icon bg-red"><i
-              className="fa  fa-terminal"></i></span>
-            <div className="info-box-content">
               <span className="info-box-text">Location Type</span>
               <span
                   className="info-box-number">{this.state.result.locationType}</span>
@@ -117,17 +104,6 @@ export default class Definition extends React.Component {
               <span className="info-box-text">Additional Parameters</span>
               <span
                   className="info-box-number"><pre>{JSON.stringify(this.state.result.additionalParameters,undefined,1)}</pre></span>
-            </div>
-          </div>
-        </div>
-        <div className="col-sm-6">
-          <div className="info-box">
-          <span className="info-box-icon bg-red"><i
-              className="fa  fa-terminal"></i></span>
-            <div className="info-box-content">
-              <span className="info-box-text">Location</span>
-              <span
-                  className="info-box-number">{this.state.result.location}</span>
             </div>
           </div>
         </div>
