@@ -23,6 +23,24 @@ class AdminSidebar extends React.Component {
               </Link>
             </li>
 
+            <li className="nav-item">
+              <Link href="/executions">
+                <a className={['nav-link', pathname === '/executions' ? 'active' : ''].join(' ')}>
+                  <i className="nav-icon fa fa-home"/>
+                  <p>Executions</p>
+                </a>
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link href="/definitions">
+                <a className={['nav-link', pathname === '/definitions' ? 'active' : ''].join(' ')}>
+                  <i className="nav-icon fa fa-home"/>
+                  <p>Definitions</p>
+                </a>
+              </Link>
+            </li>
+
             <li className="nav-item has-treeview menu-closed">
               <a href="#" className="nav-link">
                 <i className="nav-icon fa fas fa-edit"/>

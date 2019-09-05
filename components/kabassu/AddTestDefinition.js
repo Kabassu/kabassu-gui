@@ -1,5 +1,6 @@
 const initialstate = {
   name: '',
+  configurationId: '',
   runner: 'gradle',
   locationType: 'filesystem',
   message: null,
@@ -25,6 +26,8 @@ class AddTestDefinition extends React.Component {
   onChange(e) {
     if (e.target.id === 'nameInput') {
       this.setState({name: e.target.value});
+    } else if (e.target.id === 'configurationInput') {
+      this.setState({configurationId: e.target.value});
     } else if (e.target.id === 'runnerInput') {
       this.setState({runner: e.target.value});
     } else if (e.target.id === 'locationTypeInput') {
@@ -58,6 +61,7 @@ class AddTestDefinition extends React.Component {
 
       this.setState({
         name: '',
+        configurationId: '',
         runner: 'gradle',
         locationType: 'filesystem',
         parameters: new Map(),
@@ -105,6 +109,7 @@ class AddTestDefinition extends React.Component {
       name: this.state.name,
       runner: this.state.runner,
       locationType: this.state.locationType,
+      configurationId: this.state.configurationId,
       additionalParameters: {},
       reports: this.state.reports.split(",")
     }
@@ -172,6 +177,15 @@ class AddTestDefinition extends React.Component {
                      placeholder="Enter Name" value={this.state.name}/>
               <small id="nameHelp" className="form-text text-muted">
                 Enter name for definition
+              </small>
+            </div>
+            <div className="form-group">
+              <label htmlFor="configurationInput">Configuration</label>
+              <input type="text" className="form-control"
+                     id="configurationInput" aria-describedby="configurationHelp"
+                     placeholder="Enter Configuration" value={this.state.configurationId}/>
+              <small id="configurationHelp" className="form-text text-muted">
+                Enter existing configuration
               </small>
             </div>
             <div className="form-group">
