@@ -1,3 +1,5 @@
+import AdditionalParameters from "./AdditionalParameters";
+
 class RequestDetails extends React.Component {
 
   constructor(props) {
@@ -32,7 +34,8 @@ class RequestDetails extends React.Component {
               className="fa  fa-terminal"></i></span>
           <div className="info-box-content">
             <span className="info-box-text">Configuration</span>
-            <span className="info-box-number"><pre>{JSON.stringify(this.props.result.additionalParameters,undefined,1)}</pre></span>
+            <span className="info-box-number"><AdditionalParameters configurationId={this.props.result.configurationId} additionalParameters={this.props.result.additionalParameters}/>
+</span>
           </div>
         </div>
       </div>

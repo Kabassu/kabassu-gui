@@ -2,6 +2,7 @@ import "../../styles/styles.scss"
 import Button from "react-bootstrap/Button";
 import DefinitionDetailsModal from "./DefinitionDetailsModal";
 import Link from "next/link";
+import AdditionalParameters from "./AdditionalParameters";
 
 class RequestsTable extends React.Component {
 
@@ -39,7 +40,7 @@ class RequestsTable extends React.Component {
                     onClick={e => this.clickHandler(
                         item.definitionId)}>{item.definitionId}</Button>
           </td>
-          <td><pre>{JSON.stringify(item.additionalParameters,undefined,1)}</pre></td>
+          <td><AdditionalParameters configurationId={item.configurationId} additionalParameters={item.additionalParameters}/></td>
           <td>{item.status}</td>
           <td>
             <Link href={'/request?id=' + item._id}><a className="nav-link">Show

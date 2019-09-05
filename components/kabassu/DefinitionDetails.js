@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AdditionalParameters from "./AdditionalParameters";
 
 class DefinitionDetails extends React.Component {
 
@@ -80,7 +81,7 @@ class DefinitionDetails extends React.Component {
             <tr>
               <td>Additional Parameters</td>
               <td>
-                <pre>{JSON.stringify(this.state.result.additionalParameters,undefined,1)}</pre>
+                <AdditionalParameters configurationId={this.state.result.configurationId} additionalParameters={this.state.result.additionalParameters}/>
               </td>
             </tr>
             <tr>
