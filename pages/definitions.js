@@ -1,9 +1,8 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
 import DataList from "../components/kabassu/DataList";
-import RequestsTable from "../components/kabassu/RequestsTable";
-import DefinitionsTable from "../components/kabassu/DefinitionsTable";
-import TestSuitesTable from "../components/kabassu/TestSuitesTable";
-import SuiteRunTable from "../components/kabassu/SuiteRunTable";
+import DefinitionsTable from "../components/kabassu/tables/DefinitionsTable";
+import TestSuitesTable from "../components/kabassu/tables/TestSuitesTable";
+
 
 export default class Index extends React.Component {
 

@@ -1,9 +1,9 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
-import ResultsTable from "../components/kabassu/ResultsTable";
+import ResultsTable from "../components/kabassu/tables/ResultsTable";
 import DataListParametrized from "../components/kabassu/DataListParametrized";
 import RequestDetails from "../components/kabassu/RequestDetails";
 import DefinitionDetails from "../components/kabassu/DefinitionDetails";
-import HistoryTable from "../components/kabassu/HistoryTable";
+import HistoryTable from "../components/kabassu/tables/HistoryTable";
 import SingleTestReports from "../components/kabassu/SingleTestReports";
 
 export default class Request extends React.Component {

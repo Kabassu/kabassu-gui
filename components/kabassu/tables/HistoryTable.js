@@ -1,5 +1,5 @@
-import "../../styles/styles.scss"
-import PaginationBasic from "./PaginationBasic";
+import "../../../styles/styles.scss"
+import PaginationBasic from "../PaginationBasic";
 
 class HistoryTable extends React.Component {
 

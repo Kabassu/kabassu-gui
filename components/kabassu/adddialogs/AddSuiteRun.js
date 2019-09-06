@@ -1,5 +1,5 @@
 import DataListFiltered from "../DataListFiltered";
-import DefinitionsTable from "../DefinitionsTable";
+import DefinitionsTable from "../tables/DefinitionsTable";
 
 const initialstate = {
   suiteId: '',

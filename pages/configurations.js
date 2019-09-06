@@ -1,12 +1,6 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
-import DataList from "../components/kabassu/DataList";
-import RequestsTable from "../components/kabassu/RequestsTable";
-import DefinitionsTable from "../components/kabassu/DefinitionsTable";
-import TestSuitesTable from "../components/kabassu/TestSuitesTable";
-import SuiteRunTable from "../components/kabassu/SuiteRunTable";
-import ResultsTable from "../components/kabassu/ResultsTable";
 import DataListParametrized from "../components/kabassu/DataListParametrized";
-import ConfigurationsTable from "../components/kabassu/ConfigurationsTable";
+import ConfigurationsTable from "../components/kabassu/tables/ConfigurationsTable";
 
 export default class Configurations extends React.Component {
 

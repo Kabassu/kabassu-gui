@@ -1,6 +1,6 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
-import HistoryTable from "../components/kabassu/HistoryTable";
-import RequestsTable from "../components/kabassu/RequestsTable";
+import HistoryTable from "../components/kabassu/tables/HistoryTable";
+import RequestsTable from "../components/kabassu/tables/RequestsTable";
 import DataListFiltered from "../components/kabassu/DataListFiltered";
 import SuiteDetails from "../components/kabassu/SuiteDetails";
 

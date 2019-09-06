@@ -1,5 +1,5 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
-import RequestsTable from "../components/kabassu/RequestsTable";
+import RequestsTable from "../components/kabassu/tables/RequestsTable";
 import DataListParametrized from "../components/kabassu/DataListParametrized";
 import Link from "next/link";
 import AdditionalParameters from "../components/kabassu/AdditionalParameters";

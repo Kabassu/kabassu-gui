@@ -1,9 +1,10 @@
-import "../../styles/styles.scss"
+import "../../../styles/styles.scss"
 import Button from "react-bootstrap/Button";
-import DefinitionDetailsModal from "./DefinitionDetailsModal";
+import DefinitionDetailsModal from "../DefinitionDetailsModal";
 import Link from "next/link";
+import AdditionalParameters from "../AdditionalParameters";
 
-class TestSuitesTable extends React.Component {
+class RequestsTable extends React.Component {
 
   constructor(props) {
     super(props);
@@ -30,28 +31,20 @@ class TestSuitesTable extends React.Component {
     })
   }
 
-  prepareDefinitions(definitions) {
-    return definitions.map((item, index) =>
-        <div key={index}>
-          <Button variant="link" key={item}
-                  onClick={e => this.clickHandler(item)}>{item}
-          </Button>
-        </div>)
-  }
-
   render() {
     let list = this.props.items.map((item, index) =>
         <tr key={index}>
-          <td>{item.name}</td>
           <td>{item.description}</td>
           <td>
-            {this.prepareDefinitions(item.definitions)}
+            <Button variant="link" key={item.definitionId}
+                    onClick={e => this.clickHandler(
+                        item.definitionId)}>{item.definitionId}</Button>
           </td>
+          <td><AdditionalParameters configurationId={item.configurationId} additionalParameters={item.additionalParameters}/></td>
+          <td>{item.status}</td>
           <td>
-            <div><Link href={"/suite?id="+ item._id}><a className="nav-link">Show
-              Details</a></Link></div>
-            <div><Link href={'/addsuiterun?id=' + item._id}><a
-                className="nav-link">Create Execution</a></Link></div>
+            <Link href={'/request?id=' + item._id}><a className="nav-link">Show
+              Details</a></Link>
           </td>
         </tr>
     );
@@ -59,9 +52,10 @@ class TestSuitesTable extends React.Component {
       <table className="table table-hover table-bordered">
         <thead className="thead-light">
         <tr>
-          <th>Name</th>
           <th>Description</th>
-          <th>Definitions</th>
+          <th>definition</th>
+          <th>configuration</th>
+          <th>status</th>
           <th></th>
         </tr>
         </thead>
@@ -76,4 +70,4 @@ class TestSuitesTable extends React.Component {
   }
 }
 
-export default TestSuitesTable
+export default RequestsTable

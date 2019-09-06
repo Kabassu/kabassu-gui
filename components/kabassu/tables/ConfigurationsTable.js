@@ -1,6 +1,4 @@
-import "../../styles/styles.scss"
-import Link from "next/link";
-import AdditionalParameters from "./AdditionalParameters";
+import "../../../styles/styles.scss"
 
 class ConfigurationsTable extends React.Component {
 
