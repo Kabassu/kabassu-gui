@@ -1,6 +1,5 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
-import AddTestDefinition from "../components/kabassu/AddTestDefinition";
-import AddConfiguration from "../components/kabassu/AddConfiguration";
+import AddConfiguration from "../components/kabassu/adddialogs/AddConfiguration";
 
 export default class AddConfigurationPage extends React.Component {
 

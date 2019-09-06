@@ -1,5 +1,5 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
-import AddTestRequest from "../components/kabassu/AddTestRequest";
+import AddTestRequest from "../components/kabassu/adddialogs/AddTestRequest";
 
 export default class AddTestRequestPage extends React.Component {
 

@@ -1,5 +1,5 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
-import AddTestSuite from "../components/kabassu/AddTestSuite";
+import AddTestSuite from "../components/kabassu/adddialogs/AddTestSuite";
 
 export default class AddTestSuitePage extends React.Component {
 
