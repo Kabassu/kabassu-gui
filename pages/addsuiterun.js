@@ -1,6 +1,6 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
 import AddTestRequest from "../components/kabassu/AddTestRequest";
-import AddSuiteRun from "../components/kabassu/AddSuiteRun";
+import AddSuiteRun from "../components/kabassu/adddialogs/AddSuiteRun";
 
 export default class AddSuiteRunPage extends React.Component {
 

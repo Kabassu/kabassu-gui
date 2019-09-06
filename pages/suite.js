@@ -1,9 +1,9 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
 import DataListParametrized from "../components/kabassu/DataListParametrized";
 import Link from "next/link";
-import SuiteRunTable from "../components/kabassu/SuiteRunTable";
+import SuiteRunTable from "../components/kabassu/tables/SuiteRunTable";
 import DataListFiltered from "../components/kabassu/DataListFiltered";
-import DefinitionsTable from "../components/kabassu/DefinitionsTable";
+import DefinitionsTable from "../components/kabassu/tables/DefinitionsTable";
 
 export default class Suite extends React.Component {
 

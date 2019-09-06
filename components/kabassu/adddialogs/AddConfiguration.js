@@ -1,15 +1,14 @@
 const initialstate = {
   name: '',
-  runner: 'gradle',
-  locationType: 'filesystem',
+  description: '',
+  suggestedType: 'execution',
   message: null,
-  reports: '',
   parameters: new Map(),
   possibleParameterName: '',
   possibleParameterValue: '',
 }
 
-class AddTestDefinition extends React.Component {
+class AddConfiguration extends React.Component {
 
   constructor(props) {
     super(props)
@@ -25,12 +24,10 @@ class AddTestDefinition extends React.Component {
   onChange(e) {
     if (e.target.id === 'nameInput') {
       this.setState({name: e.target.value});
-    } else if (e.target.id === 'runnerInput') {
-      this.setState({runner: e.target.value});
-    } else if (e.target.id === 'locationTypeInput') {
-      this.setState({locationType: e.target.value});
-    } else if (e.target.id === 'reportsInput') {
-      this.setState({reports: e.target.value});
+    } else if (e.target.id === 'descriptionInput') {
+      this.setState({description: e.target.value});
+    } else if (e.target.id === 'suggestedTypeInput') {
+      this.setState({suggestedType: e.target.value});
     } else if (e.target.id === 'parameterNameInput') {
       this.setState({possibleParameterName: e.target.value});
     } else if (e.target.id === 'parameterValueInput') {
@@ -39,14 +36,13 @@ class AddTestDefinition extends React.Component {
   }
 
   validate(state) {
-    return state.name !== '' && state.runner !== '' && state.locationType
-        !== '';
+    return state.name !== '' && state.parameters.size >0;
   }
 
   onSubmit(e) {
     e.preventDefault();
     if (this.validate(this.state)) {
-      fetch(process.env.kabassuServer + "/kabassu/adddefinition", {
+      fetch(process.env.kabassuServer + "/kabassu/addconfiguration", {
         method: 'POST',
         crossDomain: true,
         mode: 'cors',
@@ -58,20 +54,19 @@ class AddTestDefinition extends React.Component {
 
       this.setState({
         name: '',
-        runner: 'gradle',
-        locationType: 'filesystem',
+        description: '',
+        suggestedType: 'execution',
         parameters: new Map(),
-        possibleParameterName: null,
-        possibleParameterValue: null,
-        reports: '',
+        possibleParameterName: '',
+        possibleParameterValue: '',
         message: <div className="alert alert-success" role="alert">
-          Definition send
+          Configuration send
         </div>
       });
     } else {
       this.setState({
         message: <div className="alert alert-danger" role="alert">
-          Wrong definition
+          Wrong configuration
         </div>
       });
     }
@@ -103,13 +98,12 @@ class AddTestDefinition extends React.Component {
   generateRequest() {
     var request = {
       name: this.state.name,
-      runner: this.state.runner,
-      locationType: this.state.locationType,
-      additionalParameters: {},
-      reports: this.state.reports.split(",")
+      description: this.state.description,
+      suggestedType: this.state.suggestedType,
+      parameters: {},
     }
     this.state.parameters.forEach(function (value, key) {
-      request.additionalParameters[key] = value
+      request.parameters[key] = value
     })
     return request
   }
@@ -171,36 +165,28 @@ class AddTestDefinition extends React.Component {
                      id="nameInput" aria-describedby="nameHelp"
                      placeholder="Enter Name" value={this.state.name}/>
               <small id="nameHelp" className="form-text text-muted">
-                Enter name for definition
+                Enter name for configuration
               </small>
             </div>
             <div className="form-group">
-              <label htmlFor="locationTypeInput">Runner</label>
-              <input type="text" className="form-control"
-                     id="runnerInput" aria-describedby="runnerHelp"
-                     placeholder="Enter Runner" value={this.state.runner}/>
-              <small id="runnerHelp" className="form-text text-muted">
-                Enter existing runner
+              <label htmlFor="descriptionInput">Description</label>
+              <textarea rows="4" className="form-control"
+                     id="descriptionInput" aria-describedby="descriptionHelp"
+                     placeholder="Enter Description" value={this.state.description}/>
+              <small id="descriptionHelp" className="form-text text-muted">
+                Enter description
               </small>
             </div>
             <div className="form-group">
-              <label htmlFor="locationTypeInput">Location Type</label>
-              <select id="locationTypeInput" className="form-control"
-                      value={this.state.locationType}>
-                <option value="filesystem">File System</option>
-                <option value="git">Git</option>
+              <label htmlFor="suggestedTypeInput">Suggested Type</label>
+              <select id="suggestedTypeInput" className="form-control"
+                      value={this.state.suggestedType}>
+                <option value="execution">Execution</option>
+                <option value="description">Descritpion</option>
+                <option value="other">Other</option>
               </select>
             </div>
             {this.generateLocationOptions()}
-            <div className="form-group">
-              <label htmlFor="reportsInput">Reports</label>
-              <input type="text" className="form-control"
-                     id="reportsInput" aria-describedby="reportsHelp"
-                     placeholder="Enter Reports" value={this.state.reports}/>
-              <small id="reportsHelp" className="form-text text-muted">
-                Enter reports to use with this definition
-              </small>
-            </div>
             <button type="submit" className="btn btn-primary">Submit</button>
           </form>
         </>
@@ -208,4 +194,4 @@ class AddTestDefinition extends React.Component {
   }
 }
 
-export default AddTestDefinition
+export default AddConfiguration

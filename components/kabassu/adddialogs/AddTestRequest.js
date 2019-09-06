@@ -1,5 +1,6 @@
 const initialstate = {
   definitionId: '',
+  configurationId: '',
   message: null,
   description: '',
   parameters: new Map(),
@@ -25,7 +26,9 @@ class AddTestRequest extends React.Component {
       this.setState({definitionId: e.target.value});
     } else if (e.target.id === 'descriptionInput') {
       this.setState({description: e.target.value});
-    } else if (e.target.id === 'parameterNameInput') {
+    } else if (e.target.id === 'configurationInput') {
+      this.setState({configurationId: e.target.value});
+    }else if (e.target.id === 'parameterNameInput') {
       this.setState({possibleParameterName: e.target.value});
     } else if (e.target.id === 'parameterValueInput') {
       this.setState({possibleParameterValue: e.target.value});
@@ -52,6 +55,7 @@ class AddTestRequest extends React.Component {
 
       this.setState({
         definitionId: '',
+        configurationId: '',
         parameters: new Map(),
         message: <div className="alert alert-success" role="alert">
           Request send
@@ -94,7 +98,7 @@ class AddTestRequest extends React.Component {
       definitionId: this.state.definitionId,
       jvm: this.state.jvm,
       description: this.state.description,
-      configurationId: "string",
+      configurationId: this.state.configurationId,
       additionalParameters: {},
     }
     this.state.parameters.forEach(function(value, key){
@@ -134,6 +138,16 @@ class AddTestRequest extends React.Component {
               <label htmlFor="descriptionInput">Description</label>
               <textarea id="descriptionInput" className="form-control"
                         rows="4"></textarea>
+            </div>
+            <div className="form-group">
+              <label htmlFor="configurationInput">Configuration Id</label>
+              <input type="text" className="form-control"
+                     id="configurationInput" aria-describedby="configurationHelp"
+                     placeholder="Enter configuration id"
+                     value={this.state.configurationId}/>
+              <small id="configurationHelp" className="form-text text-muted">
+                Enter existing configuration Id
+              </small>
             </div>
             <div className="form-group">
               <label htmlFor="definitionsInput">Additional Parameters</label>

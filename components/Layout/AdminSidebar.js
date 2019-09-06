@@ -23,6 +23,33 @@ class AdminSidebar extends React.Component {
               </Link>
             </li>
 
+            <li className="nav-item">
+              <Link href="/executions">
+                <a className={['nav-link', pathname === '/executions' ? 'active' : ''].join(' ')}>
+                  <i className="nav-icon fa fa-home"/>
+                  <p>Executions</p>
+                </a>
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link href="/definitions">
+                <a className={['nav-link', pathname === '/definitions' ? 'active' : ''].join(' ')}>
+                  <i className="nav-icon fa fa-home"/>
+                  <p>Definitions</p>
+                </a>
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link href="/configurations">
+                <a className={['nav-link', pathname === '/configurations' ? 'active' : ''].join(' ')}>
+                  <i className="nav-icon fa fa-home"/>
+                  <p>Configurations</p>
+                </a>
+              </Link>
+            </li>
+
             <li className="nav-item has-treeview menu-closed">
               <a href="#" className="nav-link">
                 <i className="nav-icon fa fas fa-edit"/>
@@ -53,6 +80,14 @@ class AdminSidebar extends React.Component {
                     <a className={['nav-link', pathname === '/addtestsuite' ? 'active' : ''].join(' ')}>
                       <i className="nav-icon fa  fa-plus-square"/>
                       <p>Create Test Suite</p>
+                    </a>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link href="/addconfiguration">
+                    <a className={['nav-link', pathname === '/addconfiguration' ? 'active' : ''].join(' ')}>
+                      <i className="nav-icon fa  fa-plus-square"/>
+                      <p>Create Configuration</p>
                     </a>
                   </Link>
                 </li>

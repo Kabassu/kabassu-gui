@@ -1,4 +1,4 @@
-import "../../styles/styles.scss"
+import "../../../styles/styles.scss"
 import Link from "next/link";
 
 class SuiteRunTable extends React.Component {

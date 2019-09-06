@@ -1,7 +1,8 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
-import RequestsTable from "../components/kabassu/RequestsTable";
+import RequestsTable from "../components/kabassu/tables/RequestsTable";
 import DataListParametrized from "../components/kabassu/DataListParametrized";
 import Link from "next/link";
+import AdditionalParameters from "../components/kabassu/AdditionalParameters";
 
 export default class Definition extends React.Component {
 
@@ -51,7 +52,9 @@ export default class Definition extends React.Component {
 
     return <AdminLayoutHoc contentTitle={'Definition Details'}
                            contentTitleButton={
-                             <Link href={'/addtestrequest?id=' + this.props.id}><a className={"btn btn-lg bg-gradient-green "} >Create Execution</a></Link>
+                             <Link href={'/addtestrequest?id=' + this.props.id}><a
+                                 className={"btn btn-lg bg-gradient-green "}>Create
+                               Execution</a></Link>
                            } url={this.props.url}>
       <div className="row">
         <div className="col-sm-6">
@@ -103,7 +106,10 @@ export default class Definition extends React.Component {
             <div className="info-box-content">
               <span className="info-box-text">Additional Parameters</span>
               <span
-                  className="info-box-number"><pre>{JSON.stringify(this.state.result.additionalParameters,undefined,1)}</pre></span>
+                  className="info-box-number"><AdditionalParameters
+                  configurationId={this.state.result.configurationId}
+                  additionalParameters={this.state.result.additionalParameters}/>
+              </span>
             </div>
           </div>
         </div>
@@ -116,7 +122,7 @@ export default class Definition extends React.Component {
               <span
                   className="info-box-number">{typeof this.state.result.reports
               !== 'undefined' ? this.state.result.reports.map(
-                  (item,key) => <div key={key}>{item}</div>) : ''}</span>
+                  (item, key) => <div key={key}>{item}</div>) : ''}</span>
             </div>
           </div>
         </div>

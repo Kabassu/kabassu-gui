@@ -1,5 +1,6 @@
 import Modal from "react-bootstrap/Modal"
 import Button from 'react-bootstrap/Button';
+import AdditionalParameters from "./AdditionalParameters";
 
 class DefinitionDetailsModal extends React.Component {
 
@@ -77,9 +78,7 @@ class DefinitionDetailsModal extends React.Component {
             </tr>
             <tr>
               <td>Additional Parameters</td>
-              <td>
-                <pre>{JSON.stringify(this.state.result.additionalParameters,undefined,1)}</pre>
-              </td>
+              <AdditionalParameters configurationId={this.state.result.configurationId} additionalParameters={this.state.result.additionalParameters}/>
             </tr>
             <tr>
               <td>Reports</td>

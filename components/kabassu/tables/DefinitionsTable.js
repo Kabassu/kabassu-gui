@@ -1,5 +1,6 @@
-import "../../styles/styles.scss"
+import "../../../styles/styles.scss"
 import Link from "next/link";
+import AdditionalParameters from "../AdditionalParameters";
 
 class DefinitionsTable extends React.Component {
 
@@ -19,7 +20,7 @@ class DefinitionsTable extends React.Component {
             <td>{item.name}</td>
             <td>{item.runner}</td>
             <td>{item.locationType}</td>
-            <td><pre>{JSON.stringify(item.additionalParameters,undefined,1)}</pre></td>
+            <td><AdditionalParameters configurationId={item.configurationId} additionalParameters={item.additionalParameters}/></td>
             <td><pre>{JSON.stringify(item.reports,undefined,1)}</pre></td>
           </tr>
       );
