@@ -182,7 +182,7 @@ class AddConfiguration extends React.Component {
               <select id="suggestedTypeInput" className="form-control"
                       value={this.state.suggestedType}>
                 <option value="execution">Execution</option>
-                <option value="description">Descritpion</option>
+                <option value="definition">Definition</option>
                 <option value="other">Other</option>
               </select>
             </div>
