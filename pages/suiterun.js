@@ -1,10 +1,5 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
-import ResultsTable from "../components/kabassu/ResultsTable";
-import DataListParametrized from "../components/kabassu/DataListParametrized";
-import RequestDetails from "../components/kabassu/RequestDetails";
-import DefinitionDetails from "../components/kabassu/DefinitionDetails";
 import HistoryTable from "../components/kabassu/HistoryTable";
-import SingleTestReports from "../components/kabassu/SingleTestReports";
 import RequestsTable from "../components/kabassu/RequestsTable";
 import DataListFiltered from "../components/kabassu/DataListFiltered";
 import SuiteDetails from "../components/kabassu/SuiteDetails";
@@ -35,10 +30,11 @@ export default class SuiteRun extends React.Component {
 
   prepareRequests() {
     this.setState({
-      filters:  [
+      filters: [
         {
           filterName: "_id",
-          filterValues: typeof this.state.result.requests !== 'undefined' ? this.state.result.requests.map(item => item) : []
+          filterValues: typeof this.state.result.requests !== 'undefined'
+              ? this.state.result.requests.map(item => item) : []
         }
       ],
     })
@@ -48,7 +44,7 @@ export default class SuiteRun extends React.Component {
     this.fetchData();
   }
 
-  updateRerun(finished){
+  updateRerun(finished) {
     this.setState({
       enableRerun: finished
     })
@@ -121,12 +117,14 @@ export default class SuiteRun extends React.Component {
 
   render() {
     var disabled = this.state.enableRerun ? '' : 'disabled';
-    return <AdminLayoutHoc contentTitle={'Suit Execution Details'} contentTitleButton={
-      <button type="button"
-              className={"btn btn-lg bg-gradient-green "+disabled}
-              onClick={this.rerunTest}>
-        <i className="fa fa-repeat"></i> Run Again
-      </button>} url={this.props.url}>
+    return <AdminLayoutHoc contentTitle={'Suit Execution Details'}
+                           contentTitleButton={
+                             <button type="button"
+                                     className={"btn btn-lg bg-gradient-green "
+                                     + disabled}
+                                     onClick={this.rerunTest}>
+                               <i className="fa fa-repeat"></i> Run Again
+                             </button>} url={this.props.url}>
       {this.state.message}
       <div className="row">
         <div className="col-sm-6">
@@ -169,10 +167,10 @@ export default class SuiteRun extends React.Component {
       <div className="row">
         <div className="col-sm-12">
           <DataListFiltered table={<RequestsTable/>}
-                                collection="kabassu-requests"
-                                filters={this.state.filters}
-                                title="List of test executions"
-                                parentUpdate={this.updateRerun}/>
+                            collection="kabassu-requests"
+                            filters={this.state.filters}
+                            title="List of test executions"
+                            parentUpdate={this.updateRerun}/>
         </div>
       </div>
 
