@@ -1,8 +1,8 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
 import ResultsTable from "../components/kabassu/tables/ResultsTable";
 import DataListParametrized from "../components/kabassu/DataListParametrized";
-import RequestDetails from "../components/kabassu/RequestDetails";
-import DefinitionDetails from "../components/kabassu/DefinitionDetails";
+import RequestDetails from "../components/kabassu/details/RequestDetails";
+import DefinitionDetails from "../components/kabassu/details/DefinitionDetails";
 import HistoryTable from "../components/kabassu/tables/HistoryTable";
 import SingleTestReports from "../components/kabassu/SingleTestReports";
 

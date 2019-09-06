@@ -2,7 +2,7 @@ import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
 import HistoryTable from "../components/kabassu/tables/HistoryTable";
 import RequestsTable from "../components/kabassu/tables/RequestsTable";
 import DataListFiltered from "../components/kabassu/DataListFiltered";
-import SuiteDetails from "../components/kabassu/SuiteDetails";
+import SuiteDetails from "../components/kabassu/details/SuiteDetails";
 
 export default class SuiteRun extends React.Component {
 

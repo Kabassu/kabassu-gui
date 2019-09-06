@@ -1,5 +1,5 @@
 import Link from "next/link";
-import AdditionalParameters from "./AdditionalParameters";
+import AdditionalParameters from "../AdditionalParameters";
 
 class DefinitionDetails extends React.Component {
 

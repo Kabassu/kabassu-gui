@@ -1,4 +1,4 @@
-import AdditionalParameters from "./AdditionalParameters";
+import AdditionalParameters from "../AdditionalParameters";
 
 class RequestDetails extends React.Component {
 
