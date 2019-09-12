@@ -54,10 +54,16 @@ class DataList extends React.Component {
   }
 
   fetchData() {
+    var sessionData = JSON.parse(localStorage.getItem('CREDENTIALS_TOKEN'))
+    var token =''
+    if(sessionData!= null) token = sessionData.token
     fetch(process.env.kabassuServer + '/kabassu/getall/'+this.props.collection+'/'
         + this.state.page + '/' + this.state.pageSize, {
       crossDomain: true,
       method: 'GET',
+      headers: new Headers({
+        'Authorization': 'Bearer '+ token,
+      }),
     })
     .then(res => res.json())
     .then(
@@ -69,10 +75,8 @@ class DataList extends React.Component {
           });
         },
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          var loginPage = "/login?server=" + process.env.kabassuServer
+          window.location = loginPage
         }
     )
   }

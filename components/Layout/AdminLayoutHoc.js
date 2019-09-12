@@ -4,6 +4,7 @@ import AdminSidebar from "../../components/Layout/AdminSidebar";
 import AdminControlSidebar from "../../components/Layout/AdminControlSidebar";
 import AdminContent from "../../components/Layout/AdminContent";
 import PropTypes from 'prop-types';
+import Credentials from "../kabassu/login/Credentials";
 
 /**
  * Main admin layout - A Higher Order Component
@@ -12,6 +13,7 @@ class AdminLayoutHoc extends React.Component {
   render() {
     return <div className="wrapper">
       <AdminHeader/>
+      <Credentials/>
       <AdminSidebar/>
       <AdminContent title={this.props.contentTitle} titleButton={this.props.contentTitleButton}>
         {this.props.children}

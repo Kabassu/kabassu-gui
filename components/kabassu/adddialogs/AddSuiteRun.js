@@ -44,10 +44,8 @@ class AddSuiteRun extends React.Component {
           this.prepareDefinitions();
         },
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          var loginPage = "/login?server=" + process.env.kabassuServer
+          window.location = loginPage
         }
     )
   }

@@ -65,10 +65,8 @@ export default class SuiteRun extends React.Component {
           this.prepareRequests()
         },
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          var loginPage = "/login?server=" + process.env.kabassuServer
+          window.location = loginPage
         }
     )
   }
@@ -105,11 +103,8 @@ export default class SuiteRun extends React.Component {
             }
           },
           (error) => {
-            this.setState({
-              message: <div className="alert alert-danger" role="alert">
-                Problem with server
-              </div>
-            });
+            var loginPage = "/login?server=" + process.env.kabassuServer
+            window.location = loginPage
           }
       )
     }
