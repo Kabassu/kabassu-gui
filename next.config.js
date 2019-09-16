@@ -1,5 +1,4 @@
 const withSass = require('@zeit/next-sass')
-import Cookies from 'js-cookie'
 
 module.exports = withSass(
     {

@@ -12,8 +12,8 @@ import Credentials from "../kabassu/login/Credentials";
 class AdminLayoutHoc extends React.Component {
   render() {
     return <div className="wrapper">
-      <AdminHeader/>
       <Credentials/>
+      <AdminHeader/>
       <AdminSidebar/>
       <AdminContent title={this.props.contentTitle} titleButton={this.props.contentTitleButton}>
         {this.props.children}

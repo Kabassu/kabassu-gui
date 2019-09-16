@@ -1,11 +1,7 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
-import Cookies from "js-cookie";
+import LoginForm from "../components/kabassu/login/LoginForm";
 
 export default class Index extends React.Component {
-
-  componentDidMount() {
-    document.cookie = `token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTY4NjE2MzA4fQ.vvTuW1lvhY8LrqrdCGOXfs36T93gkJpuj9qkh4DX-vQ`;
-  }
 
   render() {
     return <AdminLayoutHoc contentTitle={'Home'} contentTitleButton={<i
@@ -18,8 +14,12 @@ export default class Index extends React.Component {
               <img className="img-circle elevation-2"
                    src="/static/images/kabassu.png" alt="User Avatar"/>
             </div>
-
           </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          <LoginForm/>
         </div>
       </div>
     </AdminLayoutHoc>

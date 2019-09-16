@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Logout from "../kabassu/login/Logout";
 
 const AdminHeader = (props) => {
   return <nav className="main-header navbar navbar-expand bg-white navbar-light border-bottom">
@@ -33,6 +34,9 @@ const AdminHeader = (props) => {
           <div className="dropdown-divider"/>
           <a href="#" className="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
+      </li>
+      <li className="nav-item">
+        <Logout/>
       </li>
       {/*<li className="nav-item">
         <a className="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i className="fa fa-th-large"/></a>
