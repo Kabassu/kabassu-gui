@@ -25,6 +25,9 @@ class SingleTestReports extends React.Component {
         + this.state.page + '/' + this.state.pageSize, {
       crossDomain: true,
       method: 'GET',
+      headers: new Headers({
+        'Authorization': 'Bearer '+ process.env.token,
+      }),
     })
     .then(res => res.json())
     .then(

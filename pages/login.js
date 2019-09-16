@@ -1,6 +1,11 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
+import Cookies from "js-cookie";
 
 export default class Index extends React.Component {
+
+  componentDidMount() {
+    document.cookie = `token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTY4NjE2MzA4fQ.vvTuW1lvhY8LrqrdCGOXfs36T93gkJpuj9qkh4DX-vQ`;
+  }
 
   render() {
     return <AdminLayoutHoc contentTitle={'Home'} contentTitleButton={<i

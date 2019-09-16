@@ -13,6 +13,9 @@ class DefinitionDetailsModal extends React.Component {
         + this.props.definitionId, {
       crossDomain: true,
       method: 'GET',
+      headers: new Headers({
+        'Authorization': 'Bearer '+ process.env.token,
+      }),
     })
     .then(res => res.json())
     .then(

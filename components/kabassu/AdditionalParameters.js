@@ -13,7 +13,9 @@ class AdditionalParameters extends React.Component {
       method: 'GET',
       crossDomain: true,
       mode: 'cors',
-
+      headers: new Headers({
+        'Authorization': 'Bearer ' + process.env.token,
+      }),
     })
     .then(res => res.json())
     .then(

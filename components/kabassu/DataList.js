@@ -1,5 +1,6 @@
 import "../../styles/styles.scss"
 import PaginationBasic from "./PaginationBasic";
+import Cookies from 'js-cookie'
 
 class DataList extends React.Component {
 
@@ -54,9 +55,7 @@ class DataList extends React.Component {
   }
 
   fetchData() {
-    var sessionData = JSON.parse(localStorage.getItem('CREDENTIALS_TOKEN'))
-    var token =''
-    if(sessionData!= null) token = sessionData.token
+    var token = Cookies.get('token');
     fetch(process.env.kabassuServer + '/kabassu/getall/'+this.props.collection+'/'
         + this.state.page + '/' + this.state.pageSize, {
       crossDomain: true,
