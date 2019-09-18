@@ -44,6 +44,9 @@ export default class Suite extends React.Component {
         {
           crossDomain: true,
           method: 'GET',
+          headers: new Headers({
+            'Authorization': 'Bearer '+ process.env.token,
+          }),
         })
     .then(res => res.json())
     .then(
@@ -55,10 +58,8 @@ export default class Suite extends React.Component {
           this.prepareDefinitions()
         },
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          var loginPage = "/login?server=" + process.env.kabassuServer
+          window.location = loginPage
         }
     )
   }

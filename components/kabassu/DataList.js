@@ -1,5 +1,6 @@
 import "../../styles/styles.scss"
 import PaginationBasic from "./PaginationBasic";
+import Cookies from 'js-cookie'
 
 class DataList extends React.Component {
 
@@ -54,10 +55,14 @@ class DataList extends React.Component {
   }
 
   fetchData() {
+    var token = Cookies.get('token');
     fetch(process.env.kabassuServer + '/kabassu/getall/'+this.props.collection+'/'
         + this.state.page + '/' + this.state.pageSize, {
       crossDomain: true,
       method: 'GET',
+      headers: new Headers({
+        'Authorization': 'Bearer '+ token,
+      }),
     })
     .then(res => res.json())
     .then(
@@ -69,10 +74,8 @@ class DataList extends React.Component {
           });
         },
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          var loginPage = "/login?server=" + process.env.kabassuServer
+          window.location = loginPage
         }
     )
   }

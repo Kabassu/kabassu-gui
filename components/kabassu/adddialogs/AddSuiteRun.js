@@ -31,6 +31,9 @@ class AddSuiteRun extends React.Component {
         + this.props.id, {
       crossDomain: true,
       method: 'GET',
+      headers: new Headers({
+        'Authorization': 'Bearer '+ process.env.token,
+      }),
     })
     .then(res => res.json())
     .then(
@@ -44,10 +47,8 @@ class AddSuiteRun extends React.Component {
           this.prepareDefinitions();
         },
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          var loginPage = "/login?server=" + process.env.kabassuServer
+          window.location = loginPage
         }
     )
   }

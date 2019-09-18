@@ -14,6 +14,9 @@ class SuiteDetails extends React.Component {
         + this.props.id, {
       crossDomain: true,
       method: 'GET',
+      headers: new Headers({
+        'Authorization': 'Bearer '+ process.env.token,
+      }),
     })
     .then(res => res.json())
     .then(
@@ -24,10 +27,8 @@ class SuiteDetails extends React.Component {
           });
         },
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          var loginPage = "/login?server=" + process.env.kabassuServer
+          window.location = loginPage
         }
     )
   }

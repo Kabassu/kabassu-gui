@@ -76,6 +76,9 @@ export default class Request extends React.Component {
     fetch(process.env.kabassuServer + '/kabassu/getrequest/' + this.props.id, {
       crossDomain: true,
       method: 'GET',
+      headers: new Headers({
+        'Authorization': 'Bearer '+ process.env.token,
+      }),
     })
     .then(res => res.json())
     .then(
@@ -86,10 +89,8 @@ export default class Request extends React.Component {
           });
         },
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          var loginPage = "/login?server=" + process.env.kabassuServer
+          window.location = loginPage
         }
     )
   }

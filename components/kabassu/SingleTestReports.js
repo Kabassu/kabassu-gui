@@ -25,6 +25,9 @@ class SingleTestReports extends React.Component {
         + this.state.page + '/' + this.state.pageSize, {
       crossDomain: true,
       method: 'GET',
+      headers: new Headers({
+        'Authorization': 'Bearer '+ process.env.token,
+      }),
     })
     .then(res => res.json())
     .then(
@@ -35,10 +38,8 @@ class SingleTestReports extends React.Component {
           });
         },
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          var loginPage = "/login?server=" + process.env.kabassuServer
+          window.location = loginPage
         }
     )
   }

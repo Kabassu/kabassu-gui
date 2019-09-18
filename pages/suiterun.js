@@ -54,6 +54,9 @@ export default class SuiteRun extends React.Component {
     fetch(process.env.kabassuServer + '/kabassu/getsuiterun/' + this.props.id, {
       crossDomain: true,
       method: 'GET',
+      headers: new Headers({
+        'Authorization': 'Bearer '+ process.env.token,
+      }),
     })
     .then(res => res.json())
     .then(
@@ -65,10 +68,8 @@ export default class SuiteRun extends React.Component {
           this.prepareRequests()
         },
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          var loginPage = "/login?server=" + process.env.kabassuServer
+          window.location = loginPage
         }
     )
   }
@@ -81,7 +82,8 @@ export default class SuiteRun extends React.Component {
         crossDomain: true,
         mode: 'cors',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+ process.env.token,
         },
         body: JSON.stringify({
           suiterunId: this.props.id
@@ -105,11 +107,8 @@ export default class SuiteRun extends React.Component {
             }
           },
           (error) => {
-            this.setState({
-              message: <div className="alert alert-danger" role="alert">
-                Problem with server
-              </div>
-            });
+            var loginPage = "/login?server=" + process.env.kabassuServer
+            window.location = loginPage
           }
       )
     }

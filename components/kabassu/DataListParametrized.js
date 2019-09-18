@@ -54,10 +54,15 @@ class DataListParametrized extends React.Component {
   }
 
   fetchData() {
-        fetch(process.env.kabassuServer + '/kabassu/getallbyfield/'+this.props.collection+'/'+this.props.field+'/'+this.props.value+'/'
+    fetch(process.env.kabassuServer + '/kabassu/getallbyfield/'
+        + this.props.collection + '/' + this.props.field + '/'
+        + this.props.value + '/'
         + this.state.page + '/' + this.state.pageSize, {
       crossDomain: true,
       method: 'GET',
+      headers: new Headers({
+        'Authorization': 'Bearer ' + process.env.token,
+      }),
     })
     .then(res => res.json())
     .then(
@@ -69,10 +74,8 @@ class DataListParametrized extends React.Component {
           });
         },
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          var loginPage = "/login?server=" + process.env.kabassuServer
+          window.location = loginPage
         }
     )
   }

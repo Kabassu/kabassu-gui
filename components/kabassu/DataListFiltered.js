@@ -77,7 +77,8 @@ class DataListFiltered extends React.Component {
       crossDomain: true,
       mode: 'cors',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+ process.env.token,
       },
       body: JSON.stringify(request)
     })
@@ -92,10 +93,8 @@ class DataListFiltered extends React.Component {
           this.parentUpdate()
         },
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          var loginPage = "/login?server=" + process.env.kabassuServer
+          window.location = loginPage
         }
     )
   }
