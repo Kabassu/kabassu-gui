@@ -1,3 +1,6 @@
+import CreatableSelect from 'react-select/creatable';
+import {parametersOptions, parametersValues} from "../../data/data";
+
 const initialstate = {
   name: '',
   configurationId: '',
@@ -15,6 +18,8 @@ class AddTestDefinition extends React.Component {
   constructor(props) {
     super(props)
     this.state = initialstate;
+    this.onParameterNameChange = this.onParameterNameChange.bind(this);
+    this.onParameterValueChange = this.onParameterValueChange.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.addParameters = this.addParameters.bind(this);
@@ -22,6 +27,30 @@ class AddTestDefinition extends React.Component {
     this.generateRequest = this.generateRequest.bind(this);
 
   };
+
+  onParameterValueChange(value, action) {
+    if (action.action === 'select-option' || action.action
+        === 'create-option') {
+      this.setState(
+          {possibleParameterValue: value.value});
+    }
+    if (action.action === 'clear') {
+      this.setState(
+          {possibleParameterValue: ''});
+    }
+  }
+
+  onParameterNameChange(value, action) {
+    if (action.action === 'select-option' || action.action
+        === 'create-option') {
+      this.setState(
+          {possibleParameterName: value.value});
+    }
+    if (action.action === 'clear') {
+      this.setState(
+          {possibleParameterName: ''});
+    }
+  }
 
   onChange(e) {
     if (e.target.id === 'nameInput') {
@@ -34,10 +63,6 @@ class AddTestDefinition extends React.Component {
       this.setState({locationType: e.target.value});
     } else if (e.target.id === 'reportsInput') {
       this.setState({reports: e.target.value});
-    } else if (e.target.id === 'parameterNameInput') {
-      this.setState({possibleParameterName: e.target.value});
-    } else if (e.target.id === 'parameterValueInput') {
-      this.setState({possibleParameterValue: e.target.value});
     }
   }
 
@@ -145,16 +170,20 @@ class AddTestDefinition extends React.Component {
       </table>
       <div className="form-row">
         <div className="col">
-          <input type="text" className="form-control"
-                 id="parameterNameInput" aria-describedby="nameHelp"
-                 placeholder="Enter parameter name"
-                 value={this.state.possibleParameterName}/>
+          <CreatableSelect
+              isClearable
+              onChange={this.onParameterNameChange}
+              onInputChange={this.onParameterNameChange}
+              options={parametersOptions}
+          />
         </div>
         <div className="col">
-          <input type="text" className="form-control"
-                 id="parameterValueInput" aria-describedby="nameHelp"
-                 placeholder="Enter parameter value"
-                 value={this.state.possibleParameterValue}/>
+          <CreatableSelect
+              isClearable
+              onChange={this.onParameterValueChange}
+              onInputChange={this.onParameterValueChange}
+              options={parametersValues.get(this.state.possibleParameterName)}
+          />
         </div>
         <div className="col">
           <button type="button" className="btn btn-info btn-flat"

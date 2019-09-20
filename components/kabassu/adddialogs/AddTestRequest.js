@@ -1,3 +1,6 @@
+import CreatableSelect from 'react-select/creatable';
+import {parametersOptions, parametersValues} from "../../data/data";
+
 const initialstate = {
   definitionId: '',
   configurationId: '',
@@ -15,11 +18,37 @@ class AddTestRequest extends React.Component {
     this.state = initialstate;
     this.state.definitionId = this.props.id;
     this.onChange = this.onChange.bind(this);
+    this.onParameterNameChange = this.onParameterNameChange.bind(this);
+    this.onParameterValueChange = this.onParameterValueChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.addParameters = this.addParameters.bind(this);
     this.removeParameters = this.removeParameters.bind(this);
     this.generateRequest = this.generateRequest.bind(this);
   };
+
+  onParameterValueChange(value, action) {
+    if (action.action === 'select-option' || action.action
+        === 'create-option') {
+      this.setState(
+          {possibleParameterValue: value.value});
+    }
+    if (action.action === 'clear') {
+      this.setState(
+          {possibleParameterValue: ''});
+    }
+  }
+
+  onParameterNameChange(value, action) {
+    if (action.action === 'select-option' || action.action
+        === 'create-option') {
+      this.setState(
+          {possibleParameterName: value.value});
+    }
+    if (action.action === 'clear') {
+      this.setState(
+          {possibleParameterName: ''});
+    }
+  }
 
   onChange(e) {
     if (e.target.id === 'definitionIdInput') {
@@ -28,10 +57,6 @@ class AddTestRequest extends React.Component {
       this.setState({description: e.target.value});
     } else if (e.target.id === 'configurationInput') {
       this.setState({configurationId: e.target.value});
-    }else if (e.target.id === 'parameterNameInput') {
-      this.setState({possibleParameterName: e.target.value});
-    } else if (e.target.id === 'parameterValueInput') {
-      this.setState({possibleParameterValue: e.target.value});
     }
   }
 
@@ -101,7 +126,7 @@ class AddTestRequest extends React.Component {
       configurationId: this.state.configurationId,
       additionalParameters: {},
     }
-    this.state.parameters.forEach(function(value, key){
+    this.state.parameters.forEach(function (value, key) {
       request.additionalParameters[key] = value
     })
     return request
@@ -142,7 +167,8 @@ class AddTestRequest extends React.Component {
             <div className="form-group">
               <label htmlFor="configurationInput">Configuration Id</label>
               <input type="text" className="form-control"
-                     id="configurationInput" aria-describedby="configurationHelp"
+                     id="configurationInput"
+                     aria-describedby="configurationHelp"
                      placeholder="Enter configuration id"
                      value={this.state.configurationId}/>
               <small id="configurationHelp" className="form-text text-muted">
@@ -163,16 +189,20 @@ class AddTestRequest extends React.Component {
               </table>
               <div className="form-row">
                 <div className="col">
-                  <input type="text" className="form-control"
-                         id="parameterNameInput" aria-describedby="nameHelp"
-                         placeholder="Enter parameter name"
-                         value={this.state.possibleParameterName}/>
+                  <CreatableSelect
+                      isClearable
+                      onChange={this.onParameterNameChange}
+                      onInputChange={this.onParameterNameChange}
+                      options={parametersOptions}
+                  />
                 </div>
                 <div className="col">
-                  <input type="text" className="form-control"
-                         id="parameterValueInput" aria-describedby="nameHelp"
-                         placeholder="Enter parameter value"
-                         value={this.state.possibleParameterValue}/>
+                  <CreatableSelect
+                      isClearable
+                      onChange={this.onParameterValueChange}
+                      onInputChange={this.onParameterValueChange}
+                      options={parametersValues.get(this.state.possibleParameterName)}
+                  />
                 </div>
                 <div className="col">
                   <button type="button" className="btn btn-info btn-flat"
