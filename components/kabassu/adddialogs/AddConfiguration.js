@@ -1,5 +1,6 @@
 import CreatableSelect from 'react-select/creatable';
-import {parametersOptions, parametersValues} from "../../data/data";
+import {parametersOptions, parametersValues, suggestedTypes} from "../../data/data";
+import Select from "react-select";
 
 const initialstate = {
   name: '',
@@ -20,11 +21,20 @@ class AddConfiguration extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onParameterNameChange = this.onParameterNameChange.bind(this);
     this.onParameterValueChange = this.onParameterValueChange.bind(this);
+    this.onSuggestedTypeChange = this.onSuggestedTypeChange.bind(this);
     this.addParameters = this.addParameters.bind(this);
     this.removeParameters = this.removeParameters.bind(this);
     this.generateRequest = this.generateRequest.bind(this);
 
   };
+
+  onSuggestedTypeChange(value, action) {
+    if (action.action === 'select-option') {
+      console.log(action)
+      this.setState(
+          {suggestedType: value.value});
+    }
+  }
 
   onParameterValueChange(value, action) {
     if (action.action === 'select-option' || action.action
@@ -55,8 +65,6 @@ class AddConfiguration extends React.Component {
       this.setState({name: e.target.value});
     } else if (e.target.id === 'descriptionInput') {
       this.setState({description: e.target.value});
-    } else if (e.target.id === 'suggestedTypeInput') {
-      this.setState({suggestedType: e.target.value});
     }
   }
 
@@ -72,7 +80,8 @@ class AddConfiguration extends React.Component {
         crossDomain: true,
         mode: 'cors',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+ process.env.token,
         },
         body: JSON.stringify(this.generateRequest())
       });
@@ -80,7 +89,6 @@ class AddConfiguration extends React.Component {
       this.setState({
         name: '',
         description: '',
-        suggestedType: 'execution',
         parameters: new Map(),
         possibleParameterName: '',
         possibleParameterValue: '',
@@ -208,12 +216,7 @@ class AddConfiguration extends React.Component {
             </div>
             <div className="form-group">
               <label htmlFor="suggestedTypeInput">Suggested Type</label>
-              <select id="suggestedTypeInput" className="form-control"
-                      value={this.state.suggestedType}>
-                <option value="execution">Execution</option>
-                <option value="definition">Definition</option>
-                <option value="other">Other</option>
-              </select>
+              <Select onChange={this.onSuggestedTypeChange} options = {suggestedTypes}/>
             </div>
             {this.generateLocationOptions()}
             <button type="submit" className="btn btn-primary">Submit</button>

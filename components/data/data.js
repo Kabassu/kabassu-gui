@@ -12,3 +12,9 @@ var jvmValues = [
 export const parametersValues = new Map(
 [['jvm', jvmValues ]]
 )
+
+export const suggestedTypes = [
+  { value: 'execution', label: 'Execution'},
+  { value: 'definition', label: 'Definition'},
+  { value: 'other', label: 'Other'},
+];

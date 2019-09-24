@@ -17,7 +17,7 @@ export default class Index extends React.Component {
             <div className="card-footer">
               <div className="row">
 
-                <div className="col-sm-4 border-right">
+                <div className="col-sm-4">
                   <div className="description-block">
                     <Link href="/definitions">
                       <a className={"btn btn-lg btn-warning btn-block"}>
