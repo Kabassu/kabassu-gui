@@ -48,7 +48,8 @@ class AddTestRequest extends React.Component {
         crossDomain: true,
         mode: 'cors',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+ process.env.token,
         },
         body: JSON.stringify(this.generateRequest())
       });
