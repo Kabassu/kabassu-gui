@@ -1,6 +1,9 @@
 import CreatableSelect from 'react-select/creatable';
-import {parametersOptions, parametersValues, suggestedTypes} from "../../data/data";
-import Select from "react-select";
+import {
+  parametersOptions,
+  parametersValues,
+  suggestedTypes
+} from "../../data/data";
 
 const initialstate = {
   name: '',
@@ -29,7 +32,8 @@ class AddConfiguration extends React.Component {
   };
 
   onSuggestedTypeChange(value, action) {
-    if (action.action === 'select-option') {
+    if (action.action === 'select-option' || action.action
+        === 'create-option') {
       console.log(action)
       this.setState(
           {suggestedType: value.value});
@@ -69,7 +73,7 @@ class AddConfiguration extends React.Component {
   }
 
   validate(state) {
-    return state.name !== '' && state.parameters.size >0;
+    return state.name !== '' && state.parameters.size > 0;
   }
 
   onSubmit(e) {
@@ -81,7 +85,7 @@ class AddConfiguration extends React.Component {
         mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+ process.env.token,
+          'Authorization': 'Bearer ' + process.env.token,
         },
         body: JSON.stringify(this.generateRequest())
       });
@@ -208,15 +212,18 @@ class AddConfiguration extends React.Component {
             <div className="form-group">
               <label htmlFor="descriptionInput">Description</label>
               <textarea rows="4" className="form-control"
-                     id="descriptionInput" aria-describedby="descriptionHelp"
-                     placeholder="Enter Description" value={this.state.description}/>
+                        id="descriptionInput" aria-describedby="descriptionHelp"
+                        placeholder="Enter Description"
+                        value={this.state.description}/>
               <small id="descriptionHelp" className="form-text text-muted">
                 Enter description
               </small>
             </div>
             <div className="form-group">
               <label htmlFor="suggestedTypeInput">Suggested Type</label>
-              <Select onChange={this.onSuggestedTypeChange} options = {suggestedTypes}/>
+              <CreatableSelect onChange={this.onSuggestedTypeChange}
+                               options={suggestedTypes}
+                               onInputChange={this.onSuggestedTypeChange}/>
             </div>
             {this.generateLocationOptions()}
             <button type="submit" className="btn btn-primary">Submit</button>
