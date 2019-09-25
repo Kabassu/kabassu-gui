@@ -84,7 +84,7 @@ class AddConfiguration extends React.Component {
         mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + process.env.token,
+          'Authorization': 'Bearer '+ process.env.token,
         },
         body: JSON.stringify(this.generateRequest())
       });
