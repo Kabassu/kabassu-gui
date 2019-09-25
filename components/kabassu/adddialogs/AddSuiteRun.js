@@ -1,5 +1,7 @@
 import DataListFiltered from "../DataListFiltered";
 import DefinitionsTable from "../tables/DefinitionsTable";
+import CreatableSelect from 'react-select/creatable';
+import {parametersOptions, parametersValues} from "../../data/data";
 
 const initialstate = {
   suiteId: '',
@@ -23,8 +25,53 @@ class AddSuiteRun extends React.Component {
     this.prepareTestsConfiguration = this.prepareTestsConfiguration.bind(this);
     this.addParameters = this.addParameters.bind(this);
     this.removeParameters = this.removeParameters.bind(this);
-
+    this.onParameterNameChange = this.onParameterNameChange.bind(this);
+    this.onParameterValueChange = this.onParameterValueChange.bind(this);
   };
+
+  onParameterValueChange(name) {
+    return function(value, action){
+      if (action.action === 'select-option' || action.action
+          === 'create-option') {
+        var changedData = this.state.additionalParameters.get(name).field
+        this.state.additionalParameters.set(name, {
+          value: value.value,
+          field: changedData
+        })
+        this.setState({additionalParameters: this.state.additionalParameters});
+      }
+      if (action.action === 'clear') {
+        var changedData = this.state.additionalParameters.get(name).field
+        this.state.additionalParameters.set(name, {
+          value: '',
+          field: changedData
+        })
+        this.setState({additionalParameters: this.state.additionalParameters});
+      }
+    }.bind(this)
+  }
+
+  onParameterNameChange(name) {
+    return function(value, action){
+      if (action.action === 'select-option' || action.action
+          === 'create-option') {
+        var changedData = this.state.additionalParameters.get(name).value
+        this.state.additionalParameters.set(name, {
+          field: value.value,
+          value: changedData
+        })
+        this.setState({additionalParameters: this.state.additionalParameters});
+      }
+      if (action.action === 'clear') {
+        var changedData = this.state.additionalParameters.get(name).value
+        this.state.additionalParameters.set(name, {
+          field: '',
+          value: changedData
+        })
+        this.setState({additionalParameters: this.state.additionalParameters});
+      }
+    }.bind(this)
+  }
 
   fetchData() {
     fetch(process.env.kabassuServer + '/kabassu/getsuite/'
@@ -84,6 +131,8 @@ class AddSuiteRun extends React.Component {
     return parametersMap;
   }
 
+
+
   onChange(e) {
     if (e.target.id.startsWith('configurationInput@')) {
       var additional = this.state.definitionsData.get(
@@ -93,22 +142,6 @@ class AddSuiteRun extends React.Component {
         additionalData: additional
       })
       this.setState({definitionsData: this.state.definitionsData});
-    } else if (e.target.id.startsWith('parameterValueInput@')) {
-      var changedData = this.state.additionalParameters.get(
-          e.target.id.split('@')[1]).field
-      this.state.additionalParameters.set(e.target.id.split('@')[1], {
-        value: e.target.value,
-        field: changedData
-      })
-      this.setState({additionalParameters: this.state.additionalParameters});
-    } else if (e.target.id.startsWith('parameterFieldInput@')) {
-      var changedData = this.state.additionalParameters.get(
-          e.target.id.split('@')[1]).value
-      this.state.additionalParameters.set(e.target.id.split('@')[1], {
-        field: e.target.value,
-        value: changedData
-      })
-      this.setState({additionalParameters: this.state.additionalParameters});
     }
   }
 
@@ -138,6 +171,9 @@ class AddSuiteRun extends React.Component {
 
   addParameters(e) {
     var definition = e.target.value;
+    if(this.state.additionalParameters.get(definition).field === '' || this.state.additionalParameters.get(definition).value === ''){
+      return
+    }
     this.state.definitionsData.get(definition).additionalData.set(
         this.state.additionalParameters.get(definition).field,
         this.state.additionalParameters.get(definition).value)
@@ -189,7 +225,7 @@ class AddSuiteRun extends React.Component {
       tablecontents = this.state.suiteData.definitions.map((item, key) =>
           <tr key={key}>
             <td>{item}</td>
-            <td><input type="text" className="form-control"
+            <td><input onChange={this.onChange} type="text" className="form-control"
                        id={"configurationInput@" + item}
                        placeholder="Enter configurationId"
                        value={this.state.definitionsData.get(
@@ -240,16 +276,20 @@ class AddSuiteRun extends React.Component {
       </table>
       <div className="form-row">
         <div className="col">
-          <input type="text" className="form-control"
-                 id={"parameterFieldInput@" + item} aria-describedby="nameHelp"
-                 placeholder="Enter parameter name"
-                 value={this.state.additionalParameters.get(item).field}/>
+          <CreatableSelect
+              isClearable
+              onChange={this.onParameterNameChange(item)}
+              onInputChange={this.onParameterNameChange(item)}
+              options={parametersOptions}
+          />
         </div>
         <div className="col">
-          <input type="text" className="form-control"
-                 id={"parameterValueInput@" + item} aria-describedby="nameHelp"
-                 placeholder="Enter parameter value"
-                 value={this.state.additionalParameters.get(item).value}/>
+          <CreatableSelect
+              isClearable
+              onChange={this.onParameterValueChange(item)}
+              onInputChange={this.onParameterValueChange(item)}
+              options={parametersValues.get(this.state.additionalParameters.get(item).field)}
+          />
         </div>
         <div className="col">
           <button type="button" className="btn btn-info btn-flat"
@@ -285,7 +325,7 @@ class AddSuiteRun extends React.Component {
                               title="List of definitions"/>
           </div>
         </div>
-        <form onChange={this.onChange} onSubmit={this.onSubmit}>
+        <form onSubmit={this.onSubmit}>
           <label>Definitions Configuration</label>
           <table className="table table-hover table-bordered">
             <thead className="thead-dark">

@@ -1,3 +1,10 @@
+import CreatableSelect from 'react-select/creatable';
+import {
+  parametersOptions,
+  parametersValues,
+  suggestedTypes
+} from "../../data/data";
+
 const initialstate = {
   name: '',
   description: '',
@@ -15,28 +22,57 @@ class AddConfiguration extends React.Component {
     this.state = initialstate;
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onParameterNameChange = this.onParameterNameChange.bind(this);
+    this.onParameterValueChange = this.onParameterValueChange.bind(this);
+    this.onSuggestedTypeChange = this.onSuggestedTypeChange.bind(this);
     this.addParameters = this.addParameters.bind(this);
     this.removeParameters = this.removeParameters.bind(this);
     this.generateRequest = this.generateRequest.bind(this);
 
   };
 
+  onSuggestedTypeChange(value, action) {
+    if (action.action === 'select-option' || action.action
+        === 'create-option') {
+      this.setState(
+          {suggestedType: value.value});
+    }
+  }
+
+  onParameterValueChange(value, action) {
+    if (action.action === 'select-option' || action.action
+        === 'create-option') {
+      this.setState(
+          {possibleParameterValue: value.value});
+    }
+    if (action.action === 'clear') {
+      this.setState(
+          {possibleParameterValue: ''});
+    }
+  }
+
+  onParameterNameChange(value, action) {
+    if (action.action === 'select-option' || action.action
+        === 'create-option') {
+      this.setState(
+          {possibleParameterName: value.value});
+    }
+    if (action.action === 'clear') {
+      this.setState(
+          {possibleParameterName: ''});
+    }
+  }
+
   onChange(e) {
     if (e.target.id === 'nameInput') {
       this.setState({name: e.target.value});
     } else if (e.target.id === 'descriptionInput') {
       this.setState({description: e.target.value});
-    } else if (e.target.id === 'suggestedTypeInput') {
-      this.setState({suggestedType: e.target.value});
-    } else if (e.target.id === 'parameterNameInput') {
-      this.setState({possibleParameterName: e.target.value});
-    } else if (e.target.id === 'parameterValueInput') {
-      this.setState({possibleParameterValue: e.target.value});
     }
   }
 
   validate(state) {
-    return state.name !== '' && state.parameters.size >0;
+    return state.name !== '' && state.parameters.size > 0;
   }
 
   onSubmit(e) {
@@ -56,7 +92,6 @@ class AddConfiguration extends React.Component {
       this.setState({
         name: '',
         description: '',
-        suggestedType: 'execution',
         parameters: new Map(),
         possibleParameterName: '',
         possibleParameterValue: '',
@@ -135,16 +170,20 @@ class AddConfiguration extends React.Component {
       </table>
       <div className="form-row">
         <div className="col">
-          <input type="text" className="form-control"
-                 id="parameterNameInput" aria-describedby="nameHelp"
-                 placeholder="Enter parameter name"
-                 value={this.state.possibleParameterName}/>
+          <CreatableSelect
+              isClearable
+              onChange={this.onParameterNameChange}
+              onInputChange={this.onParameterNameChange}
+              options={parametersOptions}
+          />
         </div>
         <div className="col">
-          <input type="text" className="form-control"
-                 id="parameterValueInput" aria-describedby="nameHelp"
-                 placeholder="Enter parameter value"
-                 value={this.state.possibleParameterValue}/>
+          <CreatableSelect
+              isClearable
+              onChange={this.onParameterValueChange}
+              onInputChange={this.onParameterValueChange}
+              options={parametersValues.get(this.state.possibleParameterName)}
+          />
         </div>
         <div className="col">
           <button type="button" className="btn btn-info btn-flat"
@@ -172,20 +211,18 @@ class AddConfiguration extends React.Component {
             <div className="form-group">
               <label htmlFor="descriptionInput">Description</label>
               <textarea rows="4" className="form-control"
-                     id="descriptionInput" aria-describedby="descriptionHelp"
-                     placeholder="Enter Description" value={this.state.description}/>
+                        id="descriptionInput" aria-describedby="descriptionHelp"
+                        placeholder="Enter Description"
+                        value={this.state.description}/>
               <small id="descriptionHelp" className="form-text text-muted">
                 Enter description
               </small>
             </div>
             <div className="form-group">
               <label htmlFor="suggestedTypeInput">Suggested Type</label>
-              <select id="suggestedTypeInput" className="form-control"
-                      value={this.state.suggestedType}>
-                <option value="execution">Execution</option>
-                <option value="definition">Definition</option>
-                <option value="other">Other</option>
-              </select>
+              <CreatableSelect onChange={this.onSuggestedTypeChange}
+                               options={suggestedTypes}
+                               onInputChange={this.onSuggestedTypeChange}/>
             </div>
             {this.generateLocationOptions()}
             <button type="submit" className="btn btn-primary">Submit</button>

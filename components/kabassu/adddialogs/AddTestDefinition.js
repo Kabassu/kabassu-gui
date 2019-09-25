@@ -1,10 +1,14 @@
+import CreatableSelect from 'react-select/creatable';
+import {parametersOptions, parametersValues, locationTypes, runnerTypes, reportTypes} from "../../data/data";
+import Select from 'react-select'
+
 const initialstate = {
   name: '',
   configurationId: '',
-  runner: 'gradle',
-  locationType: 'filesystem',
+  runner:   { value: 'gradle', label: 'Gradle'},
+  locationType: { value: 'filesystem', label: 'File System'},
   message: null,
-  reports: '',
+  reports: [],
   parameters: new Map(),
   possibleParameterName: '',
   possibleParameterValue: '',
@@ -15,6 +19,11 @@ class AddTestDefinition extends React.Component {
   constructor(props) {
     super(props)
     this.state = initialstate;
+    this.onLocationTypeChange = this.onLocationTypeChange.bind(this);
+    this.onParameterNameChange = this.onParameterNameChange.bind(this);
+    this.onParameterValueChange = this.onParameterValueChange.bind(this);
+    this.onRunnerChange = this.onRunnerChange.bind(this);
+    this.onReportChange = this.onReportChange.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.addParameters = this.addParameters.bind(this);
@@ -23,27 +32,74 @@ class AddTestDefinition extends React.Component {
 
   };
 
+  onRunnerChange(value, action) {
+    if (action.action === 'select-option' || action.action
+        === 'create-option') {
+      this.setState(
+          {runner: value});
+    }
+  }
+
+  onLocationTypeChange(value, action) {
+    if (action.action === 'select-option' || action.action
+        === 'create-option') {
+      this.setState(
+          {locationType: value});
+    }
+  }
+
+  onReportChange(value, action) {
+    if (action.action === 'select-option' || action.action
+        === 'remove-value') {
+      if(value == null){
+        value = []
+      }
+      this.setState(
+          {reports: value});
+    }
+    if (action.action === 'clear') {
+      this.setState(
+          {reports: []});
+    }
+  }
+
+  onParameterValueChange(value, action) {
+    if (action.action === 'select-option' || action.action
+        === 'create-option') {
+      this.setState(
+          {possibleParameterValue: value.value});
+    }
+    if (action.action === 'clear') {
+      this.setState(
+          {possibleParameterValue: ''});
+    }
+  }
+
+  onParameterNameChange(value, action) {
+    if (action.action === 'select-option' || action.action
+        === 'create-option') {
+      this.setState(
+          {possibleParameterName: value.value});
+    }
+    if (action.action === 'clear') {
+      this.setState(
+          {possibleParameterName: ''});
+    }
+  }
+
   onChange(e) {
     if (e.target.id === 'nameInput') {
       this.setState({name: e.target.value});
     } else if (e.target.id === 'configurationInput') {
       this.setState({configurationId: e.target.value});
-    } else if (e.target.id === 'runnerInput') {
-      this.setState({runner: e.target.value});
-    } else if (e.target.id === 'locationTypeInput') {
-      this.setState({locationType: e.target.value});
     } else if (e.target.id === 'reportsInput') {
       this.setState({reports: e.target.value});
-    } else if (e.target.id === 'parameterNameInput') {
-      this.setState({possibleParameterName: e.target.value});
-    } else if (e.target.id === 'parameterValueInput') {
-      this.setState({possibleParameterValue: e.target.value});
     }
   }
 
   validate(state) {
-    return state.name !== '' && state.runner !== '' && state.locationType
-        !== '';
+    return state.name !== '' && typeof state.runner !== 'undefined' && typeof state.locationType
+        !== "undefined";
   }
 
   onSubmit(e) {
@@ -63,12 +119,12 @@ class AddTestDefinition extends React.Component {
       this.setState({
         name: '',
         configurationId: '',
-        runner: 'gradle',
-        locationType: 'filesystem',
+        runner: { value: 'gradle', label: 'Gradle'},
+        locationType: { value: 'filesystem', label: 'File System'},
         parameters: new Map(),
         possibleParameterName: null,
         possibleParameterValue: null,
-        reports: '',
+        reports: [],
         message: <div className="alert alert-success" role="alert">
           Definition send
         </div>
@@ -108,11 +164,11 @@ class AddTestDefinition extends React.Component {
   generateRequest() {
     var request = {
       name: this.state.name,
-      runner: this.state.runner,
-      locationType: this.state.locationType,
+      runner: this.state.runner.value,
+      locationType: this.state.locationType.value,
       configurationId: this.state.configurationId,
       additionalParameters: {},
-      reports: this.state.reports.split(",")
+      reports: this.state.reports.map(report => report.value)
     }
     this.state.parameters.forEach(function (value, key) {
       request.additionalParameters[key] = value
@@ -146,16 +202,21 @@ class AddTestDefinition extends React.Component {
       </table>
       <div className="form-row">
         <div className="col">
-          <input type="text" className="form-control"
-                 id="parameterNameInput" aria-describedby="nameHelp"
-                 placeholder="Enter parameter name"
-                 value={this.state.possibleParameterName}/>
+          <CreatableSelect
+              isClearable
+              onChange={this.onParameterNameChange}
+              onInputChange={this.onParameterNameChange}
+              options={parametersOptions}
+
+          />
         </div>
         <div className="col">
-          <input type="text" className="form-control"
-                 id="parameterValueInput" aria-describedby="nameHelp"
-                 placeholder="Enter parameter value"
-                 value={this.state.possibleParameterValue}/>
+          <CreatableSelect
+              isClearable
+              onChange={this.onParameterValueChange}
+              onInputChange={this.onParameterValueChange}
+              options={parametersValues.get(this.state.possibleParameterName)}
+          />
         </div>
         <div className="col">
           <button type="button" className="btn btn-info btn-flat"
@@ -191,27 +252,33 @@ class AddTestDefinition extends React.Component {
             </div>
             <div className="form-group">
               <label htmlFor="locationTypeInput">Runner</label>
-              <input type="text" className="form-control"
-                     id="runnerInput" aria-describedby="runnerHelp"
-                     placeholder="Enter Runner" value={this.state.runner}/>
+              <CreatableSelect
+                  onChange={this.onRunnerChange}
+                  onInputChange={this.onRunnerChange}
+                  options={runnerTypes}
+                  value = {this.state.runner}
+              />
               <small id="runnerHelp" className="form-text text-muted">
                 Enter existing runner
               </small>
             </div>
             <div className="form-group">
               <label htmlFor="locationTypeInput">Location Type</label>
-              <select id="locationTypeInput" className="form-control"
-                      value={this.state.locationType}>
-                <option value="filesystem">File System</option>
-                <option value="git">Git</option>
-              </select>
+              <Select
+                  onChange={this.onLocationTypeChange}
+                  options={locationTypes}
+                  value = {this.state.locationType} />
             </div>
             {this.generateLocationOptions()}
             <div className="form-group">
               <label htmlFor="reportsInput">Reports</label>
-              <input type="text" className="form-control"
-                     id="reportsInput" aria-describedby="reportsHelp"
-                     placeholder="Enter Reports" value={this.state.reports}/>
+              <CreatableSelect
+                  onChange={this.onReportChange}
+                  onInputChange={this.onReportChange}
+                  options={reportTypes}
+                  value = {this.state.reports}
+                  isMulti
+              />
               <small id="reportsHelp" className="form-text text-muted">
                 Enter reports to use with this definition
               </small>
