@@ -34,7 +34,6 @@ class AddConfiguration extends React.Component {
   onSuggestedTypeChange(value, action) {
     if (action.action === 'select-option' || action.action
         === 'create-option') {
-      console.log(action)
       this.setState(
           {suggestedType: value.value});
     }

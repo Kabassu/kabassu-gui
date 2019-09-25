@@ -18,3 +18,17 @@ export const suggestedTypes = [
   { value: 'definition', label: 'Definition'},
   { value: 'other', label: 'Other'},
 ];
+
+export const locationTypes = [
+  { value: 'filesystem', label: 'File System'},
+  { value: 'git', label: 'Git'},
+];
+
+export const runnerTypes = [
+  { value: 'gradle', label: 'Gradle'},
+];
+
+export const reportTypes = [
+  { value: 'allure', label: 'Allure'},
+  { value: 'allure-trend', label: 'Allure with Trend'},
+];
