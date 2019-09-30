@@ -2,6 +2,8 @@ export const parametersOptions = [
   { value: 'jvm', label: 'JVM'},
   { value: 'branch', label: 'Branch'},
   { value: 'repository', label: 'Repository'},
+  { value: 'runnerOptions', label: 'Runner Options'},
+  { value: 'location', label: 'Location'},
 ];
 
 var jvmValues = [
@@ -26,6 +28,7 @@ export const locationTypes = [
 
 export const runnerTypes = [
   { value: 'gradle', label: 'Gradle'},
+  { value: 'command', label: 'Command'},
 ];
 
 export const reportTypes = [
