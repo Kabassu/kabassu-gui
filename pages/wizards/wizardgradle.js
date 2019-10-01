@@ -1,4 +1,5 @@
 import AdminLayoutHoc from '../../components/Layout/AdminLayoutHoc';
+import DescriptionStep from "../../components/kabassu/wizards/DescriptionStep";
 
 export default class WizardGradle extends React.Component {
 
@@ -7,9 +8,25 @@ export default class WizardGradle extends React.Component {
     this.state = {
       wizardState: 0,
     };
+    this.upgradeState = this.upgradeState.bind(this)
   }
 
-  
+  upgradeState(props) {
+    this.setState(
+        props
+    );
+  }
+
+  renderStep(){
+    if(this.state.wizardState == 0){
+      return <DescriptionStep upgrade={this.upgradeState}/>
+    }
+  }
+
+  renderButtons(){
+
+    
+  }
 
   render() {
     return <AdminLayoutHoc contentTitle={'Home'} contentTitleButton={<i
@@ -29,7 +46,12 @@ export default class WizardGradle extends React.Component {
       </div>
       <div className="row">
         <div className="col-md-12">
-
+          {this.renderStep()}
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          {this.renderButtons()}
         </div>
       </div>
     </AdminLayoutHoc>
