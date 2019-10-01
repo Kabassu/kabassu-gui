@@ -4,6 +4,9 @@ export const parametersOptions = [
   { value: 'repository', label: 'Repository'},
   { value: 'runnerOptions', label: 'Runner Options'},
   { value: 'location', label: 'Location'},
+  { value: 'reportDir', label: 'Reports Dir'},
+  { value: 'startHtml', label: 'Start HTML'},
+
 ];
 
 var jvmValues = [
@@ -34,4 +37,6 @@ export const runnerTypes = [
 export const reportTypes = [
   { value: 'allure', label: 'Allure'},
   { value: 'allure-trend', label: 'Allure with Trend'},
+  { value: 'generic', label: 'Generic'},
+
 ];
