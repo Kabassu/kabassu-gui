@@ -93,6 +93,26 @@ class AdminSidebar extends React.Component {
                 </li>
               </ul>
             </li>
+
+            <li className="nav-item has-treeview menu-closed">
+              <a href="#" className="nav-link">
+                <i className="nav-icon fa fas fa-edit"/>
+                <p>
+                  Wizards
+                  <i className="right fa fa-angle-left"/>
+                </p>
+              </a>
+              <ul className="nav nav-treeview">
+                <li className="nav-item">
+                  <Link href="/wizards/wizardgradle">
+                    <a className={['nav-link', pathname === '/wizards/wizardgradle' ? 'active' : ''].join(' ')}>
+                      <i className="nav-icon fa  fa-plus-square"/>
+                      <p>Gradle Test</p>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+            </li>
           </ul>
         </nav>
       </div>
