@@ -28,14 +28,14 @@ class LocationStep extends React.Component {
   }
 
   validation() {
-    return true;
+    return typeof this.state.locationInput !== 'undefined' && this.state.locationInput !== '';
   }
 
   onChange(e) {
     if (e.target.id === 'locationInput') {
       this.setState({locationInput: e.target.value});
     } else if (e.target.id === 'branchInput') {
-      this.setState({locationInput: e.target.value});
+      this.setState({branchInput: e.target.value});
     }
   }
 
@@ -58,7 +58,7 @@ class LocationStep extends React.Component {
   showWarning() {
     if (this.state.showWarning) {
       return <div className="alert alert-danger" role="alert">
-        Please fill all fields
+        Please enter test location
       </div>
     }
   }

@@ -1,8 +1,9 @@
 import AdminLayoutHoc from '../../components/Layout/AdminLayoutHoc';
 import DescriptionStep from "../../components/kabassu/wizards/DescriptionStep";
 import LocationStep from "../../components/kabassu/wizards/LocationStep";
+import SystemStep from "../../components/kabassu/wizards/SystemStep";
 
-const MAX_STATE = 1;
+const MAX_STATE = 2;
 
 export default class WizardGradle extends React.Component {
 
@@ -29,6 +30,9 @@ export default class WizardGradle extends React.Component {
     }
     if (this.state.wizardState == 1) {
       return <LocationStep  existingState = {this.state} updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {this.state.wizardState>0} displayNext = {this.state.wizardState<MAX_STATE} />
+    }
+    if (this.state.wizardState == 2) {
+      return <SystemStep  existingState = {this.state} updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {this.state.wizardState>0} displayNext = {this.state.wizardState<MAX_STATE} />
     }
   }
 
