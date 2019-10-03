@@ -46,19 +46,10 @@ class SystemStep extends React.Component {
     this.props.previousStep()
   }
 
-  showWarning() {
-    if (this.state.showWarning) {
-      return <div className="alert alert-danger" role="alert">
-        Please fill gradle parameters
-      </div>
-    }
-  }
-
   render() {
     return (
         <>
           <form onChange={this.onChange}>
-            {this.showWarning()}
             <div className="form-group">
               <label htmlFor="locationTypeInput">Location Type</label>
               <Select
