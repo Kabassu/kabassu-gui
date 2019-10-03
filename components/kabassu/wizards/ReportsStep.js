@@ -56,7 +56,6 @@ class ReportsStep extends React.Component {
   genericOptions() {
     console.log(this.state.reports);
     if(this.state.reports.filter(report => report.value === 'generic').length>0){
-      console.log(this.state.reports);
       return <>
         <div className="form-group">
           <label htmlFor="reportDirInput">Directory for generic report</label>

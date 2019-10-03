@@ -3,6 +3,8 @@ import DescriptionStep from "../../components/kabassu/wizards/DescriptionStep";
 import LocationStep from "../../components/kabassu/wizards/LocationStep";
 import SystemStep from "../../components/kabassu/wizards/SystemStep";
 import ReportsStep from "../../components/kabassu/wizards/ReportsStep";
+import GradleDisplay from "../../components/kabassu/wizards/GradleDisplay";
+import EndStep from "../../components/kabassu/wizards/EndStep";
 
 const MAX_STATE = 4;
 
@@ -37,6 +39,9 @@ export default class WizardGradle extends React.Component {
     }
     if (this.state.wizardState == 3) {
       return <ReportsStep  existingState = {this.state} updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {this.state.wizardState>0} displayNext = {this.state.wizardState<MAX_STATE} />
+    }
+    if (this.state.wizardState == 4) {
+      return <EndStep  existingState = {this.state} updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {this.state.wizardState>0} displayNext = {this.state.wizardState<MAX_STATE} />
     }
   }
 
@@ -73,6 +78,11 @@ export default class WizardGradle extends React.Component {
                    src="/static/images/kabassu.png" alt="User Avatar"/>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          <GradleDisplay state = {this.state}/>
         </div>
       </div>
       <div className="row">
