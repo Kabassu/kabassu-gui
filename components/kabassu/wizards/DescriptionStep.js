@@ -4,7 +4,8 @@ class DescriptionStep extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {showWarning: false}
+    this.state = this.props.existingState;
+    this.state.showWarning = false;
     this.nextStep = this.nextStep.bind(this)
     this.previousStep = this.previousStep.bind(this)
     this.validation = this.validation.bind(this)
@@ -57,15 +58,15 @@ class DescriptionStep extends React.Component {
               <label htmlFor="nameInput">Name</label>
               <input type="text" className="form-control"
                      id="nameInput" aria-describedby="nameHelp"
-                     placeholder="Enter Name"/>
+                     placeholder="Enter Name" value={this.state.name}/>
               <small id="nameHelp" className="form-text text-muted">
-                Enter name for definition
+                Enter name
               </small>
             </div>
             <div className="form-group">
               <label htmlFor="descriptionInput">Description</label>
               <textarea id="descriptionInput" className="form-control"
-                        rows="4"></textarea>
+                        rows="4" value={this.state.description}></textarea>
             </div>
             <WizardButtons nextStep={this.nextStep}
                            previousStep={this.previousStep}
