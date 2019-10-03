@@ -1,6 +1,8 @@
 import AdminLayoutHoc from '../../components/Layout/AdminLayoutHoc';
 import DescriptionStep from "../../components/kabassu/wizards/DescriptionStep";
 
+const MAX_STATE = 1;
+
 export default class WizardGradle extends React.Component {
 
   constructor(props) {
@@ -9,6 +11,9 @@ export default class WizardGradle extends React.Component {
       wizardState: 0,
     };
     this.upgradeState = this.upgradeState.bind(this)
+    this.nextStep = this.nextStep.bind(this)
+    this.previousStep = this.previousStep.bind(this)
+
   }
 
   upgradeState(props) {
@@ -17,15 +22,28 @@ export default class WizardGradle extends React.Component {
     );
   }
 
-  renderStep(){
-    if(this.state.wizardState == 0){
-      return <DescriptionStep upgrade={this.upgradeState}/>
+  renderStep() {
+    if (this.state.wizardState == 0) {
+      return <DescriptionStep updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {this.state.wizardState>0} displayNext = {this.state.wizardState<MAX_STATE} />
     }
   }
 
-  renderButtons(){
+  previousStep() {
+    if (this.state.wizardState !== 0) {
+      this.setState({
+        wizardState: (this.state.wizardState - 1)
+          }
+      );
+    }
+  }
 
-    
+  nextStep() {
+    if (this.state.wizardState !== MAX_STATE) {
+      this.setState({
+        wizardState: (this.state.wizardState + 1)
+          }
+      );
+    }
   }
 
   render() {
@@ -35,7 +53,8 @@ export default class WizardGradle extends React.Component {
         <div className="col-md-12">
           <div className="card card-widget widget-user">
             <div className="widget-user-header bg-success">
-              <h5 className="widget-user-desc text-center">Wizard: Gradle Test</h5>
+              <h5 className="widget-user-desc text-center">Wizard: Gradle
+                Test</h5>
             </div>
             <div className="widget-user-image">
               <img className="img-circle elevation-2"
@@ -47,11 +66,6 @@ export default class WizardGradle extends React.Component {
       <div className="row">
         <div className="col-md-12">
           {this.renderStep()}
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-md-12">
-          {this.renderButtons()}
         </div>
       </div>
     </AdminLayoutHoc>
