@@ -1,9 +1,5 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
 import Link from "next/link";
-import DataList from "../components/kabassu/DataList";
-import DefinitionsTable from "../components/kabassu/tables/DefinitionsTable";
-import TestSuitesTable from "../components/kabassu/tables/TestSuitesTable";
-
 export default class Index extends React.Component {
 
   render() {
@@ -19,6 +15,39 @@ export default class Index extends React.Component {
             </div>
             <div className="card-footer">
               <div className="row">
+
+                <div className="col-sm-12">
+                  <div className="card ">
+                    <div className="card-header bg-gray-dark">
+                      <h3 className="card-title">
+                        <i className="fa fa-list"/>&nbsp;Wizards - Easy Creation
+                      </h3>
+                      <div className="card-tools">
+                        <button type="button" className="btn btn-tool"
+                                data-widget="collapse"
+                                data-toggle="tooltip" title="Collapse">
+                          <i className="fa fa-minus"/>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="card-body scroll">
+                      <div className="row">
+
+                        <div className="col-sm-4">
+                          <div className="description-block">
+                            <Link href="/wizards/wizardgradle">
+                              <a className={"btn btn-lg btn-success btn-block"}>
+                                <p>Gradle Wizard</p>
+                              </a>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="card-footer text-right text-muted">
+                    </div>
+                  </div>
+                </div>
 
                 <div className="col-sm-12">
                   <div className="card ">

@@ -1,10 +1,10 @@
-import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
 import LoginForm from "../components/kabassu/login/LoginForm";
+import LoginLayout from "../components/Layout/LoginLayout";
 
-export default class Index extends React.Component {
+export default class Login extends React.Component {
 
   render() {
-    return <AdminLayoutHoc contentTitle={'Home'} contentTitleButton={<i
+    return <LoginLayout contentTitle={'Home'} contentTitleButton={<i
         className="fa fa-2x fa-home"/>} url={this.props.url}>
       <div className="row">
         <div className="col-md-12">
@@ -22,6 +22,6 @@ export default class Index extends React.Component {
           <LoginForm/>
         </div>
       </div>
-    </AdminLayoutHoc>
+    </LoginLayout>
   }
 }

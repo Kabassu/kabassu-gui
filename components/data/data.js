@@ -9,7 +9,7 @@ export const parametersOptions = [
 
 ];
 
-var jvmValues = [
+export const jvmValues = [
   { value: '1.8', label: '1.8'},
   { value: '1.8_2', label: '1.8_2'},
 ];
