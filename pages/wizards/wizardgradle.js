@@ -81,17 +81,19 @@ export default class WizardGradle extends React.Component {
               <img className="img-circle elevation-2"
                    src="/static/images/kabassu.png" alt="User Avatar"/>
             </div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-md-12">
-          <GradleDisplay state = {this.state}/>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-md-12">
-          {this.renderStep()}
+            <div className="card-footer">
+              <div className="row">
+                <div className="col-md-12">
+                  <GradleDisplay state = {this.state}/>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-12">
+                  {this.renderStep()}
+                </div>
+              </div>
+            </div>
+            </div>
         </div>
       </div>
     </AdminLayoutHoc>
