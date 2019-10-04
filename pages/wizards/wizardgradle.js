@@ -5,6 +5,7 @@ import SystemStep from "../../components/kabassu/wizards/SystemStep";
 import ReportsStep from "../../components/kabassu/wizards/ReportsStep";
 import GradleDisplay from "../../components/kabassu/wizards/GradleDisplay";
 import EndStep from "../../components/kabassu/wizards/EndStep";
+import AfterStep from "../../components/kabassu/wizards/AfterStep";
 
 const MAX_STATE = 4;
 
@@ -42,6 +43,9 @@ export default class WizardGradle extends React.Component {
     }
     if (this.state.wizardState == 4) {
       return <EndStep  existingState = {this.state} updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {this.state.wizardState>0} displayNext = {this.state.wizardState<MAX_STATE} />
+    }
+    if (this.state.wizardState == 5 || this.state.wizardState == 6) {
+      return <AfterStep  existingState = {this.state} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {this.state.wizardState>0} displayNext = {this.state.wizardState<MAX_STATE} />
     }
   }
 

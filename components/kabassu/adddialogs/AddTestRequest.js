@@ -122,7 +122,6 @@ class AddTestRequest extends React.Component {
   generateRequest() {
     var request = {
       definitionId: this.state.definitionId,
-      jvm: this.state.jvm,
       description: this.state.description,
       configurationId: this.state.configurationId,
       additionalParameters: {},
