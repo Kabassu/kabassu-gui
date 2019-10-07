@@ -1,32 +1,18 @@
-import WizardButtons from "./WizardButtons";
-import Select from "react-select";
-import {jvmValues} from "../../data/data";
+import WizardButtons from "../WizardButtons";
 
-class SystemStep extends React.Component {
+class RobotSystemStep extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = this.props.existingState;
     this.state.showWarning = false;
-    if (typeof this.state.jvm === 'undefined') {
-      this.state.jvm = {value: '1.8', label: '1.8'}
-    }
     if (typeof this.state.runnerOptions === 'undefined') {
-      this.state.runnerOptions = "clean test"
+      this.state.runnerOptions = ""
     }
     this.nextStep = this.nextStep.bind(this)
     this.previousStep = this.previousStep.bind(this)
     this.onChange = this.onChange.bind(this)
-    this.onJVMChange = this.onJVMChange.bind(this);
 
-  }
-
-  onJVMChange(value, action) {
-    if (action.action === 'select-option' || action.action
-        === 'create-option') {
-      this.setState(
-          {jvm: value});
-    }
   }
 
   onChange(e) {
@@ -51,19 +37,12 @@ class SystemStep extends React.Component {
         <>
           <form onChange={this.onChange}>
             <div className="form-group">
-              <label htmlFor="locationTypeInput">JVM</label>
-              <Select
-                  onChange={this.onJVMChange}
-                  options={jvmValues}
-                  value={this.state.jvm}/>
-            </div>
-            <div className="form-group">
-              <label htmlFor="runnerOptionsInput">Gradle Parameters</label>
+              <label htmlFor="runnerOptionsInput">Robot Parameters</label>
               <input type="text" className="form-control"
                      id="runnerOptionsInput" aria-describedby="nameHelp"
                      value={this.state.runnerOptions}/>
               <small id="nameHelp" className="form-text text-muted">
-                Enter parameters for gradle  task
+                Enter parameters for robot task. Do not enter report directory or report file configuration - this is done by Kabassu
               </small>
             </div>
             <WizardButtons nextStep={this.nextStep}
@@ -76,4 +55,4 @@ class SystemStep extends React.Component {
   }
 }
 
-export default SystemStep
+export default RobotSystemStep
