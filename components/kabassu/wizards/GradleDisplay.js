@@ -48,7 +48,7 @@ class GradleDisplay extends React.Component {
     }
 
     if(this.props.state.runnerOptions !=='' && typeof this.props.state.runnerOptions !== 'undefined'){
-      this.state.visuals.set("Gradle Options", this.props.state.runnerOptions)
+      this.state.visuals.set("Running Options", this.props.state.runnerOptions)
     }
 
     if(this.props.state.reports !==[] && typeof this.props.state.reports !== 'undefined'){

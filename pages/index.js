@@ -42,6 +42,15 @@ export default class Index extends React.Component {
                             </Link>
                           </div>
                         </div>
+                        <div className="col-sm-4">
+                          <div className="description-block">
+                            <Link href="/wizards/wizardrobot">
+                              <a className={"btn btn-lg btn-success btn-block"}>
+                                <p>Robot Wizard</p>
+                              </a>
+                            </Link>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div className="card-footer text-right text-muted">
