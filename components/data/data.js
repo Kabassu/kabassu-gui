@@ -32,6 +32,7 @@ export const locationTypes = [
 export const runnerTypes = [
   { value: 'gradle', label: 'Gradle'},
   { value: 'command', label: 'Command'},
+  { value: 'aet', label: 'AET'},
 ];
 
 export const reportTypes = [
