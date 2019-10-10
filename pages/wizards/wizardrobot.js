@@ -8,7 +8,7 @@ import RobotEndStep from "../../components/kabassu/wizards/robot/RobotEndStep";
 
 const MAX_STATE = 3;
 
-export default class WizardGradle extends React.Component {
+export default class WizardRobot extends React.Component {
 
   constructor(props) {
     super(props);
