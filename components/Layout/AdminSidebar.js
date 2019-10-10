@@ -119,6 +119,14 @@ class AdminSidebar extends React.Component {
                     </a>
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link href="/wizards/wizardaet">
+                    <a className={['nav-link', pathname === '/wizards/wizardaet' ? 'active' : ''].join(' ')}>
+                      <i className="nav-icon fa  fa-plus-square"/>
+                      <p>AET Test</p>
+                    </a>
+                  </Link>
+                </li>
               </ul>
             </li>
           </ul>
