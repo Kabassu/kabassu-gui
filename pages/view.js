@@ -1,16 +1,14 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
 import RequestsTable from "../components/kabassu/tables/RequestsTable";
-import DataListParametrized from "../components/kabassu/DataListParametrized";
 import Link from "next/link";
 import SuiteRunTable from "../components/kabassu/tables/SuiteRunTable";
 import DataListFiltered from "../components/kabassu/DataListFiltered";
-import DefinitionsTable from "../components/kabassu/tables/DefinitionsTable";
 
 export default class view extends React.Component {
 
   static async getInitialProps({req, query: {id}}) {
     return {
-      id: id
+      id: id,
     }
   }
 
@@ -25,7 +23,14 @@ export default class view extends React.Component {
     };
     this.prepareExecutionsId = this.prepareExecutionsId.bind(this);
     this.prepareSuitesId = this.prepareSuitesId.bind(this);
+    this.refreshView = this.refreshView.bind(this);
+
   }
+
+  refreshView(id){
+    this.fetchData();
+  }
+
 
   componentDidMount() {
     this.fetchData();
@@ -36,7 +41,7 @@ export default class view extends React.Component {
       filtersExecutions:  [
         {
           filterName: "_id",
-          filterValues: typeof this.state.result.executionId !== 'undefined' ? this.state.result.executionId.map(item => item) : []
+          filterValues: typeof this.state.result.executionId !== 'undefined' ? this.state.result.executionId.map(item => item) : ['no data']
         }
       ]
     })
@@ -47,7 +52,7 @@ export default class view extends React.Component {
       filtersSuites:  [
         {
           filterName: "_id",
-          filterValues: typeof this.state.result.suiteRunId !== 'undefined' ? this.state.result.suiteRunId.map(item => item) : []
+          filterValues: typeof this.state.result.suiteRunId !== 'undefined' ? this.state.result.suiteRunId.map(item => item) : ['no data']
         }
       ]
     })
@@ -123,7 +128,7 @@ export default class view extends React.Component {
 
       <div className="row">
         <div className="col-sm-12">
-          <DataListFiltered table={<RequestsTable/>}
+          <DataListFiltered table={<RequestsTable viewId={this.props.id} refresh={this.refreshView}/>}
                             collection="kabassu-requests"
                             filters={this.state.filtersExecutions}
                             title="List of executions"/>
@@ -132,7 +137,7 @@ export default class view extends React.Component {
 
       <div className="row">
         <div className="col-sm-12">
-          <DataListFiltered table={<SuiteRunTable/>}
+          <DataListFiltered table={<SuiteRunTable viewId={this.props.id} refresh={this.refreshView}/>}
                             collection="kabassu-suite-runs"
                             filters={this.state.filtersSuites}
                             title="List of suite executions"/>

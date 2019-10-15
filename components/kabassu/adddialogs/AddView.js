@@ -19,8 +19,6 @@ class AddView extends React.Component {
     this.generateRequest = this.generateRequest.bind(this);
   };
 
-
-
   onChange(e) {
     if (e.target.id === 'nameInput') {
       this.setState({name: e.target.value});
