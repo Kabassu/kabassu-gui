@@ -181,7 +181,15 @@ export default class Index extends React.Component {
                             </Link>
                           </div>
                         </div>
-
+                        <div className="col-sm-3">
+                          <div className="description-block">
+                            <Link href="/addview">
+                              <a className={"btn btn-lg btn-info btn-block"}>
+                                <p>Create View</p>
+                              </a>
+                            </Link>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div className="card-footer text-right text-muted">
