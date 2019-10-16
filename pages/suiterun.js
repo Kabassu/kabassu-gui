@@ -3,6 +3,7 @@ import HistoryTable from "../components/kabassu/tables/HistoryTable";
 import RequestsTable from "../components/kabassu/tables/RequestsTable";
 import DataListFiltered from "../components/kabassu/DataListFiltered";
 import SuiteDetails from "../components/kabassu/details/SuiteDetails";
+import AddToViewModal from "../components/kabassu/modals/AddToViewModal";
 
 export default class SuiteRun extends React.Component {
 
@@ -25,7 +26,37 @@ export default class SuiteRun extends React.Component {
     this.prepareRequests = this.prepareRequests.bind(this);
     this.updateRerun = this.updateRerun.bind(this);
     this.rerunTest = this.rerunTest.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+    this.showModal = this.showModal.bind(this);
+  }
 
+  showModal() {
+    this.setState({
+      activeModal: true,
+    })
+  }
+
+  hideModal() {
+    this.setState({
+      activeModal: false,
+    })
+  }
+
+  generateMenu() {
+    var disabled = this.state.enableRerun ? '' : 'disabled';
+    this.state.enableRerun = this.state.result.status == 'finished';
+    return <div>
+      <button type="button"
+              className={"btn btn-sm bg-gradient-green " + disabled}
+              onClick={this.rerunTest}>
+        <i className="fa fa-repeat"></i> Run Again
+      </button>
+      <button type="button"
+              className={"btn btn-sm bg-gradient-info "}
+              onClick={this.showModal}>
+        <i className="fa fa-repeat"></i> Add to View
+      </button>
+    </div>
   }
 
   prepareRequests() {
@@ -55,7 +86,7 @@ export default class SuiteRun extends React.Component {
       crossDomain: true,
       method: 'GET',
       headers: new Headers({
-        'Authorization': 'Bearer '+ process.env.token,
+        'Authorization': 'Bearer ' + process.env.token,
       }),
     })
     .then(res => res.json())
@@ -83,7 +114,7 @@ export default class SuiteRun extends React.Component {
         mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+ process.env.token,
+          'Authorization': 'Bearer ' + process.env.token,
         },
         body: JSON.stringify({
           suiterunId: this.props.id
@@ -115,16 +146,13 @@ export default class SuiteRun extends React.Component {
   }
 
   render() {
-    var disabled = this.state.enableRerun ? '' : 'disabled';
     return <AdminLayoutHoc contentTitle={'Suit Execution Details'}
-                           contentTitleButton={
-                             <button type="button"
-                                     className={"btn btn-lg bg-gradient-green "
-                                     + disabled}
-                                     onClick={this.rerunTest}>
-                               <i className="fa fa-repeat"></i> Run Again
-                             </button>} url={this.props.url}>
+                           menu={this.generateMenu()} url={this.props.url}>
       {this.state.message}
+      <AddToViewModal show={this.state.activeModal}
+                      onHide={this.hideModal}
+                      id={this.props.id}
+                      field='suiteRunId'/>
       <div className="row">
         <div className="col-sm-6">
           <div className="info-box">

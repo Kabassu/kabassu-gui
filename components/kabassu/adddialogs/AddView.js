@@ -1,6 +1,3 @@
-import CreatableSelect from 'react-select/creatable';
-import {parametersOptions, parametersValues} from "../../data/data";
-
 const initialstate = {
   name: '',
   message: null,

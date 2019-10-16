@@ -5,6 +5,7 @@ import RequestDetails from "../components/kabassu/details/RequestDetails";
 import DefinitionDetails from "../components/kabassu/details/DefinitionDetails";
 import HistoryTable from "../components/kabassu/tables/HistoryTable";
 import SingleTestReports from "../components/kabassu/SingleTestReports";
+import AddToViewModal from "../components/kabassu/modals/AddToViewModal";
 
 export default class Request extends React.Component {
 
@@ -21,9 +22,38 @@ export default class Request extends React.Component {
       isLoaded: false,
       result: {},
       message: null,
-      enableRerun: false
+      enableRerun: false,
+      activeModal: false,
     };
+    this.hideModal = this.hideModal.bind(this);
+    this.showModal = this.showModal.bind(this);
     this.rerunTest = this.rerunTest.bind(this);
+  }
+
+  showModal() {
+    this.setState({
+      activeModal: true,
+    })
+  }
+
+  hideModal() {
+    this.setState({
+      activeModal: false,
+    })
+  }
+
+  generateMenu() {
+    var disabled = this.state.result.status == 'finished' ? '' : 'disabled';
+    this.state.enableRerun = this.state.result.status == 'finished';
+    return <div><button type="button"
+                className={"btn btn-sm bg-gradient-green " + disabled}
+                onClick={this.rerunTest}>
+        <i className="fa fa-repeat"></i> Run Again
+      </button><button type="button"
+                 className={"btn btn-sm bg-gradient-info "}
+                 onClick={this.showModal}>
+      <i className="fa fa-repeat"></i> Add to View
+    </button></div>
   }
 
   rerunTest() {
@@ -97,15 +127,13 @@ export default class Request extends React.Component {
   }
 
   render() {
-    var disabled = this.state.result.status == 'finished' ? '' : 'disabled';
-    this.state.enableRerun = this.state.result.status == 'finished';
-    return <AdminLayoutHoc contentTitle={'Test Execution Details'} contentTitleButton={
-      <button type="button"
-              className={"btn btn-lg bg-gradient-green " + disabled}
-              onClick={this.rerunTest}>
-        <i className="fa fa-repeat"></i> Run Again
-      </button>} url={this.props.url}>
+    return <AdminLayoutHoc contentTitle={'Test Execution Details'}  url={this.props.url}
+      menu={ this.generateMenu()}>
       {this.state.message}
+      <AddToViewModal show={this.state.activeModal}
+                              onHide={this.hideModal}
+                              id={this.props.id}
+                              field='executionId'/>
       <div className="row">
         <RequestDetails result={this.state.result}/>
       </div>
