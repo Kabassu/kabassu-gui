@@ -6,8 +6,9 @@ import ReportsStep from "../../components/kabassu/wizards/ReportsStep";
 import GradleDisplay from "../../components/kabassu/wizards/GradleDisplay";
 import EndStep from "../../components/kabassu/wizards/EndStep";
 import AfterStep from "../../components/kabassu/wizards/AfterStep";
+import ViewStep from "../../components/kabassu/wizards/ViewStep";
 
-const MAX_STATE = 4;
+const MAX_STATE = 5;
 
 export default class WizardGradle extends React.Component {
 
@@ -30,22 +31,25 @@ export default class WizardGradle extends React.Component {
 
   renderStep() {
     if (this.state.wizardState == 0) {
-      return <DescriptionStep existingState = {this.state} updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {this.state.wizardState>0} displayNext = {this.state.wizardState<MAX_STATE} />
+      return <DescriptionStep existingState = {this.state} updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {false} displayNext = {true} />
     }
     if (this.state.wizardState == 1) {
-      return <LocationStep  existingState = {this.state} updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {this.state.wizardState>0} displayNext = {this.state.wizardState<MAX_STATE} />
+      return <LocationStep  existingState = {this.state} updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {true} displayNext = {true} />
     }
     if (this.state.wizardState == 2) {
-      return <SystemStep  existingState = {this.state} updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {this.state.wizardState>0} displayNext = {this.state.wizardState<MAX_STATE} />
+      return <SystemStep  existingState = {this.state} updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {true} displayNext = {true} />
     }
     if (this.state.wizardState == 3) {
-      return <ReportsStep  existingState = {this.state} updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {this.state.wizardState>0} displayNext = {this.state.wizardState<MAX_STATE} />
+      return <ReportsStep  existingState = {this.state} updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {true} displayNext = {true} />
     }
     if (this.state.wizardState == 4) {
-      return <EndStep  existingState = {this.state} updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {this.state.wizardState>0} displayNext = {this.state.wizardState<MAX_STATE} />
+      return <ViewStep  existingState = {this.state} updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {true} displayNext = {true} />
     }
-    if (this.state.wizardState == 5 || this.state.wizardState == 6) {
-      return <AfterStep  existingState = {this.state} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {this.state.wizardState>0} displayNext = {this.state.wizardState<MAX_STATE} />
+    if (this.state.wizardState == 5) {
+      return <EndStep  existingState = {this.state} updateState={this.upgradeState} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {true} displayNext = {false} />
+    }
+    if (this.state.wizardState == 1000 || this.state.wizardState == 1001) {
+      return <AfterStep  existingState = {this.state} nextStep={this.nextStep} previousStep={this.previousStep} displayPrevious = {false} displayNext = {false} />
     }
   }
 

@@ -62,6 +62,10 @@ class GradleDisplay extends React.Component {
         }
       }
     }
+    if (this.props.state.viewId !== ''
+        && typeof this.props.state.viewId !== 'undefined') {
+      this.state.visuals.set("View", this.props.state.viewId)
+    }
   }
 
   render() {

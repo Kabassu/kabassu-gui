@@ -15,7 +15,7 @@ class AdminLayoutHoc extends React.Component {
       <Credentials/>
       <AdminHeader/>
       <AdminSidebar/>
-      <AdminContent title={this.props.contentTitle} titleButton={this.props.contentTitleButton}>
+      <AdminContent title={this.props.contentTitle} titleButton={this.props.contentTitleButton} menu={this.props.menu}>
         {this.props.children}
       </AdminContent>
       <AdminControlSidebar/>
@@ -27,5 +27,6 @@ class AdminLayoutHoc extends React.Component {
 AdminLayoutHoc.propTypes = {
   contentTitle: PropTypes.string,
   contentTitleButton: PropTypes.element,
+  menu: PropTypes.element,
 };
 export default AdminLayoutHoc

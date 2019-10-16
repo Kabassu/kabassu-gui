@@ -1,5 +1,6 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
 import Link from "next/link";
+
 export default class Index extends React.Component {
 
   render() {
@@ -84,33 +85,42 @@ export default class Index extends React.Component {
                     <div className="card-body scroll">
                       <div className="row">
 
-                      <div className="col-sm-4">
-                        <div className="description-block">
-                          <Link href="/definitions">
-                            <a className={"btn btn-lg btn-warning btn-block"}>
-                              <p>Definitions</p>
-                            </a>
-                          </Link>
+                        <div className="col-sm-3">
+                          <div className="description-block">
+                            <Link href="/views">
+                              <a className={"btn btn-lg btn-info btn-block"}>
+                                <p>Views</p>
+                              </a>
+                            </Link>
+                          </div>
                         </div>
-                      </div>
-                      <div className="col-sm-4">
-                        <div className="description-block">
-                          <Link href="/executions">
-                            <a className={"btn btn-lg btn-success btn-block"}>
-                              <p>Executions</p>
-                            </a>
-                          </Link>
+                        <div className="col-sm-3">
+                          <div className="description-block">
+                            <Link href="/definitions">
+                              <a className={"btn btn-lg btn-warning btn-block"}>
+                                <p>Definitions</p>
+                              </a>
+                            </Link>
+                          </div>
                         </div>
-                      </div>
-                      <div className="col-sm-4">
-                        <div className="description-block">
-                          <Link href="/configurations">
-                            <a className={"btn btn-lg btn-secondary btn-block"}>
-                              <p>Configurations</p>
-                            </a>
-                          </Link>
+                        <div className="col-sm-3">
+                          <div className="description-block">
+                            <Link href="/executions">
+                              <a className={"btn btn-lg btn-success btn-block"}>
+                                <p>Executions</p>
+                              </a>
+                            </Link>
+                          </div>
                         </div>
-                      </div>
+                        <div className="col-sm-3">
+                          <div className="description-block">
+                            <Link href="/configurations">
+                              <a className={"btn btn-lg btn-secondary btn-block"}>
+                                <p>Configurations</p>
+                              </a>
+                            </Link>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div className="card-footer text-right text-muted">
@@ -171,7 +181,15 @@ export default class Index extends React.Component {
                             </Link>
                           </div>
                         </div>
-
+                        <div className="col-sm-3">
+                          <div className="description-block">
+                            <Link href="/addview">
+                              <a className={"btn btn-lg btn-info btn-block"}>
+                                <p>Create View</p>
+                              </a>
+                            </Link>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div className="card-footer text-right text-muted">

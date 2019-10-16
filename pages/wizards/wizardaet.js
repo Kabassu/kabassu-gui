@@ -6,8 +6,9 @@ import AETSystemStep from "../../components/kabassu/wizards/aet/AETSystemStep";
 import AETCustomStep from "../../components/kabassu/wizards/aet/AETCustomStep";
 import AETEndStep from "../../components/kabassu/wizards/aet/AETEndStep";
 import AETDisplay from "../../components/kabassu/wizards/aet/AETDisplay";
+import ViewStep from "../../components/kabassu/wizards/ViewStep";
 
-const MAX_STATE = 4;
+const MAX_STATE = 5;
 
 export default class WizardAET extends React.Component {
 
@@ -34,46 +35,52 @@ export default class WizardAET extends React.Component {
                               updateState={this.upgradeState}
                               nextStep={this.nextStep}
                               previousStep={this.previousStep}
-                              displayPrevious={this.state.wizardState > 0}
-                              displayNext={this.state.wizardState < MAX_STATE}/>
+                              displayPrevious={false}
+                              displayNext={true}/>
     }
     if (this.state.wizardState == 1) {
       return <LocationStep existingState={this.state}
                            updateState={this.upgradeState}
                            nextStep={this.nextStep}
                            previousStep={this.previousStep}
-                           displayPrevious={this.state.wizardState > 0}
-                           displayNext={this.state.wizardState < MAX_STATE}/>
+                           displayPrevious={true}
+                           displayNext={true}/>
     }
     if (this.state.wizardState == 2) {
       return <AETSystemStep existingState={this.state}
                             updateState={this.upgradeState}
                             nextStep={this.nextStep}
                             previousStep={this.previousStep}
-                            displayPrevious={this.state.wizardState > 0}
-                            displayNext={this.state.wizardState < MAX_STATE}/>
+                            displayPrevious={true}
+                            displayNext={true}/>
     }
     if (this.state.wizardState == 3) {
       return <AETCustomStep existingState={this.state}
                             updateState={this.upgradeState}
                             nextStep={this.nextStep}
                             previousStep={this.previousStep}
-                            displayPrevious={this.state.wizardState > 0}
-                            displayNext={this.state.wizardState < MAX_STATE}/>
+                            displayPrevious={true}
+                            displayNext={true}/>
     }
     if (this.state.wizardState == 4) {
+      return <ViewStep existingState={this.state}
+                       updateState={this.upgradeState} nextStep={this.nextStep}
+                       previousStep={this.previousStep} displayPrevious={true}
+                       displayNext={true}/>
+    }
+    if (this.state.wizardState == 5) {
       return <AETEndStep existingState={this.state}
                          updateState={this.upgradeState}
                          nextStep={this.nextStep}
                          previousStep={this.previousStep}
-                         displayPrevious={this.state.wizardState > 0}
-                         displayNext={this.state.wizardState < MAX_STATE}/>
+                         displayPrevious={true}
+                         displayNext={false}/>
     }
-    if (this.state.wizardState == 5 || this.state.wizardState == 6) {
+    if (this.state.wizardState == 1000 || this.state.wizardState == 1001) {
       return <AfterStep existingState={this.state} nextStep={this.nextStep}
                         previousStep={this.previousStep}
-                        displayPrevious={this.state.wizardState > 0}
-                        displayNext={this.state.wizardState < MAX_STATE}/>
+                        displayPrevious={false}
+                        displayNext={false}/>
     }
   }
 

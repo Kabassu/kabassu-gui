@@ -70,6 +70,10 @@ class AETDisplay extends React.Component {
         && typeof this.props.state.nameSuite !== 'undefined') {
       this.state.visuals.set("Suite Name", this.props.state.nameSuite)
     }
+    if (this.props.state.viewId !== ''
+        && typeof this.props.state.viewId !== 'undefined') {
+      this.state.visuals.set("View", this.props.state.viewId)
+    }
   }
 
   render() {

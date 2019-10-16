@@ -15,6 +15,41 @@ class RequestsTable extends React.Component {
     }
     this.clickHandler = this.clickHandler.bind(this);
     this.hideModal = this.hideModal.bind(this);
+    this.renderRemove = this.renderRemove.bind(this)
+    this.removeHandler = this.removeHandler.bind(this);
+    this.generateRequest = this.generateRequest.bind(this);
+  }
+
+  removeHandler(id, e) {
+    fetch(process.env.kabassuServer + "/kabassu/updateview", {
+      method: 'POST',
+      crossDomain: true,
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + process.env.token,
+      },
+      body: JSON.stringify(this.generateRequest(id))
+    });
+    this.props.refresh(id)
+  }
+
+  generateRequest(id) {
+    var request = {
+      id: this.props.viewId,
+      operation: 'remove',
+      field: 'executionId',
+      value: id
+    }
+    return request
+  }
+
+  renderRemove(id) {
+    return <td><div><Button className={"btn  btn-danger btn-sm"}  onClick={e => this.removeHandler(id)}>Remove from view</Button></div></td>;
+  }
+
+  renderRemoveHeader() {
+    return <th></th>;
   }
 
   clickHandler(definitionId, e) {
@@ -46,6 +81,7 @@ class RequestsTable extends React.Component {
             <Link href={'/request?id=' + item._id}><a className="nav-link">Show
               Details</a></Link>
           </td>
+          {typeof this.props.viewId!=='undefined' ? this.renderRemove(item._id): ''}
         </tr>
     );
     return <>
@@ -57,6 +93,7 @@ class RequestsTable extends React.Component {
           <th>configuration</th>
           <th>status</th>
           <th></th>
+          {typeof this.props.viewId!=='undefined' ? this.renderRemoveHeader(): ''}
         </tr>
         </thead>
         <tbody>

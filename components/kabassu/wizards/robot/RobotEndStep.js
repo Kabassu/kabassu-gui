@@ -77,6 +77,10 @@ class RobotEndStep extends React.Component {
         !== 'undefined') {
       request.additionalParameters['branch'] = this.state.branchInput
     }
+    if (this.state.viewId !== ''
+        && typeof this.state.viewId !== 'undefined') {
+      request.viewId = this.state.viewId
+    }
     return request
   }
 

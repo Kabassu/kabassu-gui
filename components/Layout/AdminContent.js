@@ -12,6 +12,11 @@ const AdminContent = (props) => {
             {props.titleButton && props.titleButton}
           </div>
         </div>
+        <div className="row mb-2">
+          <div className="col-sm-2  text-muted">
+            {props.menu && props.menu}
+          </div>
+        </div>
       </div>}
     </div>
     <div className="content">
@@ -25,6 +30,7 @@ const AdminContent = (props) => {
 AdminContent.propTypes = {
   title: PropTypes.string,
   titleButton: PropTypes.element,
+  menu: PropTypes.element,
 };
 
 export default AdminContent;
