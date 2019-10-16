@@ -55,13 +55,13 @@ class EndStep extends React.Component {
     .then(
         (result) => {
           this.props.updateState({
-            wizardState: 5,
+            wizardState: 1000,
             requestId: result.id
           })
         },
         (error) => {
           this.props.updateState({
-            wizardState: 6
+            wizardState: 1001
           })
         }
     )
@@ -78,6 +78,10 @@ class EndStep extends React.Component {
       request.additionalParameters['branch'] = this.state.branchInput
     }
     request.additionalParameters['jvm'] = this.state.jvm.value
+    if (this.state.viewId !== ''
+        && typeof this.state.viewId !== 'undefined') {
+      request.viewId = this.state.viewId
+    }
     return request
   }
 

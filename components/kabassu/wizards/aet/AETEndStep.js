@@ -82,6 +82,10 @@ class AETEndStep extends React.Component {
     if (typeof this.state.nameSuite !== 'undefined' && this.state.nameSuite !== '') {
       request.additionalParameters['name'] = this.state.nameSuite
     }
+    if (this.state.viewId !== ''
+        && typeof this.state.viewId !== 'undefined') {
+      request.viewId = this.state.viewId
+    }
     return request
   }
 

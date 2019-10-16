@@ -16,7 +16,7 @@ class AfterStep extends React.Component {
   }
 
   generateSummary() {
-    if(this.state.wizardState === 5){
+    if(this.state.wizardState === 1000){
       return <div className="alert alert-success" role="alert">
         <div>Test was created and run with id: {this.state.requestId}. Here is the link to execution</div>
         <div>
@@ -38,11 +38,6 @@ class AfterStep extends React.Component {
     return (
         <>
           {this.generateSummary()}
-          <WizardButtons
-              previousStep={this.previousStep}
-              displayPrevious={this.props.displayPrevious}
-              displayNext={false}/>
-
         </>
     );
   }
