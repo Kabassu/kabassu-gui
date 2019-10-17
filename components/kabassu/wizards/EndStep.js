@@ -111,6 +111,13 @@ class EndStep extends React.Component {
         request.additionalParameters['reportDir'] = this.state.reportDir
       }
     }
+    if (this.state.reports.filter(report => report.value === 'allure-junit-xml').length
+        > 0) {
+      if (this.state.reportDir !== '' && typeof this.state.reportDir
+          !== 'undefined') {
+        request.additionalParameters['reportDir'] = this.state.reportDir
+      }
+    }
     console.log(request)
     return request
   }

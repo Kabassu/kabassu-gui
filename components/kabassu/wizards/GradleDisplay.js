@@ -61,6 +61,11 @@ class GradleDisplay extends React.Component {
           this.state.visuals.set("Generic Report Directory", this.props.state.reportDir)
         }
       }
+      if(this.props.state.reports.filter(report => report.value === 'allure-junit-xml').length>0){
+        if(this.props.state.reportDir !=='' && typeof this.props.state.reportDir !== 'undefined') {
+          this.state.visuals.set("JUnit xml files", this.props.state.reportDir)
+        }
+      }
     }
     if (this.props.state.viewId !== ''
         && typeof this.props.state.viewId !== 'undefined') {

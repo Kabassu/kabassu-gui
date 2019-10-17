@@ -54,9 +54,20 @@ class ReportsStep extends React.Component {
 
 
   genericOptions() {
-    console.log(this.state.reports);
+    let reports;
+    if(this.state.reports.filter(report => report.value === 'allure-junit-xml').length>0){
+     reports = <div className="form-group">
+        <label htmlFor="reportDirInput">Directory for junit report xml files</label>
+        <input type="text" className="form-control"
+               id="reportDirInput" aria-describedby="nameHelp"
+               value={this.state.reportDir}/>
+        <small id="nameHelp" className="form-text text-muted">
+          Enter where we can found junit xml report files
+        </small>
+      </div>
+    }
     if(this.state.reports.filter(report => report.value === 'generic').length>0){
-      return <>
+      reports = <>
         <div className="form-group">
           <label htmlFor="reportDirInput">Directory for generic report</label>
           <input type="text" className="form-control"
@@ -77,6 +88,7 @@ class ReportsStep extends React.Component {
         </div>
       </>
     }
+    return reports
   }
 
   render() {
