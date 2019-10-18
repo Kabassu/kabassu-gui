@@ -33,7 +33,7 @@ export default class Suite extends React.Component {
       filters:  [
           {
             filterName: "_id",
-            filterValues: typeof this.state.result.definitions !== 'undefined' ? this.state.result.definitions.map(item => item) : []
+            filterValues: typeof this.state.result.definitions !== 'undefined' ? this.state.result.definitions.map(item => item.trim()) : []
           }
         ]
     })
