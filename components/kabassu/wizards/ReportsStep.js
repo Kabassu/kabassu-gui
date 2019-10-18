@@ -55,7 +55,7 @@ class ReportsStep extends React.Component {
 
   genericOptions() {
     let reports;
-    if(this.state.reports.filter(report => report.value === 'allure-junit-xml').length>0){
+    if(this.state.reports.filter(report => (report.value === 'allure-junit-xml' || report.value === 'allure-junit-xml-trend')).length>0){
      reports = <div className="form-group">
         <label htmlFor="reportDirInput">Directory for junit report xml files</label>
         <input type="text" className="form-control"
