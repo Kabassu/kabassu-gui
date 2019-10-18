@@ -44,7 +44,6 @@ export default class SuiteRun extends React.Component {
 
   generateMenu() {
     var disabled = this.state.enableRerun ? '' : 'disabled';
-    this.state.enableRerun = this.state.result.status == 'finished';
     return <div>
       <button type="button"
               className={"btn btn-sm bg-gradient-green " + disabled}
