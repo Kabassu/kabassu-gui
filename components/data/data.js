@@ -38,6 +38,8 @@ export const runnerTypes = [
 export const reportTypes = [
   { value: 'allure', label: 'Allure'},
   { value: 'allure-trend', label: 'Allure with Trend'},
+  { value: 'allure-junit-xml', label: 'Allure For JUnit XML'},
+  { value: 'allure-junit-xml-trend', label: 'Allure Trend For JUnit XML'},
   { value: 'generic', label: 'Generic'},
 
 ];
