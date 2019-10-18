@@ -55,13 +55,13 @@ class RobotEndStep extends React.Component {
     .then(
         (result) => {
           this.props.updateState({
-            wizardState: 5,
+            wizardState: 1000,
             requestId: result.id
           })
         },
         (error) => {
           this.props.updateState({
-            wizardState: 6
+            wizardState: 1001
           })
         }
     )
