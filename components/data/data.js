@@ -6,7 +6,7 @@ export const parametersOptions = [
   { value: 'location', label: 'Location'},
   { value: 'reportDir', label: 'Reports Dir'},
   { value: 'startHtml', label: 'Start HTML'},
-
+  { value: 'url', label: 'url'},
 ];
 
 export const jvmValues = [
@@ -27,12 +27,14 @@ export const suggestedTypes = [
 export const locationTypes = [
   { value: 'filesystem', label: 'File System'},
   { value: 'git', label: 'Git'},
+  { value: 'none', label: 'No Location'},
 ];
 
 export const runnerTypes = [
   { value: 'gradle', label: 'Gradle'},
   { value: 'command', label: 'Command'},
   { value: 'aet', label: 'AET'},
+  { value: 'lighthouse', label: 'Lighthouse'},
 ];
 
 export const reportTypes = [
@@ -41,5 +43,6 @@ export const reportTypes = [
   { value: 'allure-junit-xml', label: 'Allure For JUnit XML'},
   { value: 'allure-junit-xml-trend', label: 'Allure Trend For JUnit XML'},
   { value: 'generic', label: 'Generic'},
+  { value: 'lighthouse', label: 'Lighthouse'},
 
 ];
