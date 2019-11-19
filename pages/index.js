@@ -61,6 +61,15 @@ export default class Index extends React.Component {
                             </Link>
                           </div>
                         </div>
+                        <div className="col-sm-4">
+                          <div className="description-block">
+                            <Link href="/wizards/wizardlighthouse">
+                              <a className={"btn btn-lg btn-success btn-block"}>
+                                <p>Lighthouse Wizard</p>
+                              </a>
+                            </Link>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div className="card-footer text-right text-muted">

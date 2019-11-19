@@ -6,7 +6,7 @@ export const parametersOptions = [
   { value: 'location', label: 'Location'},
   { value: 'reportDir', label: 'Reports Dir'},
   { value: 'startHtml', label: 'Start HTML'},
-
+  { value: 'url', label: 'url'},
 ];
 
 export const jvmValues = [
@@ -27,12 +27,14 @@ export const suggestedTypes = [
 export const locationTypes = [
   { value: 'filesystem', label: 'File System'},
   { value: 'git', label: 'Git'},
+  { value: 'none', label: 'No Location'},
 ];
 
 export const runnerTypes = [
   { value: 'gradle', label: 'Gradle'},
   { value: 'command', label: 'Command'},
   { value: 'aet', label: 'AET'},
+  { value: 'lighthouse', label: 'Lighthouse'},
 ];
 
 export const reportTypes = [
@@ -41,5 +43,27 @@ export const reportTypes = [
   { value: 'allure-junit-xml', label: 'Allure For JUnit XML'},
   { value: 'allure-junit-xml-trend', label: 'Allure Trend For JUnit XML'},
   { value: 'generic', label: 'Generic'},
+  { value: 'lighthouse', label: 'Lighthouse'},
+
+];
+
+export const lighthouseOptions = [
+  { value: '--config-path', label: '--config-path'},
+  { value: '--chrome-flags', label: '--chrome-flags'},
+  { value: '--preset', label: '--preset'},
+  { value: '--max-wait-for-load', label: '--max-wait-for-load'},
+  { value: '--emulated-form-factor', label: '--emulated-form-factor'},
+  { value: '--additional-trace-categories', label: '--additional-trace-categories'},
+  { value: '--output', label: '--output'},
+  { value: '--blocked-url-patterns', label: '--blocked-url-patterns'},
+  { value: '--disable-storage-reset', label: '--disable-storage-reset'},
+  { value: '--throttling-method', label: '--throttling-method'},
+  { value: '--throttling.throughputKbps', label: '--throttling.throughputKbps'},
+  { value: '--throttling.requestLatencyMs', label: '--throttling.requestLatencyMs'},
+  { value: '--throttling.cpuSlowdownMultiplier', label: '--throttling.cpuSlowdownMultiplier'},
+  { value: '--throttling.downloadThroughputKbps', label: '--throttling.downloadThroughputKbps'},
+  { value: '--throttling.uploadThroughputKbps', label: '--throttling.uploadThroughputKbps'},
+  { value: '--extra-headers', label: '--extra-headers'},
+
 
 ];
