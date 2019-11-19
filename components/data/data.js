@@ -46,3 +46,24 @@ export const reportTypes = [
   { value: 'lighthouse', label: 'Lighthouse'},
 
 ];
+
+export const lighthouseOptions = [
+  { value: '--config-path', label: '--config-path'},
+  { value: '--chrome-flags', label: '--chrome-flags'},
+  { value: '--preset', label: '--preset'},
+  { value: '--max-wait-for-load', label: '--max-wait-for-load'},
+  { value: '--emulated-form-factor', label: '--emulated-form-factor'},
+  { value: '--additional-trace-categories', label: '--additional-trace-categories'},
+  { value: '--output', label: '--output'},
+  { value: '--blocked-url-patterns', label: '--blocked-url-patterns'},
+  { value: '--disable-storage-reset', label: '--disable-storage-reset'},
+  { value: '--throttling-method', label: '--throttling-method'},
+  { value: '--throttling.throughputKbps', label: '--throttling.throughputKbps'},
+  { value: '--throttling.requestLatencyMs', label: '--throttling.requestLatencyMs'},
+  { value: '--throttling.cpuSlowdownMultiplier', label: '--throttling.cpuSlowdownMultiplier'},
+  { value: '--throttling.downloadThroughputKbps', label: '--throttling.downloadThroughputKbps'},
+  { value: '--throttling.uploadThroughputKbps', label: '--throttling.uploadThroughputKbps'},
+  { value: '--extra-headers', label: '--extra-headers'},
+
+
+];

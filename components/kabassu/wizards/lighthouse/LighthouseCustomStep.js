@@ -1,6 +1,6 @@
 import WizardButtons from "../WizardButtons";
 import CreatableSelect from 'react-select/creatable';
-import {parametersOptions} from "../../../data/data";
+import {lighthouseOptions} from "../../../data/data";
 
 class LighthouseCustomStep extends React.Component {
 
@@ -97,7 +97,7 @@ class LighthouseCustomStep extends React.Component {
               isClearable
               onChange={this.onParameterNameChange}
               onInputChange={this.onParameterNameChange}
-              options={parametersOptions}
+              options={lighthouseOptions}
           />
         </div>
         <div className="col">
