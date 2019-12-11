@@ -3,7 +3,6 @@ const initialstate = {
   message: null,
   description: '',
   executions: '',
-  suiteRuns: '',
 }
 
 class AddView extends React.Component {
@@ -23,8 +22,6 @@ class AddView extends React.Component {
       this.setState({description: e.target.value});
     }else if (e.target.id === 'executionsInput') {
       this.setState({executions: e.target.value});
-    }else if (e.target.id === 'suitesInput') {
-      this.setState({suiteRuns: e.target.value});
     }
   }
 
@@ -71,7 +68,6 @@ class AddView extends React.Component {
       name: this.state.name,
       description: this.state.description,
       executionId: this.state.executions.replace(/\s+/g, '').split(","),
-      suiteRunId: this.state.suiteRuns.replace(/\s+/g, '').split(","),
     }
     return request
   }
@@ -99,11 +95,6 @@ class AddView extends React.Component {
             <div className="form-group">
               <label htmlFor="executionsInput">Single Executions (',' - splitter)</label>
               <textarea id="executionsInput" className="form-control"
-                        rows="4"></textarea>
-            </div>
-            <div className="form-group">
-              <label htmlFor="suitesInput">Suite Executions (',' - splitter)</label>
-              <textarea id="suitesInput" className="form-control"
                         rows="4"></textarea>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>

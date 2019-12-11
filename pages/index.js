@@ -174,15 +174,6 @@ export default class Index extends React.Component {
                         </div>
                         <div className="col-sm-3">
                           <div className="description-block">
-                            <Link href="/addtestsuite">
-                              <a className={"btn btn-lg btn-info btn-block"}>
-                                <p>Create Test Suite</p>
-                              </a>
-                            </Link>
-                          </div>
-                        </div>
-                        <div className="col-sm-3">
-                          <div className="description-block">
                             <Link href="/addconfiguration">
                               <a className={"btn btn-lg btn-info btn-block"}>
                                 <p>Create Configuration</p>
