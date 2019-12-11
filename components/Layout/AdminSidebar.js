@@ -84,10 +84,10 @@ class AdminSidebar extends React.Component {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link href="/addtestsuite">
-                    <a className={['nav-link', pathname === '/addtestsuite' ? 'active' : ''].join(' ')}>
+                  <Link href="/addview">
+                    <a className={['nav-link', pathname === '/addview' ? 'active' : ''].join(' ')}>
                       <i className="nav-icon fa  fa-plus-square"/>
-                      <p>Create Test Suite</p>
+                      <p>Create View</p>
                     </a>
                   </Link>
                 </li>

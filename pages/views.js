@@ -12,7 +12,7 @@ export default class Views extends React.Component {
           <div className="card ">
             <div className="card-header bg-gray-dark">
               <h3 className="card-title">
-                <i className="fa fa-list"/>&nbsp;Prepared definitions
+                <i className="fa fa-list"/>&nbsp;Prepared Views
               </h3>
               <div className="card-tools">
                 <button type="button" className="btn btn-tool"

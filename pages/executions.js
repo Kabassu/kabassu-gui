@@ -1,7 +1,6 @@
 import AdminLayoutHoc from '../components/Layout/AdminLayoutHoc';
 import DataList from "../components/kabassu/DataList";
 import RequestsTable from "../components/kabassu/tables/RequestsTable";
-import SuiteRunTable from "../components/kabassu/tables/SuiteRunTable";
 
 export default class Index extends React.Component {
 
@@ -28,10 +27,6 @@ export default class Index extends React.Component {
               <div className="col-sm-12">
                 <DataList table={<RequestsTable/>} collection="kabassu-requests"
                           title="List of test executions"/>
-              </div>
-              <div className="col-sm-12">
-                <DataList table={<SuiteRunTable/>} collection="kabassu-suite-runs"
-                          title="List of test suites executions"/>
               </div>
             </div>
             <div className="card-footer text-right text-muted">
